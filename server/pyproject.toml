@@ -1,0 +1,15 @@
+[project]
+name = "statified-server"
+version = "0.1.0"
+description = "Statified API"
+requires-python = ">=3.10"
+dependencies = [
+  "fastapi",
+  "uvicorn",
+  "pydantic",
+]
+
+[project.scripts]
+dev = "uvicorn app:app --reload --host 127.0.0.1 --port 8000"
+
+
