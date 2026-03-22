@@ -66,3 +66,14 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.statified-button {
+  background-color: #000;
+  color: #fff;
+  border: 1px solid #000;
+}
+
+.statified-button:hover {
+  border-color: #646cff;
+}
+

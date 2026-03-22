@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 
 const STAT_OPTIONS = [
   { key: "net_rating_last10", label: "Net Rating (Last 10)" },
@@ -6,15 +6,38 @@ const STAT_OPTIONS = [
   { key: "turnover_diff", label: "Turnover Differential" },
   { key: "pace_diff", label: "Pace Differential" },
   { key: "home_away_split", label: "Home/Away Split" },
+  { key: "timezone", label: "Timezone Travel" }
+  
 ];
 
 export default function App() {
-  const [homeTeam, setHomeTeam] = useState("Lakers");
-  const [awayTeam, setAwayTeam] = useState("Suns");
+  const [homeTeam, setHomeTeam] = useState("Dodgers");
+  const [awayTeam, setAwayTeam] = useState("Giants");
   const [selected, setSelected] = useState([]);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [games, setGames] = useState([]);
+  const [gamesLoading, setGamesLoading] = useState(false);
+  const [gamesError, setGamesError] = useState("");
 
+  useEffect(() => {
+    async function fetchGames() {
+      setGamesLoading(true);
+      try {
+        const res = await fetch("http://127.0.0.1:8000/mlb-games-with-probabilities");
+        const data = await res.json();
+        setGames(data.games || []);
+      } catch (err) {
+        console.error("Failed to fetch MLB games:", err);
+        setGamesError("Failed to load MLB games");
+      } finally {
+        setGamesLoading(false);
+      }
+    }
+
+  fetchGames();
+}, []);
+  
   const selectedKeys = useMemo(() => new Set(selected), [selected]);
 
   function toggleStat(key) {
@@ -26,31 +49,49 @@ export default function App() {
   async function getProbability() {
     setLoading(true);
     setResult(null);
-
-    const payload = {
-      sport: "basketball",
-      league: "NBA",
-      home_team: homeTeam,
-      away_team: awayTeam,
-      selected_stats: selected.map((k) => ({ stat_key: k, weight: 1.0 })),
-    };
-
-    const res = await fetch("http://localhost:8000/probability", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-
-    const data = await res.json();
-    setResult(data);
-    setLoading(false);
+  
+    try {
+      const payload = {
+        sport: "baseball",
+        league: "MLB",
+        home_team: homeTeam,
+        away_team: awayTeam,
+        selected_stats: selected.map((k) => ({ stat_key: k, weight: 1.0 })),
+      };
+  
+      const res = await fetch("http://127.0.0.1:8000/probability", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+  
+      if (!res.ok) {
+        throw new Error(`HTTP error ${res.status}`);
+      }
+  
+      const data = await res.json();
+      console.log("backend response:", data);
+      setResult(data);
+    } catch (error) {
+      console.error("Probability request failed:", error);
+      setResult({
+        home_team: homeTeam,
+        away_team: awayTeam,
+        p_home_win: 0,
+        p_away_win: 0,
+        message: "Request failed. Check backend terminal.",
+        selected_stats_count: selected.length,
+      });
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
     <div style={{ maxWidth: 900, margin: "40px auto", fontFamily: "system-ui" }}>
-      <h1 style={{ marginBottom: 6 }}>Statified</h1>
+      <h1 style={{ marginBottom: 6 }}>Statified MLB</h1>
       <div style={{ opacity: 0.7, marginBottom: 24 }}>
-        Build your stat parlay → get a probability.
+        Today's MLB games, live scores, and win probabilities.
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
@@ -93,18 +134,17 @@ export default function App() {
           </div>
 
           <button
+            className="statified-button"
             onClick={getProbability}
             disabled={loading}
             style={{
               marginTop: 18,
               padding: "12px 14px",
               borderRadius: 10,
-              border: "1px solid #000",
-              background: "#000",
-              color: "#fff",
               cursor: "pointer",
             }}
           >
+
             {loading ? "Statifying..." : "Generate Probability"}
           </button>
         </div>
@@ -146,6 +186,50 @@ export default function App() {
           )}
         </div>
       </div>
+      <div style={{ marginTop: 40 }}>
+  <h2>Today's MLB Games</h2>
+
+  {gamesLoading && <div>Loading games...</div>}
+  {gamesError && <div>{gamesError}</div>}
+
+  {games.map((game, index) => (
+  <div
+    key={index}
+    style={{
+      border: "1px solid #ddd",
+      borderRadius: 12,
+      padding: 12,
+      marginBottom: 10,
+    }}
+  >
+    <div style={{ fontWeight: 600 }}>
+      {game.away_team} at {game.home_team}
+    </div>
+
+    <div style={{ opacity: 0.8 }}>
+      Status: {game.status}
+    </div>
+
+    <div>
+      {game.away_score == null || game.home_score == null
+        ? "Score: Not started"
+        : `Score: ${game.away_score} - ${game.home_score}`}
+    </div>
+
+    <div>
+      Expected Runs: {game.away_team} {game.expected_away_runs} - {game.home_team} {game.expected_home_runs}
+    </div>
+
+    <div style={{ marginTop: 8 }}>
+      Home Win: {Math.round(game.p_home_win * 100)}%
+    </div>
+
+    <div>
+      Away Win: {Math.round(game.p_away_win * 100)}%
+    </div>
+  </div>
+))}
+</div>
     </div>
   );
 }
