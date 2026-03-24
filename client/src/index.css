@@ -69,11 +69,11 @@ button:focus-visible {
 
 .statified-button {
   background-color: #000;
-  color: #fff;
+  color: #050404;
   border: 1px solid #000;
 }
 
-.statified-button:hover {
+.statified-:hover {
   border-color: #646cff;
 }
 

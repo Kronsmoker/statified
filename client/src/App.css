@@ -40,3 +40,38 @@
 .read-the-docs {
   color: #888;
 }
+
+.statified-button {
+  margin-top: 18px;
+  background: linear-gradient(135deg, #22c55e, #4ade80);
+  color: #0f172a;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.statified-button:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+.statified-button:disabled {
+  background: #9ca3af;
+  color: white;
+  cursor: not-allowed;
+  transform: none;
+  opacity: 1;
+}
+
+.statified-result {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #22c55e, #4ade80);
+  color: #0f172a;
+  font-weight: 700;
+  text-align: center;
+}

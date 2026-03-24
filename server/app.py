@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Dict, Any
 import requests
+from datetime import date, datetime, timedelta
 
 from models.probability import win_probability, win_probability_from_expected_runs
 from models.ratings import team_power_rating, team_rating_diff
@@ -88,45 +89,148 @@ def get_today_mlb_game():
             return game
 
     return games[0]
-# THese are fake stats to test pipeline befo0re pull;ong actual MLB stats
-def get_mock_team_stats(team_name: str) -> dict:
-    """
-    Temporary mock stats so we can test the model pipeline.
-    Replace later with real MLB API stats.
-    """
-    mock_data = {
-        "Dodgers": {
-            "win_pct": 0.620,
-            "run_diff_per_game": 1.2,
-            "starter_era": 3.20,
-            "home_win_pct": 0.650,
-            "away_win_pct": 0.590,
-            "last10_win_pct": 0.700,
-            "rest_days": 1,
-        },
-        "Giants": {
-            "win_pct": 0.510,
-            "run_diff_per_game": 0.1,
-            "starter_era": 4.05,
-            "home_win_pct": 0.540,
-            "away_win_pct": 0.470,
-            "last10_win_pct": 0.500,
-            "rest_days": 0,
-        },
-    }
+# THese are real actual MLB stats from current season
+def get_team_id_map() -> dict:
+    url = "https://statsapi.mlb.com/api/v1/teams"
+    res = requests.get(url, params={"sportId": 1}, timeout=10)
+    res.raise_for_status()
+    data = res.json()
 
-    return mock_data.get(
-        team_name,
-        {
+    teams = data.get("teams", [])
+    return {team["name"]: team["id"] for team in teams}
+
+
+def get_team_games(team_id: int, start_date: str, end_date: str) -> list:
+    url = "https://statsapi.mlb.com/api/v1/schedule"
+    params = {
+        "sportId": 1,
+        "teamId": team_id,
+        "startDate": start_date,
+        "endDate": end_date,
+    }
+    res = requests.get(url, params=params, timeout=10)
+    res.raise_for_status()
+    data = res.json()
+
+    all_games = []
+    for d in data.get("dates", []):
+        all_games.extend(d.get("games", []))
+    return all_games
+
+
+def pct(wins: int, losses: int) -> float:
+    total = wins + losses
+    if total == 0:
+        return 0.500
+    return wins / total
+
+
+def did_team_win(game: dict, team_id: int) -> bool:
+    away_team_id = game["teams"]["away"]["team"]["id"]
+    home_team_id = game["teams"]["home"]["team"]["id"]
+
+    away_score = game["teams"]["away"].get("score", 0)
+    home_score = game["teams"]["home"].get("score", 0)
+
+    if team_id == home_team_id:
+        return home_score > away_score
+    return away_score > home_score
+
+
+def get_real_team_stats(team_name: str) -> dict:
+    team_ids = get_team_id_map()
+    team_id = team_ids.get(team_name)
+
+    if team_id is None:
+        raise ValueError(f"Unknown MLB team: {team_name}")
+
+    today = date.today()
+    season = today.year
+
+    # good enough for regular season data pull
+    season_start = date(season, 3, 1).isoformat()
+    today_str = today.isoformat()
+
+    games = get_team_games(team_id, season_start, today_str)
+
+    final_games = []
+    for game in games:
+        state = game.get("status", {}).get("abstractGameState")
+        if state != "Final":
+            continue
+
+        away_team_id = game["teams"]["away"]["team"]["id"]
+        home_team_id = game["teams"]["home"]["team"]["id"]
+
+        away_score = game["teams"]["away"].get("score", 0)
+        home_score = game["teams"]["home"].get("score", 0)
+
+        if team_id == home_team_id:
+            is_home = True
+            team_score = home_score
+            opp_score = away_score
+        elif team_id == away_team_id:
+            is_home = False
+            team_score = away_score
+            opp_score = home_score
+        else:
+            continue
+
+        game_date = game.get("gameDate", "")
+
+        final_games.append({
+            "game_date": game_date,
+            "is_home": is_home,
+            "team_score": team_score,
+            "opp_score": opp_score,
+            "won": team_score > opp_score,
+        })
+
+    final_games.sort(key=lambda g: g["game_date"])
+
+    if not final_games:
+        return {
             "win_pct": 0.500,
             "run_diff_per_game": 0.0,
-            "starter_era": 4.00,
+            "starter_era": None,
             "home_win_pct": 0.500,
             "away_win_pct": 0.500,
             "last10_win_pct": 0.500,
             "rest_days": 0,
-        },
-    )
+        }
+
+    wins = sum(1 for g in final_games if g["won"])
+    losses = len(final_games) - wins
+
+    runs_for = sum(g["team_score"] for g in final_games)
+    runs_against = sum(g["opp_score"] for g in final_games)
+    run_diff_per_game = (runs_for - runs_against) / len(final_games)
+
+    home_games = [g for g in final_games if g["is_home"]]
+    away_games = [g for g in final_games if not g["is_home"]]
+
+    home_wins = sum(1 for g in home_games if g["won"])
+    home_losses = len(home_games) - home_wins
+
+    away_wins = sum(1 for g in away_games if g["won"])
+    away_losses = len(away_games) - away_wins
+
+    last10 = final_games[-10:]
+    last10_wins = sum(1 for g in last10 if g["won"])
+    last10_losses = len(last10) - last10_wins
+
+    last_game_dt = datetime.fromisoformat(final_games[-1]["game_date"].replace("Z", "+00:00")).date()
+    rest_days = max((today - last_game_dt).days - 1, 0)
+
+    return {
+        "win_pct": round(pct(wins, losses), 3),
+        "run_diff_per_game": round(run_diff_per_game, 3),
+        "starter_era": None,
+        "home_win_pct": round(pct(home_wins, home_losses), 3),
+        "away_win_pct": round(pct(away_wins, away_losses), 3),
+        "last10_win_pct": round(pct(last10_wins, last10_losses), 3),
+        "rest_days": rest_days,
+    }
 
 
 @app.get("/mlb-games")
@@ -151,9 +255,9 @@ def mlb_games_with_probabilities():
         home = game["home_team"]
         away = game["away_team"]
 
-        # get mock stats
-        home_stats = get_mock_team_stats(home)
-        away_stats = get_mock_team_stats(away)
+        # get real stats
+        home_stats = get_real_team_stats(home)
+        away_stats = get_real_team_stats(away)
 
         # ratings
         home_rating = team_power_rating(
@@ -168,10 +272,7 @@ def mlb_games_with_probabilities():
         rating_diff = team_rating_diff(home_rating, away_rating)
 
         # edges
-        pitcher_edge = pitcher_era_edge(
-            home_stats["starter_era"],
-            away_stats["starter_era"]
-        )
+        pitcher_edge = 0.0
 
         home_field = home_field_advantage()
 
@@ -228,70 +329,145 @@ def mlb_games_with_probabilities():
 
     return {"games": results}
     
-@app.get("/mlb-probability")
-def mlb_probability():
-    game = get_today_mlb_game()
+# @app.get("/mlb-probability")
+# def mlb_probability():
+#     game = get_today_mlb_game()
 
-    if game is None:
-        return {"error": "No MLB games found today"}
+#     if game is None:
+#         return {"error": "No MLB games found today"}
 
-    home = game["home_team"]
-    away = game["away_team"]
+#     home = game["home_team"]
+#     away = game["away_team"]
 
-    team_a_score = 100
-    team_b_score = 95
+#     team_a_score = 100
+#     team_b_score = 95
 
-    p_home_win = win_probability(
-        team_a_score,
-        team_b_score,
-        home,
-        away
-    )
+#     p_home_win = win_probability(
+#         team_a_score,
+#         team_b_score,
+#         home,
+#         away
+#     )
 
-    return {
-        "home_team": home,
-        "away_team": away,
-        "p_home_win": round(p_home_win, 3),
-        "p_away_win": round(1 - p_home_win, 3),
-        "message": "MLB game auto-statified"
-    }
+#     return {
+#         "home_team": home,
+#         "away_team": away,
+#         "p_home_win": round(p_home_win, 3),
+#         "p_away_win": round(1 - p_home_win, 3),
+#         "message": "MLB game auto-statified"
+#     }
 
 @app.post("/probability")
 def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
-    team_a_score = 50.0
-    team_b_score = 50.0
-
     selected = {stat.stat_key: stat.weight for stat in payload.selected_stats}
-    timezone_weight = selected.get("timezone", 0.0)
 
-    if "net_rating_last10" in selected:
-        team_a_score += 20 * selected["net_rating_last10"]
+    home_stats = get_real_team_stats(payload.home_team)
+    away_stats = get_real_team_stats(payload.away_team)
+
+    home_rating = team_power_rating(
+        home_stats["win_pct"],
+        home_stats["run_diff_per_game"]
+    )
+    away_rating = team_power_rating(
+        away_stats["win_pct"],
+        away_stats["run_diff_per_game"]
+    )
+
+    base_rating_diff = team_rating_diff(home_rating, away_rating)
+
+    rating_diff = 0.0
+    pitcher_edge = 0.0
+    home_field = 0.0
+    rest_edge = 0.0
+    form_edge = 0.0
+    split_edge = 0.0
+    timezone_edge = 0.0
+    # 
+    # rating_diff = base_rating_diff
+    # pitcher_edge = 0.0
+    # home_field = 0.0
+    # rest_edge = 0.0
+    # form_edge = 0.0
+    # split_edge = 0.0
+    # timezone_edge = 0.15 * selected["timezone"]-->if not selceted will crash
+
+    if "last10" in selected:
+        form_edge = last10_edge(
+            home_stats["last10_win_pct"],
+            away_stats["last10_win_pct"]
+        ) * 0.5 * selected["last10"]
 
     if "rest_days" in selected:
-        team_a_score += 10 * selected["rest_days"]
+        rest_edge = rest_days_edge(
+            home_stats["rest_days"],
+            away_stats["rest_days"]
+        ) * selected["rest_days"]
 
     if "home_away_split" in selected:
-        team_a_score += 15 * selected["home_away_split"]
+        home_field = home_field_advantage()
+        split_edge = home_away_split_edge(
+            home_stats["home_win_pct"],
+            away_stats["away_win_pct"]
+        ) * selected["home_away_split"]
 
-    p_home_win = win_probability(
-        team_a_score,
-        team_b_score,
-        payload.home_team,
-        payload.away_team,
-        timezone_weight=timezone_weight
+    if "timezone" in selected:
+        timezone_edge = 0.15 * selected["timezone"]
+
+    home_runs = expected_home_runs(
+        base_runs=4.5,
+        rating_diff=rating_diff,
+        pitcher_edge=pitcher_edge,
+        home_field=home_field,
+        rest_edge=rest_edge + timezone_edge,
+        form_edge=form_edge,
+        split_edge=split_edge,
     )
+
+    away_runs = expected_away_runs(
+        base_runs=4.5,
+        rating_diff=rating_diff,
+        pitcher_edge=pitcher_edge,
+        home_field=home_field,
+        rest_edge=rest_edge + timezone_edge,
+        form_edge=form_edge,
+        split_edge=split_edge,
+    )
+
+    p_home_win = win_probability_from_expected_runs(home_runs, away_runs)
+
+    biggest_edge_name = "None"
+    biggest_edge_value = 0.0
+
+    edge_map = {
+        "rating_diff": rating_diff,
+        "pitcher_edge": pitcher_edge,
+        "home_field": home_field,
+        "rest_edge": rest_edge,
+        "form_edge": form_edge,
+        "split_edge": split_edge,
+        "timezone_edge": timezone_edge,
+    }
+
+    if edge_map:
+        biggest_edge_name = max(edge_map, key=lambda k: abs(edge_map[k]))
+        biggest_edge_value = edge_map[biggest_edge_name]
 
     return {
         "home_team": payload.home_team,
         "away_team": payload.away_team,
         "p_home_win": round(p_home_win, 3),
         "p_away_win": round(1 - p_home_win, 3),
+        "expected_home_runs": round(home_runs, 2),
+        "expected_away_runs": round(away_runs, 2),
         "message": "You've been Statified",
-        "inputs_used": {
-            "team_a_score": team_a_score,
-            "team_b_score": team_b_score,
-            "timezone_weight": timezone_weight,
-            "selected_stats": list(selected.keys())
-        },
         "selected_stats_count": len(payload.selected_stats),
+        "biggest_edge": {
+            "name": biggest_edge_name,
+            "value": round(biggest_edge_value, 3),
+        },
+        "inputs_used": {
+            "selected_stats": list(selected.keys()),
+            "home_stats": home_stats,
+            "away_stats": away_stats,
+        },
     }
