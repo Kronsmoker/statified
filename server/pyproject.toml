@@ -8,6 +8,10 @@ dependencies = [
   "uvicorn",
   "pydantic",
   "requests>=2.32.5",
+  "ipykernel>=7.2.0",
+  "pandas>=2.3.3",
+  "matplotlib>=3.10.8",
+  "jupyter>=1.1.1",
 ]
 
 [project.scripts]
