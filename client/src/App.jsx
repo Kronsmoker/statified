@@ -7,6 +7,7 @@ function App() {
   const [selectedStats, setSelectedStats] = useState([]);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  
 
   // ✅ CLEAN STAT PACK (baseball only)
   const statOptions = [
@@ -14,6 +15,7 @@ function App() {
     { key: "rest_days", label: "Rest Days" },
     { key: "home_away_split", label: "Home/Away Split" },
     { key: "timezone", label: "Travel / Timezone" },
+    { key: "pitcher_stats", label: "Pitcher Stats" },
   ];
 
   useEffect(() => {
@@ -156,7 +158,8 @@ function App() {
             style={{
               cursor: "pointer",
               border:
-                selectedGame === game
+                selectedGame?.home_team === game.home_team &&
+                selectedGame?.away_team === game.away_team
                   ? "2px solid #22c55e"
                   : "1px solid #ccc",
             }}

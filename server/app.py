@@ -3,7 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Dict, Any
 import requests
+import csv
+import os
 from datetime import date, datetime, timedelta
+from models.pitcher import build_pitcher_report, PitcherStats, TeamStats, GameContext
 
 from models.probability import win_probability, win_probability_from_expected_runs
 from models.ratings import team_power_rating, team_rating_diff
@@ -357,9 +360,43 @@ def mlb_games_with_probabilities():
 #         "message": "MLB game auto-statified"
 #     }
 
+def log_prediction(result):
+    file_path = "predictions.csv"
+
+    row = {
+        "date": datetime.now().isoformat(),
+        "home_team": result["home_team"],
+        "away_team": result["away_team"],
+        "p_home_win": result["p_home_win"],
+        "expected_home_runs": result["expected_home_runs"],
+        "expected_away_runs": result["expected_away_runs"],
+        "selected_stats": "|".join(result["inputs_used"]["selected_stats"]),
+        # 🔥 IMPORTANT — model features (for ML later)
+        "rating_diff": result["inputs_used"].get("rating_diff", 0),
+        "pitcher_edge": result["inputs_used"].get("pitcher_edge", 0),
+        "rest_edge": result["inputs_used"].get("rest_edge", 0),
+        "form_edge": result["inputs_used"].get("form_edge", 0),
+        "split_edge": result["inputs_used"].get("split_edge", 0),
+        "timezone_edge": result["inputs_used"].get("timezone_edge", 0),
+
+        # 🔥 add later manually
+        "actual_result": "",
+        
+    }
+
+    file_exists = os.path.isfile(file_path)
+
+    with open(file_path, "a", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=row.keys())
+        if not file_exists:
+            writer.writeheader()
+        writer.writerow(row)
+
+
 @app.post("/probability")
 def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
     selected = {stat.stat_key: stat.weight for stat in payload.selected_stats}
+    pitcher_stats_selected = "pitcher_stats" in selected
 
     home_stats = get_real_team_stats(payload.home_team)
     away_stats = get_real_team_stats(payload.away_team)
@@ -375,43 +412,82 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
 
     base_rating_diff = team_rating_diff(home_rating, away_rating)
 
-    rating_diff = 0.0
+    rating_diff = base_rating_diff * 0.10
     pitcher_edge = 0.0
     home_field = 0.0
     rest_edge = 0.0
     form_edge = 0.0
     split_edge = 0.0
     timezone_edge = 0.0
-    # 
-    # rating_diff = base_rating_diff
-    # pitcher_edge = 0.0
-    # home_field = 0.0
-    # rest_edge = 0.0
-    # form_edge = 0.0
-    # split_edge = 0.0
-    # timezone_edge = 0.15 * selected["timezone"]-->if not selceted will crash
 
     if "last10" in selected:
         form_edge = last10_edge(
             home_stats["last10_win_pct"],
             away_stats["last10_win_pct"]
-        ) * 0.5 * selected["last10"]
+        ) * 0.20 * selected["last10"]
 
     if "rest_days" in selected:
         rest_edge = rest_days_edge(
             home_stats["rest_days"],
             away_stats["rest_days"]
-        ) * selected["rest_days"]
+        ) * 0.25 * selected["rest_days"]
 
     if "home_away_split" in selected:
         home_field = home_field_advantage()
         split_edge = home_away_split_edge(
             home_stats["home_win_pct"],
             away_stats["away_win_pct"]
-        ) * selected["home_away_split"]
+        ) * 0.25 * selected["home_away_split"]
 
     if "timezone" in selected:
-        timezone_edge = 0.15 * selected["timezone"]
+        timezone_edge = 0.05 * selected["timezone"]
+
+    if pitcher_stats_selected:
+        home_pitcher = PitcherStats(
+            name="Home Pitcher",
+            handedness="R",
+            k_percent=25.0,
+            bb_percent=7.0,
+            hr_per_9=1.0,
+            hard_hit_percent=38.0,
+            innings_per_start=5.5,
+        )
+
+        away_pitcher = PitcherStats(
+            name="Away Pitcher",
+            handedness="R",
+            k_percent=22.0,
+            bb_percent=9.0,
+            hr_per_9=1.3,
+            hard_hit_percent=42.0,
+            innings_per_start=5.0,
+        )
+
+        home_team_ctx = TeamStats(
+            team_name=payload.away_team,
+            handedness_split="vs_RHP",
+            k_percent=23.0,
+            bb_percent=8.0,
+            iso=0.150,
+            hard_hit_percent=38.0,
+        )
+
+        away_team_ctx = TeamStats(
+            team_name=payload.home_team,
+            handedness_split="vs_RHP",
+            k_percent=23.0,
+            bb_percent=8.0,
+            iso=0.150,
+            hard_hit_percent=38.0,
+        )
+
+        home_context = GameContext(home_pitcher=True)
+        away_context = GameContext(home_pitcher=False)
+
+        home_report = build_pitcher_report(home_pitcher, home_team_ctx, home_context)
+        away_report = build_pitcher_report(away_pitcher, away_team_ctx, away_context)
+
+        pitcher_edge = (home_report["f5"]["f5_edge"] - away_report["f5"]["f5_edge"]) * 0.15
 
     home_runs = expected_home_runs(
         base_runs=4.5,
@@ -452,7 +528,7 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
         biggest_edge_name = max(edge_map, key=lambda k: abs(edge_map[k]))
         biggest_edge_value = edge_map[biggest_edge_name]
 
-    return {
+    result = {
         "home_team": payload.home_team,
         "away_team": payload.away_team,
         "p_home_win": round(p_home_win, 3),
@@ -469,5 +545,41 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
             "selected_stats": list(selected.keys()),
             "home_stats": home_stats,
             "away_stats": away_stats,
+            "pitcher_stats_selected": pitcher_stats_selected,
+            "rating_diff": round(rating_diff, 3),
+            "pitcher_edge": round(pitcher_edge, 3),
+            "rest_edge": round(rest_edge, 3),
+            "form_edge": round(form_edge, 3),
+            "split_edge": round(split_edge, 3),
+            "timezone_edge": round(timezone_edge, 3),
+        }
         },
-    }
+
+    log_prediction(result)
+
+    return result
+
+@app.get("/test-pitcher")
+def test_pitcher():
+    pitcher = PitcherStats(
+        name="Cam Schlittler",
+        handedness="R",
+        k_percent=27.0,
+        bb_percent=8.8,
+        hr_per_9=0.95,
+        hard_hit_percent=40.2,
+        innings_per_start=5.4,
+    )
+
+    team = TeamStats(
+        team_name="Giants",
+        handedness_split="vs_RHP",
+        k_percent=23.5,
+        bb_percent=8.5,
+        iso=0.155,
+        hard_hit_percent=38.0,
+    )
+
+    context = GameContext(park_factor=95.0, home_pitcher=False)
+
+    return build_pitcher_report(pitcher, team, context)

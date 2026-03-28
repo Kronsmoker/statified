@@ -1,0 +1,5 @@
+date,home_team,away_team,p_home_win,expected_home_runs,expected_away_runs,selected_stats
+2026-03-27T19:10:27.450661,San Diego Padres,Detroit Tigers,0.448,4.4,4.6,last10
+2026-03-27T19:10:32.705424,San Diego Padres,Detroit Tigers,0.577,4.66,4.34,pitcher_stats
+2026-03-27T19:10:37.652969,San Diego Padres,Detroit Tigers,0.714,4.96,4.04,"pitcher_stats,home_away_split"
+2026-03-27T19:10:42.413310,San Diego Padres,Detroit Tigers,0.719,4.97,4.03,"pitcher_stats,home_away_split,timezone"
