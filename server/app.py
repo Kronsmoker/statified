@@ -1,13 +1,15 @@
+import requests
+import csv
+import os
+import pandas as pd
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Dict, Any
-import requests
-import csv
-import os
 from datetime import date, datetime, timedelta
+from models.bullpen import calculate_bullpen_breakdown_score
 from models.pitcher import build_pitcher_report, PitcherStats, TeamStats, GameContext
-
+from models.run_regression_index import build_run_regression_index
 from models.probability import win_probability, win_probability_from_expected_runs
 from models.ratings import team_power_rating, team_rating_diff
 from models.baseball_stats import (
@@ -139,6 +141,34 @@ def did_team_win(game: dict, team_id: int) -> bool:
         return home_score > away_score
     return away_score > home_score
 
+def get_game_by_teams(home_team: str, away_team: str):
+    games = get_today_mlb_games()
+
+    for game in games:
+        if game["home_team"] == home_team and game["away_team"] == away_team:
+            return game
+
+    return None
+
+
+def get_actual_result_from_game(game: dict):
+    if not game:
+        return None
+
+    status = game.get("status", "").lower()
+
+    # allow more "final-like" states
+    if not any(s in status for s in ["final", "game over"]):
+        return None
+
+    home_score = game.get("home_score")
+    away_score = game.get("away_score")
+
+    if home_score is None or away_score is None:
+        return None
+
+    return 1 if home_score > away_score else 0
+
 
 def get_real_team_stats(team_name: str) -> dict:
     team_ids = get_team_id_map()
@@ -200,7 +230,20 @@ def get_real_team_stats(team_name: str) -> dict:
             "away_win_pct": 0.500,
             "last10_win_pct": 0.500,
             "rest_days": 0,
+            "rri_5": 0.0,
         }
+
+    rri_df = pd.DataFrame([
+        {
+            "team": team_name,
+            "date": g["game_date"],
+            "runs_scored": g["team_score"],
+        }
+        for g in final_games
+    ])
+
+    rri_df = build_run_regression_index(rri_df)
+    latest_rri = rri_df.iloc[-1]["rri_5"]
 
     wins = sum(1 for g in final_games if g["won"])
     losses = len(final_games) - wins
@@ -222,7 +265,9 @@ def get_real_team_stats(team_name: str) -> dict:
     last10_wins = sum(1 for g in last10 if g["won"])
     last10_losses = len(last10) - last10_wins
 
-    last_game_dt = datetime.fromisoformat(final_games[-1]["game_date"].replace("Z", "+00:00")).date()
+    last_game_dt = datetime.fromisoformat(
+        final_games[-1]["game_date"].replace("Z", "+00:00")
+    ).date()
     rest_days = max((today - last_game_dt).days - 1, 0)
 
     return {
@@ -233,8 +278,9 @@ def get_real_team_stats(team_name: str) -> dict:
         "away_win_pct": round(pct(away_wins, away_losses), 3),
         "last10_win_pct": round(pct(last10_wins, last10_losses), 3),
         "rest_days": rest_days,
+        "rri_5": round(float(latest_rri), 3) if pd.notna(latest_rri) else 0.0,
     }
-
+    
 
 @app.get("/mlb-games")
 def mlb_games():
@@ -276,6 +322,7 @@ def mlb_games_with_probabilities():
 
         # edges
         pitcher_edge = 0.0
+        timezone_edge = 0.0
 
         home_field = home_field_advantage()
 
@@ -288,6 +335,7 @@ def mlb_games_with_probabilities():
             home_stats["last10_win_pct"],
             away_stats["last10_win_pct"]
         )
+        rri_edge = (away_stats["rri_5"] - home_stats["rri_5"]) * 0.15
 
         split_edge = home_away_split_edge(
             home_stats["home_win_pct"],
@@ -300,9 +348,10 @@ def mlb_games_with_probabilities():
             rating_diff=rating_diff,
             pitcher_edge=pitcher_edge,
             home_field=home_field,
-            rest_edge=rest_edge,
+            rest_edge=rest_edge + timezone_edge,
             form_edge=form_edge,
             split_edge=split_edge,
+            rri_edge=rri_edge,
         )
 
         away_runs = expected_away_runs(
@@ -310,9 +359,10 @@ def mlb_games_with_probabilities():
             rating_diff=rating_diff,
             pitcher_edge=pitcher_edge,
             home_field=home_field,
-            rest_edge=rest_edge,
+            rest_edge=rest_edge + timezone_edge,
             form_edge=form_edge,
             split_edge=split_edge,
+            rri_edge=rri_edge,
         )
 
         # probability
@@ -332,33 +382,6 @@ def mlb_games_with_probabilities():
 
     return {"games": results}
     
-# @app.get("/mlb-probability")
-# def mlb_probability():
-#     game = get_today_mlb_game()
-
-#     if game is None:
-#         return {"error": "No MLB games found today"}
-
-#     home = game["home_team"]
-#     away = game["away_team"]
-
-#     team_a_score = 100
-#     team_b_score = 95
-
-#     p_home_win = win_probability(
-#         team_a_score,
-#         team_b_score,
-#         home,
-#         away
-#     )
-
-#     return {
-#         "home_team": home,
-#         "away_team": away,
-#         "p_home_win": round(p_home_win, 3),
-#         "p_away_win": round(1 - p_home_win, 3),
-#         "message": "MLB game auto-statified"
-#     }
 
 def log_prediction(result):
     file_path = "predictions.csv"
@@ -371,7 +394,6 @@ def log_prediction(result):
         "expected_home_runs": result["expected_home_runs"],
         "expected_away_runs": result["expected_away_runs"],
         "selected_stats": "|".join(result["inputs_used"]["selected_stats"]),
-        # 🔥 IMPORTANT — model features (for ML later)
         "rating_diff": result["inputs_used"].get("rating_diff", 0),
         "pitcher_edge": result["inputs_used"].get("pitcher_edge", 0),
         "rest_edge": result["inputs_used"].get("rest_edge", 0),
@@ -380,7 +402,7 @@ def log_prediction(result):
         "timezone_edge": result["inputs_used"].get("timezone_edge", 0),
 
         # 🔥 add later manually
-        "actual_result": "",
+        "actual_result": result.get("actual_result", ""),
         
     }
 
@@ -392,7 +414,7 @@ def log_prediction(result):
             writer.writeheader()
         writer.writerow(row)
 
-
+#PROBABILITY***********************************************************
 @app.post("/probability")
 def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
     selected = {stat.stat_key: stat.weight for stat in payload.selected_stats}
@@ -440,7 +462,7 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
         ) * 0.25 * selected["home_away_split"]
 
     if "timezone" in selected:
-        timezone_edge = 0.05 * selected["timezone"]
+        timezone_edge = 0.02 * selected["timezone"]
 
     if pitcher_stats_selected:
         home_pitcher = PitcherStats(
@@ -487,8 +509,29 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
         home_report = build_pitcher_report(home_pitcher, home_team_ctx, home_context)
         away_report = build_pitcher_report(away_pitcher, away_team_ctx, away_context)
 
-        pitcher_edge = (home_report["f5"]["f5_edge"] - away_report["f5"]["f5_edge"]) * 0.15
+        pitcher_edge = (home_report["f5"]["f5_edge"] - away_report["f5"]["f5_edge"]) * 0.08
+    
+    rri_edge = (away_stats["rri_5"] - home_stats["rri_5"]) * 0.07
 
+    home_bullpen = calculate_bullpen_breakdown_score(
+        bullpen_innings_yesterday=3.5,
+        back_to_back_relievers=2,
+        closer_used_yesterday=True,
+        setup_used_yesterday=True,
+        bullpen_era_penalty=1.0,
+    )
+
+    away_bullpen = calculate_bullpen_breakdown_score(
+        bullpen_innings_yesterday=1.0,
+        back_to_back_relievers=0,
+        closer_used_yesterday=False,
+        setup_used_yesterday=False,
+        bullpen_era_penalty=0.2,
+    )
+
+    home_bullpen_edge = away_bullpen["opponent_expected_run_boost"]
+    away_bullpen_edge = home_bullpen["opponent_expected_run_boost"]
+    
     home_runs = expected_home_runs(
         base_runs=4.5,
         rating_diff=rating_diff,
@@ -497,6 +540,8 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
         rest_edge=rest_edge + timezone_edge,
         form_edge=form_edge,
         split_edge=split_edge,
+        rri_edge=rri_edge,
+        bullpen_edge=home_bullpen_edge,
     )
 
     away_runs = expected_away_runs(
@@ -507,9 +552,17 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
         rest_edge=rest_edge + timezone_edge,
         form_edge=form_edge,
         split_edge=split_edge,
+        rri_edge=rri_edge,
+        bullpen_edge=away_bullpen_edge,
     )
 
     p_home_win = win_probability_from_expected_runs(home_runs, away_runs)
+
+    # Compress extreme probabilities
+    p_home_win = 0.5 + ((p_home_win - 0.5) * 0.65)
+
+    # Clamp probabilities to realistic MLB range
+    p_home_win = max(0.35, min(0.65, p_home_win))
 
     biggest_edge_name = "None"
     biggest_edge_value = 0.0
@@ -522,12 +575,15 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
         "form_edge": form_edge,
         "split_edge": split_edge,
         "timezone_edge": timezone_edge,
+        "home_bullpen_edge": home_bullpen_edge,
+        "away_bullpen_edge": away_bullpen_edge,
     }
 
     if edge_map:
         biggest_edge_name = max(edge_map, key=lambda k: abs(edge_map[k]))
         biggest_edge_value = edge_map[biggest_edge_name]
-
+    game = get_game_by_teams(payload.home_team, payload.away_team)
+    actual_result = get_actual_result_from_game(game)
     result = {
         "home_team": payload.home_team,
         "away_team": payload.away_team,
@@ -537,6 +593,7 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
         "expected_away_runs": round(away_runs, 2),
         "message": "You've been Statified",
         "selected_stats_count": len(payload.selected_stats),
+        "actual_result": actual_result,
         "biggest_edge": {
             "name": biggest_edge_name,
             "value": round(biggest_edge_value, 3),
@@ -552,8 +609,12 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
             "form_edge": round(form_edge, 3),
             "split_edge": round(split_edge, 3),
             "timezone_edge": round(timezone_edge, 3),
+            "home_bullpen_edge": round(home_bullpen_edge, 3),
+            "away_bullpen_edge": round(away_bullpen_edge, 3),
+            "home_bullpen": home_bullpen,
+            "away_bullpen": away_bullpen,
         }
-        },
+        }
 
     log_prediction(result)
 
@@ -583,3 +644,48 @@ def test_pitcher():
     context = GameContext(park_factor=95.0, home_pitcher=False)
 
     return build_pitcher_report(pitcher, team, context)
+
+@app.get("/predictions")
+def get_predictions():
+    try:
+        csv_path = os.path.join(os.path.dirname(__file__), "predictions.csv")
+        df = pd.read_csv(csv_path)
+        df = df.fillna("")
+        return {
+            "ok": True,
+            "count": len(df),
+            "predictions": df.to_dict(orient="records")
+        }
+    except Exception as e:
+        return {
+            "ok": False,
+            "error": str(e)
+        }
+
+class BullpenBreakdownRequest(BaseModel):
+    team: str
+    bullpen_innings_yesterday: float = 0
+    back_to_back_relievers: int = 0
+    closer_used_yesterday: bool = False
+    setup_used_yesterday: bool = False
+    bullpen_era_penalty: float = 0
+
+
+@app.post("/bullpen-breakdown-score")
+def bullpen_breakdown_score(data: BullpenBreakdownRequest):
+    result = calculate_bullpen_breakdown_score(
+        bullpen_innings_yesterday=data.bullpen_innings_yesterday,
+        back_to_back_relievers=data.back_to_back_relievers,
+        closer_used_yesterday=data.closer_used_yesterday,
+        setup_used_yesterday=data.setup_used_yesterday,
+        bullpen_era_penalty=data.bullpen_era_penalty,
+    )
+
+    return {
+        "team": data.team,
+        "stat": "Bullpen Breakdown Score",
+        "short_name": "BBS",
+        "stat_key": "bullpen_breakdown_score",
+        **result,
+        "message": f"{data.team} bullpen risk: {result['risk_level']}",
+    }
