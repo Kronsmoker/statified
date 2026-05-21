@@ -22,7 +22,7 @@ function App() {
   ];
 
   useEffect(() => {
-  fetch('${API_BASE_URL}/mlb-games')
+  fetch(`${API_BASE_URL}/mlb-games`)
     .then((res) => res.json())
     .then((data) => {
       console.log("MLB games data:", data);
@@ -46,7 +46,7 @@ function App() {
     setResult(null);
 
     try {
-      const res = await fetch('${API_BASE_URL}/probability"', {
+      const res = await fetch(`${API_BASE_URL}/probability`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
