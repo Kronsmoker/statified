@@ -452,14 +452,14 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
         rest_edge = rest_days_edge(
             home_stats["rest_days"],
             away_stats["rest_days"]
-        ) * 0.25 * selected["rest_days"]
+        ) * 0.10 * selected["rest_days"]
 
     if "home_away_split" in selected:
         home_field = home_field_advantage()
         split_edge = home_away_split_edge(
             home_stats["home_win_pct"],
             away_stats["away_win_pct"]
-        ) * 0.25 * selected["home_away_split"]
+        ) * 0.12 * selected["home_away_split"]
 
     if "timezone" in selected:
         timezone_edge = 0.02 * selected["timezone"]

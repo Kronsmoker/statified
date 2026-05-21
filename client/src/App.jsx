@@ -16,14 +16,18 @@ function App() {
     { key: "home_away_split", label: "Home/Away Split" },
     { key: "timezone", label: "Travel / Timezone" },
     { key: "pitcher_stats", label: "Pitcher Stats" },
+    { key: "bullpen_breakdown_score", label: "Bullpen Breakdown Score" },
   ];
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/mlb-games")
-      .then((res) => res.json())
-      .then((data) => setGames(data.games || []))
-      .catch((err) => console.error(err));
-  }, []);
+  fetch("http://127.0.0.1:8000/mlb-games")
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("MLB games data:", data);
+      setGames(Array.isArray(data) ? data : data.games || []);
+    })
+    .catch((err) => console.error(err));
+}, []);
 
   const toggleStat = (statKey) => {
     setSelectedStats((prev) =>
@@ -67,118 +71,127 @@ function App() {
   };
 
   return (
-    <div className="container">
-      <h1>Statified MLB</h1>
-      <p>Today's MLB games, live scores, and win probabilities.</p>
+  <div className="container">
+    <h1>Statified MLB</h1>
+    <p>Today's MLB games, live scores, and win probabilities.</p>
 
-      <div className="main-grid">
-        {/* LEFT PANEL */}
-        <div className="card">
-          <h2>Game</h2>
+    <div className="app-layout">
+      <div className="games-column">
+        <h2>Today's MLB Games</h2>
+        <p>Games loaded: {games.length}</p>
 
-          {!selectedGame && (
-            <p style={{ opacity: 0.7 }}>Select a game below</p>
-          )}
+        <div className="games-list">
+          {games.map((game, i) => (
+            <div
+              key={i}
+              className="game-card"
+              onClick={() => {
+                setSelectedGame(game);
+                setResult(null);
+              }}
+              style={{
+                cursor: "pointer",
+                border:
+                  selectedGame?.home_team === game.home_team &&
+                  selectedGame?.away_team === game.away_team
+                    ? "2px solid #22c55e"
+                    : "1px solid #ccc",
+              }}
+            >
+              <h3>{game.away_team} at {game.home_team}</h3>
+              <p>Status: {game.status}</p>
 
-          {selectedGame && (
-            <>
-              <div>
-                <strong>Home:</strong> {selectedGame.home_team}
-              </div>
-              <div>
-                <strong>Away:</strong> {selectedGame.away_team}
-              </div>
-            </>
-          )}
-
-          <h3 style={{ marginTop: 20 }}>Stat Packs (MVP)</h3>
-
-          {statOptions.map((stat) => (
-            <div key={stat.key}>
-              <label>
-                <input
-                  type="checkbox"
-                  checked={selectedStats.includes(stat.key)}
-                  onChange={() => toggleStat(stat.key)}
-                />
-                {" "}{stat.label}
-              </label>
+              {game.away_score !== null && game.home_score !== null && (
+                <p>Score: {game.away_score} - {game.home_score}</p>
+              )}
             </div>
           ))}
-
-          <button onClick={generateProbability}>
-            Generate Probability
-          </button>
-        </div>
-
-        {/* RIGHT PANEL */}
-        <div className="card">
-          <h2>Result</h2>
-
-          {!result && !loading && (
-            <p style={{ opacity: 0.7 }}>
-              Select a game and generate probability.
-            </p>
-          )}
-
-          {loading && <p>Calculating...</p>}
-
-          {result && (
-            <>
-              <h2>
-                {Math.round(result.p_home_win * 100)}%{" "}
-                {result.home_team} win
-              </h2>
-              <p>
-                {Math.round(result.p_away_win * 100)}%{" "}
-                {result.away_team} win
-              </p>
-
-              <div style={{ marginTop: 12 }}>
-                You've been Statified
-              </div>
-            </>
-          )}
         </div>
       </div>
 
-      {/* GAME LIST */}
-      <h2 style={{ marginTop: 40 }}>Today's MLB Games</h2>
-      <p>Games loaded: {games.length}</p>
+      <div className="side-panel">
+        <div className="main-grid">
+          <div className="card">
+            <h2>Game</h2>
 
-      <div className="games-list">
-        {games.map((game, i) => (
-          <div
-            key={i}
-            className="game-card"
-            onClick={() => {
-              setSelectedGame(game);
-              setResult(null);
-            }}
-            style={{
-              cursor: "pointer",
-              border:
-                selectedGame?.home_team === game.home_team &&
-                selectedGame?.away_team === game.away_team
-                  ? "2px solid #22c55e"
-                  : "1px solid #ccc",
-            }}
-          >
-            <h3>
-              {game.away_team} at {game.home_team}
-            </h3>
-            <p>Status: {game.status}</p>
+            {!selectedGame && (
+              <p style={{ opacity: 0.7 }}>Select a game below</p>
+            )}
 
-            {game.away_score !== null && game.home_score !== null && (
-            <p>
-              Score: {game.away_score} - {game.home_score}
-            </p>
-          )}
+            {selectedGame && (
+              <>
+                <div><strong>Home:</strong> {selectedGame.home_team}</div>
+                <div><strong>Away:</strong> {selectedGame.away_team}</div>
+              </>
+            )}
+
+            <h3 style={{ marginTop: 20 }}>Stat Packs (MVP)</h3>
+
+            {statOptions.map((stat) => (
+              <div key={stat.key}>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={selectedStats.includes(stat.key)}
+                    onChange={() => toggleStat(stat.key)}
+                  />
+                  {" "}{stat.label}
+                </label>
+              </div>
+            ))}
+
+            <button
+              onClick={generateProbability}
+              disabled={!selectedGame || loading}
+              style={{
+                marginTop: "16px",
+                padding: "12px 18px",
+                backgroundColor: !selectedGame || loading ? "#999" : "#22c55e",
+                color: "white",
+                border: "none",
+                borderRadius: "8px",
+                cursor: !selectedGame || loading ? "not-allowed" : "pointer",
+                fontWeight: "bold",
+                width: "100%",
+              }}
+            >
+              {loading ? "Calculating..." : "Generate Probability"}
+            </button>
           </div>
-        ))}
+
+          <div className="card">
+            <h2>Result</h2>
+
+            {!result && !loading && (
+              <p style={{ opacity: 0.7 }}>
+                Select a game and generate probability.
+              </p>
+            )}
+
+            {loading && <p>Calculating...</p>}
+
+            {result && (
+              <>
+                <h2>
+                  {Math.round(result.p_home_win * 100)}%{" "}
+                  {result.home_team} win
+                </h2>
+
+                <p>
+                  {Math.round(result.p_away_win * 100)}%{" "}
+                  {result.away_team} win
+                </p>
+
+                <div style={{ marginTop: 12, color: "#00bfff"}}>
+                  You've been Statified
+                </div>
+              </>
+            )}
+          </div>
+        </div>
       </div>
     </div>
-  );
+  </div>
+);
 }
-
 export default App;
