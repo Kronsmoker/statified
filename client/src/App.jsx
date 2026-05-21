@@ -7,6 +7,8 @@ function App() {
   const [selectedStats, setSelectedStats] = useState([]);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const API_BASE_URL = 
+    import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
   
 
   // ✅ CLEAN STAT PACK (baseball only)
@@ -20,7 +22,7 @@ function App() {
   ];
 
   useEffect(() => {
-  fetch("http://127.0.0.1:8000/mlb-games")
+  fetch('${API_BASE_URL}/mlb-games')
     .then((res) => res.json())
     .then((data) => {
       console.log("MLB games data:", data);
@@ -44,7 +46,7 @@ function App() {
     setResult(null);
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/probability", {
+      const res = await fetch('${API_BASE_URL}/probability"', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
