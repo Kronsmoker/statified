@@ -10,6 +10,23 @@ function App() {
   const API_BASE_URL = 
     import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
   
+  const [isUnlocked, setIsUnlocked] = useState(
+  localStorage.getItem("statified_unlocked") === "true"
+  );
+  const [passwordInput, setPasswordInput] = useState("");
+
+  const APP_PASSWORD = "statified2026";
+
+  function handleUnlock(e) {
+    e.preventDefault();
+
+    if (passwordInput === APP_PASSWORD) {
+      localStorage.setItem("statified_unlocked", "true");
+      setIsUnlocked(true);
+    } else {
+      alert("Wrong password");
+    }
+  }
 
   // ✅ CLEAN STAT PACK (baseball only)
   const statOptions = [
@@ -71,6 +88,26 @@ function App() {
 
     setLoading(false);
   };
+
+  if (!isUnlocked) {
+  return (
+    <div className="login-screen">
+      <form className="login-card" onSubmit={handleUnlock}>
+        <h1>Statified</h1>
+        <p>Enter password to continue</p>
+
+        <input
+          type="password"
+          value={passwordInput}
+          onChange={(e) => setPasswordInput(e.target.value)}
+          placeholder="Password"
+        />
+
+        <button type="submit">Unlock</button>
+      </form>
+    </div>
+  );
+}
 
   return (
   <div className="container">
