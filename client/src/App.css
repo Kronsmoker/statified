@@ -5,6 +5,19 @@
   text-align: center;
 }
 
+a {
+  color: #4ade80;
+}
+
+a:hover {
+  color: #86efac;
+}
+
+body {
+  background-color: #111827;
+  color: #f8fafc;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -12,10 +25,10 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #4ade80);
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em #86efac);
 }
 
 @keyframes logo-spin {
@@ -33,12 +46,13 @@
   }
 }
 
+
 .card {
   padding: 2em;
 }
 
 .read-the-docs {
-  color: #888;
+  color: #cbd5e1;
 }
 
 .statified-button {
@@ -114,9 +128,64 @@
 /* CARD STYLE */
 .card,
 .game-card {
-  border: 1px solid #555;
+  border: 1px solid #374151;
   border-radius: 10px;
   padding: 18px;
 
-  background-color: #1f1f1f;
+  background-color: #1f2937;
+  color: #f9fafb;
+}
+
+/* MOBILE + TABLET RESPONSIVE */
+
+@media (max-width: 900px) {
+  #root {
+    max-width: 100%;
+    width: 100%;
+    padding: 0.75rem;
+  }
+
+  .app-layout {
+    flex-direction: column;
+    width: 100%;
+    padding: 8px;
+    gap: 16px;
+  }
+
+  .games-column,
+  .side-panel {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .side-panel {
+    position: static;
+  }
+
+  .main-grid {
+    width: 100%;
+  }
+
+  .card,
+  .game-card {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px;
+  }
+
+  button,
+  .statified-button {
+    width: 100%;
+    font-size: 16px;
+    padding: 14px;
+  }
+
+  h1 {
+    font-size: 28px;
+    line-height: 1.1;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
 }
