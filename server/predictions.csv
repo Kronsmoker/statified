@@ -318,3 +318,5 @@ date,home_team,away_team,p_home_win,expected_home_runs,expected_away_runs,select
 2026-05-19T19:28:04.540143,Chicago Cubs,Milwaukee Brewers,0.404,4.57,5.18,pitcher_stats|rest_days,-0.126,0.447,0.0,0.0,0.0,0.0,0
 2026-05-19T19:28:54.056900,St. Louis Cardinals,Pittsburgh Pirates,0.531,4.97,4.78,pitcher_stats|rest_days|last10|home_away_split|timezone|bullpen_breakdown_score,0.043,0.447,0.0,0.04,0.01,0.02,
 2026-05-21T18:30:09.712729,Arizona Diamondbacks,Colorado Rockies,0.411,4.59,5.16,timezone,0.11,0.0,0.0,0.0,0.0,0.02,
+2026-05-26T21:43:42.096867,Los Angeles Dodgers,Colorado Rockies,0.503,4.89,4.86,pitcher_stats|bullpen_breakdown_score,0.469,0.447,0.0,0.0,0.0,0.0,
+2026-05-26T21:43:51.064590,Los Angeles Dodgers,Colorado Rockies,0.46,4.75,5.0,timezone,0.469,0.0,0.0,0.0,0.0,0.02,
