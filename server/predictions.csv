@@ -320,3 +320,5 @@ date,home_team,away_team,p_home_win,expected_home_runs,expected_away_runs,select
 2026-05-21T18:30:09.712729,Arizona Diamondbacks,Colorado Rockies,0.411,4.59,5.16,timezone,0.11,0.0,0.0,0.0,0.0,0.02,
 2026-05-26T21:43:42.096867,Los Angeles Dodgers,Colorado Rockies,0.503,4.89,4.86,pitcher_stats|bullpen_breakdown_score,0.469,0.447,0.0,0.0,0.0,0.0,
 2026-05-26T21:43:51.064590,Los Angeles Dodgers,Colorado Rockies,0.46,4.75,5.0,timezone,0.469,0.0,0.0,0.0,0.0,0.02,
+2026-05-27T13:51:21.892578,Texas Rangers,Houston Astros,0.531,4.97,4.78,home_away_split|timezone|pitcher_stats|last10,0.136,0.447,0.0,-0.021,0.0,0.005,
+2026-05-27T14:32:11.424656,Texas Rangers,Houston Astros,0.533,4.98,4.77,pitcher_stats|home_away_split|rest_days,0.136,0.447,0.0,0.0,0.007,0.0,
