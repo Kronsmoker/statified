@@ -45,7 +45,7 @@ class ProbabilityRequest(BaseModel):
     selected_stats: List[StatSelection]
 
 
-@app.get("/health")
+@app.get("/health", methods=["GET", "HEAD"])
 def health():
     return {"status": "ok"}
 
@@ -558,11 +558,11 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
 
     p_home_win = win_probability_from_expected_runs(home_runs, away_runs)
 
-    # Compress extreme probabilities
-    p_home_win = 0.5 + ((p_home_win - 0.5) * 0.65)
+    # Compress probabilities harder until model is calibrated
+    p_home_win = 0.5 + ((p_home_win - 0.5) * 0.45)
 
     # Clamp probabilities to realistic MLB range
-    p_home_win = max(0.35, min(0.65, p_home_win))
+    p_home_win = max(0.40, min(0.60, p_home_win))
 
     biggest_edge_name = "None"
     biggest_edge_value = 0.0
