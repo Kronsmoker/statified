@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv("predictions.csv")
+df = pd.read_csv("predictions.csv", on_bad_lines="skip")
 
 df["date"] = pd.to_datetime(df["date"]).dt.date
 

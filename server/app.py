@@ -45,7 +45,7 @@ class ProbabilityRequest(BaseModel):
     selected_stats: List[StatSelection]
 
 
-@app.get("/health", methods=["GET", "HEAD"])
+@app.get("/health")
 def health():
     return {"status": "ok"}
 
