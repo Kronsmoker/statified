@@ -291,6 +291,84 @@ def mlb_games():
 
     return {"games": games}
 
+def prediction_exists_today(home_team: str, away_team: str) -> bool:
+    file_path = "predictions.csv"
+
+    if not os.path.exists(file_path):
+        return False
+
+    try:
+        df = pd.read_csv(file_path, on_bad_lines="skip")
+
+        if df.empty:
+            return False
+
+        df["date_only"] = pd.to_datetime(df["date"]).dt.date
+        today = date.today()
+
+        match = df[
+            (df["date_only"] == today)
+            & (df["home_team"] == home_team)
+            & (df["away_team"] == away_team)
+        ]
+
+        return not match.empty
+
+    except Exception:
+        return False
+
+@app.get("/generate-daily-predictions")
+def generate_daily_predictions():
+    games = get_today_mlb_games()
+
+    if not games:
+        return {
+            "ok": False,
+            "message": "No MLB games found today",
+            "saved": 0
+        }
+
+    saved = 0
+    skipped = 0
+    results = []
+
+    default_stats = [
+        StatSelection(stat_key="last10", weight=0.25),
+        StatSelection(stat_key="rest_days", weight=0.15),
+        StatSelection(stat_key="home_away_split", weight=0.25),
+        StatSelection(stat_key="timezone", weight=0.10),
+        StatSelection(stat_key="pitcher_stats", weight=0.25),
+    ]
+
+    for game in games:
+        home = game["home_team"]
+        away = game["away_team"]
+
+        if prediction_exists_today(home, away):
+            skipped += 1
+            continue
+
+        payload = ProbabilityRequest(
+            sport="baseball",
+            league="mlb",
+            home_team=home,
+            away_team=away,
+            selected_stats=default_stats
+        )
+
+        result = probability(payload)
+
+        results.append(result)
+        saved += 1
+
+    return {
+        "ok": True,
+        "message": "Daily predictions generated",
+        "saved": saved,
+        "skipped": skipped,
+        "results": results
+    }
+
 @app.get("/mlb-games-with-probabilities")
 def mlb_games_with_probabilities():
     games = get_today_mlb_games()

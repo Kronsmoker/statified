@@ -1,371 +1,394 @@
 date,home_team,away_team,p_home_win,expected_home_runs,expected_away_runs,selected_stats,rating_diff,pitcher_edge,rest_edge,form_edge,split_edge,timezone_edge,actual_result
-2026-03-29T18:50:21.599389,Baltimore Orioles,Minnesota Twins,0.735,5.01,3.99,last10|rest_days|home_away_split|timezone|pitcher_stats,-0.14,0.838,0,0.06,0.048,0.05,1
-2026-03-29T18:50:31.033391,Philadelphia Phillies,Texas Rangers,0.638,4.78,4.22,last10|rest_days|home_away_split|timezone|pitcher_stats,-0.498,0.838,0,-0.08,-0.025,0.05,0
-2026-03-29T18:50:37.508539,Atlanta Braves,Kansas City Royals,0.868,5.44,3.56,last10|rest_days|home_away_split|timezone|pitcher_stats,0.639,0.838,0,0.1,0.183,0.05,0
-2026-03-29T18:56:19.763267,Toronto Blue Jays,Athletics,0.758,5.07,3.93,last10|rest_days|home_away_split|timezone|pitcher_stats,-0.054,0.838,0,0.08,0.103,0.05,1
-2026-03-29T18:56:28.574996,Cincinnati Reds,Boston Red Sox,0.801,5.2,3.8,last10|rest_days|home_away_split|timezone|pitcher_stats,0.217,0.838,0,0.02,0.119,0.05,1
-2026-03-29T18:56:35.004503,New York Mets,Pittsburgh Pirates,0.805,5.21,3.79,last10|rest_days|home_away_split|timezone|pitcher_stats,0.274,0.838,0,0,0.065,0.05,0
-2026-03-29T18:56:41.923424,Miami Marlins,Colorado Rockies,0.784,5.14,3.86,last10|rest_days|home_away_split|timezone|pitcher_stats,0.154,0.838,0,0.04,0.018,0.05,1
-2026-03-29T18:56:48.091939,Houston Astros,Los Angeles Angels,0.781,5.13,3.87,last10|rest_days|home_away_split|timezone|pitcher_stats,0.159,0.838,0,-0.02,0.014,0.05,1
-2026-03-29T18:56:53.950327,Milwaukee Brewers,Chicago White Sox,0.827,5.28,3.72,last10|rest_days|home_away_split|timezone|pitcher_stats,0.356,0.838,0,0.1,0.113,0.05,1
-2026-03-29T18:57:02.534960,St. Louis Cardinals,Tampa Bay Rays,0.811,5.23,3.77,last10|rest_days|home_away_split|timezone|pitcher_stats,0.255,0.838,0,0.08,0.12,0.05,0
-2026-03-29T18:57:09.143233,Chicago Cubs,Washington Nationals,0.748,5.04,3.96,last10|rest_days|home_away_split|timezone|pitcher_stats,-0.035,0.838,0,0,0.021,0.05,0
-2026-03-29T18:57:15.927622,Seattle Mariners,Cleveland Guardians,0.662,4.84,4.16,last10|rest_days|home_away_split|timezone|pitcher_stats,-0.394,0.838,0,-0.04,-0.054,0.05,
-2026-03-30T11:22:04.624785,Miami Marlins,Chicago White Sox,0.66,4.83,4.17,pitcher_stats|timezone|rest_days,0.151,0.838,0,0,0,0.05,
-2026-03-30T11:23:02.673328,Miami Marlins,Chicago White Sox,0.785,5.15,3.85,pitcher_stats|timezone|rest_days|home_away_split,0.151,0.838,0,0,0.072,0.05,
-2026-03-30T11:24:40.797085,Miami Marlins,Chicago White Sox,0.785,5.15,3.85,pitcher_stats|timezone|rest_days|home_away_split,0.151,0.838,0,0,0.072,0.05,
-2026-03-30T11:32:44.374563,Toronto Blue Jays,Colorado Rockies,0.594,4.69,4.31,,0.379,0,0,0,0,0,
-2026-03-30T11:32:47.840824,Kansas City Royals,Minnesota Twins,0.401,4.3,4.7,,-0.402,0,0,0,0,0,
-2026-03-30T11:32:52.962143,Baltimore Orioles,Texas Rangers,0.396,4.29,4.71,,-0.421,0,0,0,0,0,
-2026-03-30T11:33:09.850346,San Diego Padres,San Francisco Giants,0.711,4.95,4.05,pitcher_stats|timezone|home_away_split|rest_days|last10,-0.152,0.838,-0.25,-0.02,-0.02,0.05,
-2026-03-30T11:33:24.414488,San Diego Padres,San Francisco Giants,0.587,4.68,4.32,pitcher_stats,-0.152,0.838,0,0,0,0,
-2026-03-30T11:35:02.589887,San Diego Padres,San Francisco Giants,0.587,4.68,4.32,pitcher_stats,-0.152,0.838,0,0,0,0,
-2026-03-31T15:14:59.026496,Baltimore Orioles,Texas Rangers,0.656,4.82,4.18,pitcher_stats|timezone|home_away_split|rest_days|last10,-0.447,0.838,0,-0.02,-0.018,0.05,
-2026-03-31T15:18:13.883254,Baltimore Orioles,Texas Rangers,0.658,4.83,4.17,pitcher_stats|timezone|home_away_split|rest_days,-0.447,0.838,0,0,-0.018,0.05,
-2026-03-31T15:18:16.954431,Baltimore Orioles,Texas Rangers,0.516,4.53,4.47,pitcher_stats|timezone|rest_days,-0.447,0.838,0,0,0,0.05,
-2026-03-31T15:18:22.961579,Baltimore Orioles,Texas Rangers,0.516,4.53,4.47,pitcher_stats|timezone,-0.447,0.838,0,0,0,0.05,
-2026-03-31T15:18:25.593316,Baltimore Orioles,Texas Rangers,0.514,4.53,4.47,pitcher_stats,-0.447,0.838,0,0,0,0,
-2026-03-31T15:18:27.811011,Baltimore Orioles,Texas Rangers,0.514,4.53,4.47,pitcher_stats,-0.447,0.838,0,0,0,0,
-2026-04-01T16:41:04.645959,Kansas City Royals,Minnesota Twins,0.488,4.48,4.52,pitcher_stats,-0.357,0.838,0,0,0,0,
-2026-04-01T19:10:20.922547,Chicago Cubs,Los Angeles Angels,0.638,4.78,4.22,last10|rest_days|home_away_split,0.003,0,0,0.04,0.001,0,1
-2026-04-01T19:10:46.151779,Chicago Cubs,Los Angeles Angels,0.613,4.73,4.27,pitcher_stats|timezone,0.003,0.838,0,0,0,0.05,1
-2026-04-01T19:14:24.572472,Chicago Cubs,Los Angeles Angels,0.613,4.73,4.27,pitcher_stats|timezone,0.003,0.838,0,0,0,0.05,1
-2026-05-05T08:00:29.221123,New York Yankees,Texas Rangers,0.696,4.91,4.09,home_away_split|timezone,0.025,0,0,0,0.054,0.05,
-2026-05-05T08:02:29.022206,Detroit Tigers,Boston Red Sox,0.731,5,4,home_away_split|timezone,0.254,0,0,0,0.065,0.05,
-2026-05-05T08:22:17.079187,Washington Nationals,Minnesota Twins,0.492,4.48,4.52,last10|rest_days,-0.096,0,0,0.04,0,0,
-2026-05-05T08:23:36.607054,Washington Nationals,Minnesota Twins,0.494,4.49,4.51,last10|rest_days|timezone,-0.096,0,0,0.04,0,0.05,
-2026-05-05T08:36:38.833661,San Francisco Giants,San Diego Padres,0.497,4.49,4.51,last10,-0.013,0,0,-0.02,0,0,
-2026-05-05T08:36:48.936098,San Francisco Giants,San Diego Padres,0.499,4.5,4.5,bullpen_breakdown_score,-0.013,0,0,0,0,0,
-2026-05-05T09:02:01.048089,San Francisco Giants,San Diego Padres,0.32,4.5,5.25,bullpen_breakdown_score,-0.013,0,0,0,0,0,
-2026-05-05T09:03:44.898990,San Francisco Giants,San Diego Padres,0.32,4.5,5.25,bullpen_breakdown_score,-0.013,0,0,0,0,0,
-2026-05-05T09:03:49.447327,San Francisco Giants,San Diego Padres,0.318,4.49,5.26,bullpen_breakdown_score|last10,-0.013,0,0,-0.02,0,0,
-2026-05-05T09:03:52.036058,San Francisco Giants,San Diego Padres,0.46,4.79,4.96,bullpen_breakdown_score|last10|home_away_split,-0.013,0,0,-0.02,0.003,0,
-2026-05-05T09:03:59.097469,San Francisco Giants,San Diego Padres,0.32,4.5,5.25,bullpen_breakdown_score,-0.013,0,0,0,0,0,
-2026-05-05T15:50:16.837848,Philadelphia Phillies,Athletics,0.389,4.65,5.1,pitcher_stats,-0.275,0.838,0,0,0,0,
-2026-05-05T15:50:31.000093,Philadelphia Phillies,Athletics,0.53,4.93,4.82,timezone|home_away_split|pitcher_stats|rest_days|last10,-0.275,0.838,-0.25,0.04,-0.025,0.05,
-2026-05-05T15:50:41.369784,Philadelphia Phillies,Athletics,0.53,4.93,4.82,timezone|home_away_split|pitcher_stats|rest_days|last10|bullpen_breakdown_score,-0.275,0.838,-0.25,0.04,-0.025,0.05,
-2026-05-05T15:50:46.402419,Philadelphia Phillies,Athletics,0.526,4.93,4.82,timezone|home_away_split|pitcher_stats|rest_days|bullpen_breakdown_score,-0.275,0.838,-0.25,0,-0.025,0.05,
-2026-05-05T15:50:50.708047,Philadelphia Phillies,Athletics,0.536,4.95,4.8,timezone|home_away_split|pitcher_stats|bullpen_breakdown_score,-0.275,0.838,0,0,-0.025,0.05,
-2026-05-05T15:50:54.044212,Philadelphia Phillies,Athletics,0.391,4.65,5.1,timezone|pitcher_stats|bullpen_breakdown_score,-0.275,0.838,0,0,0,0.05,
-2026-05-05T15:50:58.758073,Philadelphia Phillies,Athletics,0.389,4.65,5.1,pitcher_stats|bullpen_breakdown_score,-0.275,0.838,0,0,0,0,
-2026-05-05T15:51:01.733232,Philadelphia Phillies,Athletics,0.278,4.4,5.35,bullpen_breakdown_score,-0.275,0,0,0,0,0,
-2026-05-05T15:56:38.242422,Miami Marlins,Baltimore Orioles,0.609,5.1,4.65,bullpen_breakdown_score|pitcher_stats|timezone|home_away_split|rest_days|last10,0.1,0.838,0,0.04,0.035,0.05,
-2026-05-05T15:56:47.246815,Miami Marlins,Baltimore Orioles,0.331,4.52,5.23,bullpen_breakdown_score,0.1,0,0,0,0,0,
-2026-05-05T15:56:56.057357,Miami Marlins,Baltimore Orioles,0.45,4.78,4.97,pitcher_stats,0.1,0.838,0,0,0,0,
-2026-05-05T15:57:01.361570,Miami Marlins,Baltimore Orioles,0.333,4.53,5.22,timezone,0.1,0,0,0,0,0.05,
-2026-05-05T15:57:06.629018,Miami Marlins,Baltimore Orioles,0.479,4.83,4.92,home_away_split,0.1,0,0,0,0.035,0,
-2026-05-05T15:57:11.025039,Miami Marlins,Baltimore Orioles,0.331,4.52,5.23,rest_days,0.1,0,0,0,0,0,
-2026-05-05T15:57:15.745236,Miami Marlins,Baltimore Orioles,0.335,4.53,5.22,last10,0.1,0,0,0.04,0,0,
-2026-05-05T15:57:21.734163,Miami Marlins,Baltimore Orioles,0.609,5.1,4.65,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,0.1,0.838,0,0.04,0.035,0.05,
-2026-05-05T15:57:35.158416,Miami Marlins,Baltimore Orioles,0.331,4.52,5.23,bullpen_breakdown_score,0.1,0,0,0,0,0,
-2026-05-05T15:57:43.675318,Miami Marlins,Baltimore Orioles,0.45,4.78,4.97,pitcher_stats,0.1,0.838,0,0,0,0,
-2026-05-05T15:57:53.725883,Miami Marlins,Baltimore Orioles,0.333,4.53,5.22,timezone,0.1,0,0,0,0,0.05,
-2026-05-05T15:58:00.641914,Miami Marlins,Baltimore Orioles,0.337,4.54,5.21,timezone|last10|rest_days,0.1,0,0,0.04,0,0.05,
-2026-05-05T16:27:10.987430,Miami Marlins,Baltimore Orioles,0.337,4.54,5.21,timezone|last10|rest_days,0.1,0,0,0.04,0,0.05,
-2026-05-05T16:27:50.289429,Philadelphia Phillies,Athletics,0.275,4.39,5.36,timezone|last10|rest_days,-0.275,0,-0.25,0.04,0,0.05,
-2026-05-06T14:40:31.594297,Arizona Diamondbacks,Pittsburgh Pirates,0.251,4.33,5.42,last10|rest_days,-0.161,0,0,-0.02,0,0,
-2026-05-06T14:40:42.735241,Arizona Diamondbacks,Pittsburgh Pirates,0.251,4.33,5.42,last10|rest_days|bullpen_breakdown_score,-0.161,0,0,-0.02,0,0,
-2026-05-06T14:40:46.567244,Arizona Diamondbacks,Pittsburgh Pirates,0.356,4.58,5.17,last10|rest_days|bullpen_breakdown_score|pitcher_stats,-0.161,0.838,0,-0.02,0,0,
-2026-05-06T14:40:55.545721,Arizona Diamondbacks,Pittsburgh Pirates,0.358,4.58,5.17,bullpen_breakdown_score|pitcher_stats,-0.161,0.838,0,0,0,0,
-2026-05-06T14:44:51.422405,Tampa Bay Rays,Toronto Blue Jays,0.596,5.07,4.68,bullpen_breakdown_score|pitcher_stats|last10|rest_days|home_away_split|timezone,-0.01,0.838,0,0.1,0.093,0.05,1
-2026-05-06T14:45:01.337069,St. Louis Cardinals,Milwaukee Brewers,0.584,5.05,4.7,bullpen_breakdown_score|pitcher_stats|last10|rest_days|home_away_split|timezone,-0.098,0.838,0,0.02,0.037,0.05,0
-2026-05-06T14:45:23.037617,Houston Astros,Los Angeles Dodgers,0.519,4.91,4.84,bullpen_breakdown_score|pitcher_stats|last10|rest_days|home_away_split|timezone,-0.296,0.838,0,-0.02,-0.019,0.05,0
-2026-05-06T14:45:34.865161,San Francisco Giants,San Diego Padres,0.581,5.04,4.71,bullpen_breakdown_score|pitcher_stats|last10|rest_days|home_away_split|timezone,-0.041,0.838,0,-0.04,-0.006,0.05,
-2026-05-06T15:05:22.064696,New York Yankees,Texas Rangers,0.388,4.65,5.1,,0.044,0,0,0,0,0,
-2026-05-06T15:05:26.659980,New York Yankees,Texas Rangers,0.397,4.67,5.08,last10,0.044,0,0,0.1,0,0,
-2026-05-06T15:05:30.223914,New York Yankees,Texas Rangers,0.397,4.67,5.08,last10|rest_days,0.044,0,0,0.1,0,0,
-2026-05-06T15:05:33.674052,New York Yankees,Texas Rangers,0.399,4.67,5.08,last10|rest_days|timezone,0.044,0,0,0.1,0,0.05,
-2026-05-06T15:15:30.203684,Chicago Cubs,Cincinnati Reds,0.381,4.63,5.12,last10|rest_days|timezone,0.171,0,0,0.08,0,0.05,
-2026-05-06T15:15:44.186444,Chicago Cubs,Cincinnati Reds,0.505,4.88,4.87,last10|rest_days|timezone|pitcher_stats,0.171,0.838,0,0.08,0,0.05,
-2026-05-08T11:25:44.584968,Cincinnati Reds,Houston Astros,0.574,5.02,4.73,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.061,0.838,-0.25,-0.04,0.066,0.05,
-2026-05-08T11:25:49.935049,Cincinnati Reds,Houston Astros,0.578,5.03,4.72,rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.061,0.838,-0.25,0,0.066,0.05,
-2026-05-08T11:25:51.777352,Cincinnati Reds,Houston Astros,0.587,5.05,4.7,home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.061,0.838,0,0,0.066,0.05,
-2026-05-08T11:25:57.176419,Cincinnati Reds,Houston Astros,0.431,4.74,5.01,timezone|pitcher_stats|bullpen_breakdown_score,-0.061,0.838,0,0,0,0.05,
-2026-05-08T11:26:03.090661,Cincinnati Reds,Houston Astros,0.429,4.73,5.02,pitcher_stats|bullpen_breakdown_score,-0.061,0.838,0,0,0,0,
-2026-05-08T11:26:06.772451,Cincinnati Reds,Houston Astros,0.312,4.48,5.27,bullpen_breakdown_score,-0.061,0,0,0,0,0,
-2026-05-08T11:26:15.657226,Cincinnati Reds,Houston Astros,0.429,4.73,5.02,pitcher_stats,-0.061,0.838,0,0,0,0,
-2026-05-08T11:26:18.858449,Cincinnati Reds,Houston Astros,0.314,4.48,5.27,timezone,-0.061,0,0,0,0,0.05,
-2026-05-08T11:26:21.885533,Cincinnati Reds,Houston Astros,0.461,4.8,4.95,home_away_split,-0.061,0,0,0,0.066,0,
-2026-05-08T11:26:25.326048,Cincinnati Reds,Houston Astros,0.303,4.46,5.29,rest_days,-0.061,0,-0.25,0,0,0,
-2026-05-08T11:26:28.185838,Cincinnati Reds,Houston Astros,0.309,4.47,5.28,last10,-0.061,0,0,-0.04,0,0,
-2026-05-08T11:26:32.893897,Philadelphia Phillies,Colorado Rockies,0.353,4.57,5.18,last10,-0.012,0,0,0.1,0,0,
-2026-05-08T11:26:34.791619,Philadelphia Phillies,Colorado Rockies,0.344,4.55,5.2,rest_days,-0.012,0,0,0,0,0,
-2026-05-08T11:26:37.505930,Philadelphia Phillies,Colorado Rockies,0.489,4.85,4.9,home_away_split,-0.012,0,0,0,0.006,0,
-2026-05-08T11:26:40.680760,Philadelphia Phillies,Colorado Rockies,0.346,4.56,5.19,timezone,-0.012,0,0,0,0,0.05,
-2026-05-08T11:26:43.167374,Philadelphia Phillies,Colorado Rockies,0.464,4.8,4.95,pitcher_stats,-0.012,0.838,0,0,0,0,
-2026-05-08T11:26:45.732582,Philadelphia Phillies,Colorado Rockies,0.344,4.55,5.2,bullpen_breakdown_score,-0.012,0,0,0,0,0,
-2026-05-08T11:26:50.955672,Philadelphia Phillies,Colorado Rockies,0.624,5.13,4.62,bullpen_breakdown_score|pitcher_stats|timezone|home_away_split|rest_days|last10,-0.012,0.838,0,0.1,0.006,0.05,
-2026-05-08T11:26:58.620207,Baltimore Orioles,Athletics,0.549,4.97,4.78,bullpen_breakdown_score|pitcher_stats|timezone|home_away_split|rest_days|last10,-0.226,0.838,0,-0.04,-0.008,0.05,
-2026-05-08T11:27:04.773026,Baltimore Orioles,Athletics,0.287,4.42,5.33,last10,-0.226,0,0,-0.04,0,0,
-2026-05-08T11:27:07.611534,Baltimore Orioles,Athletics,0.29,4.43,5.32,rest_days,-0.226,0,0,0,0,0,
-2026-05-08T11:27:09.895651,Baltimore Orioles,Athletics,0.426,4.73,5.02,home_away_split,-0.226,0,0,0,-0.008,0,
-2026-05-08T11:27:13.357206,Baltimore Orioles,Athletics,0.292,4.43,5.32,timezone,-0.226,0,0,0,0,0.05,
-2026-05-08T11:27:15.976420,Baltimore Orioles,Athletics,0.403,4.68,5.07,pitcher_stats,-0.226,0.838,0,0,0,0,
-2026-05-08T11:27:18.193293,Baltimore Orioles,Athletics,0.29,4.43,5.32,bullpen_breakdown_score,-0.226,0,0,0,0,0,
-2026-05-08T11:27:27.210068,Toronto Blue Jays,Los Angeles Angels,0.36,4.59,5.16,bullpen_breakdown_score,0.046,0,0,0,0,0,
-2026-05-08T11:27:29.421027,Toronto Blue Jays,Los Angeles Angels,0.482,4.84,4.91,pitcher_stats,0.046,0.838,0,0,0,0,
-2026-05-08T11:27:31.504750,Toronto Blue Jays,Los Angeles Angels,0.361,4.59,5.16,timezone,0.046,0,0,0,0,0.05,
-2026-05-08T11:27:33.503088,Toronto Blue Jays,Los Angeles Angels,0.511,4.9,4.85,home_away_split,0.046,0,0,0,0.041,0,
-2026-05-08T11:27:36.852987,Toronto Blue Jays,Los Angeles Angels,0.36,4.59,5.16,rest_days,0.046,0,0,0,0,0,
-2026-05-08T11:27:39.650000,Toronto Blue Jays,Los Angeles Angels,0.361,4.59,5.16,last10,0.046,0,0,0.02,0,0,
-2026-05-08T11:27:43.688837,Toronto Blue Jays,Los Angeles Angels,0.515,4.9,4.85,last10|rest_days|home_away_split|timezone|bullpen_breakdown_score,0.046,0,0,0.02,0.041,0.05,
-2026-05-08T11:27:46.250344,Boston Red Sox,Tampa Bay Rays,0.432,4.74,5.01,last10|rest_days|home_away_split|timezone|bullpen_breakdown_score,-0.144,0,0,-0.08,-0.003,0.05,
-2026-05-08T11:27:49.809970,Boston Red Sox,Tampa Bay Rays,0.293,4.44,5.31,last10,-0.144,0,0,-0.08,0,0,
-2026-05-08T11:27:53.003735,Boston Red Sox,Tampa Bay Rays,0.3,4.45,5.3,rest_days,-0.144,0,0,0,0,0,
-2026-05-08T11:27:56.014061,Boston Red Sox,Tampa Bay Rays,0.438,4.75,5,home_away_split,-0.144,0,0,0,-0.003,0,
-2026-05-08T11:27:58.589683,Boston Red Sox,Tampa Bay Rays,0.302,4.46,5.29,timezone,-0.144,0,0,0,0,0.05,
-2026-05-08T11:28:01.170059,Boston Red Sox,Tampa Bay Rays,0.415,4.7,5.05,pitcher_stats,-0.144,0.838,0,0,0,0,
-2026-05-08T11:28:03.436771,Boston Red Sox,Tampa Bay Rays,0.3,4.45,5.3,bullpen_breakdown_score,-0.144,0,0,0,0,0,
-2026-05-08T11:28:06.739741,Miami Marlins,Washington Nationals,0.317,4.49,5.26,bullpen_breakdown_score,0.005,0,0,0,0,0,
-2026-05-08T11:28:08.774229,Miami Marlins,Washington Nationals,0.435,4.74,5.01,pitcher_stats,0.005,0.838,0,0,0,0,
-2026-05-08T11:28:11.350294,Miami Marlins,Washington Nationals,0.319,4.5,5.25,timezone,0.005,0,0,0,0,0.05,
-2026-05-08T11:28:13.774132,Miami Marlins,Washington Nationals,0.457,4.79,4.96,home_away_split,0.005,0,0,0,-0.016,0,
-2026-05-08T11:28:15.802373,Miami Marlins,Washington Nationals,0.317,4.49,5.26,rest_days,0.005,0,0,0,0,0,
-2026-05-08T11:28:17.889485,Miami Marlins,Washington Nationals,0.314,4.48,5.27,last10,0.005,0,0,-0.04,0,0,
-2026-05-08T11:28:25.162999,Miami Marlins,Washington Nationals,0.58,5.04,4.71,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,0.005,0.838,0,-0.04,-0.016,0.05,
-2026-05-08T11:28:31.691510,Cleveland Guardians,Minnesota Twins,0.61,5.1,4.65,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,0.048,0.838,0,0.02,0.062,0.05,
-2026-05-08T11:28:37.056291,Cleveland Guardians,Minnesota Twins,0.333,4.53,5.22,last10,0.048,0,0,0.02,0,0,
-2026-05-08T11:28:39.801793,Cleveland Guardians,Minnesota Twins,0.331,4.52,5.23,rest_days,0.048,0,0,0,0,0,
-2026-05-08T11:28:41.764714,Cleveland Guardians,Minnesota Twins,0.482,4.84,4.91,home_away_split,0.048,0,0,0,0.062,0,
-2026-05-08T11:28:43.923968,Cleveland Guardians,Minnesota Twins,0.333,4.53,5.22,timezone,0.048,0,0,0,0,0.05,
-2026-05-08T11:28:45.897067,Cleveland Guardians,Minnesota Twins,0.45,4.77,4.98,pitcher_stats,0.048,0.838,0,0,0,0,
-2026-05-08T11:28:48.429482,Cleveland Guardians,Minnesota Twins,0.331,4.52,5.23,bullpen_breakdown_score,0.048,0,0,0,0,0,
-2026-05-08T11:28:52.045770,Kansas City Royals,Detroit Tigers,0.276,4.39,5.36,bullpen_breakdown_score,-0.201,0,0,0,0,0,
-2026-05-08T11:28:55.215601,Kansas City Royals,Detroit Tigers,0.387,4.64,5.11,pitcher_stats,-0.201,0.838,0,0,0,0,
-2026-05-08T11:28:57.460844,Kansas City Royals,Detroit Tigers,0.278,4.4,5.35,timezone,-0.201,0,0,0,0,0.05,
-2026-05-08T11:29:00.010238,Kansas City Royals,Detroit Tigers,0.415,4.7,5.05,home_away_split,-0.201,0,0,0,0.044,0,
-2026-05-08T11:29:02.744084,Kansas City Royals,Detroit Tigers,0.268,4.37,5.38,rest_days,-0.201,0,-0.25,0,0,0,
-2026-05-08T11:29:05.832942,Kansas City Royals,Detroit Tigers,0.279,4.4,5.35,last10,-0.201,0,0,0.04,0,0,
-2026-05-08T11:29:09.779804,Kansas City Royals,Detroit Tigers,0.536,4.95,4.8,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.201,0.838,-0.25,0.04,0.044,0.05,
-2026-05-08T11:29:13.718395,Chicago White Sox,Seattle Mariners,0.618,5.11,4.64,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,0.03,0.838,0,0.02,0.014,0.05,
-2026-05-08T11:29:18.444637,Chicago White Sox,Seattle Mariners,0.346,4.56,5.19,last10,0.03,0,0,0.02,0,0,
-2026-05-08T11:29:20.946725,Chicago White Sox,Seattle Mariners,0.344,4.55,5.2,rest_days,0.03,0,0,0,0,0,
-2026-05-08T11:29:23.457051,Chicago White Sox,Seattle Mariners,0.49,4.86,4.89,home_away_split,0.03,0,0,0,0.014,0,
-2026-05-08T11:29:25.646550,Chicago White Sox,Seattle Mariners,0.346,4.56,5.19,timezone,0.03,0,0,0,0,0.05,
-2026-05-08T11:29:27.701811,Chicago White Sox,Seattle Mariners,0.464,4.8,4.95,pitcher_stats,0.03,0.838,0,0,0,0,
-2026-05-08T11:29:29.672260,Chicago White Sox,Seattle Mariners,0.344,4.55,5.2,bullpen_breakdown_score,0.03,0,0,0,0,0,
-2026-05-08T11:29:37.131946,Milwaukee Brewers,New York Yankees,0.264,4.36,5.39,bullpen_breakdown_score,-0.035,0,0,0,0,0,
-2026-05-08T11:29:39.329855,Milwaukee Brewers,New York Yankees,0.372,4.61,5.14,pitcher_stats,-0.035,0.838,0,0,0,0,
-2026-05-08T11:29:41.665578,Milwaukee Brewers,New York Yankees,0.266,4.37,5.38,timezone,-0.035,0,0,0,0,0.05,
-2026-05-08T11:29:44.176464,Milwaukee Brewers,New York Yankees,0.395,4.66,5.09,home_away_split,-0.035,0,0,0,-0.004,0,
-2026-05-08T11:29:47.443016,Milwaukee Brewers,New York Yankees,0.272,4.38,5.37,rest_days,-0.035,0,0.25,0,0,0,
-2026-05-08T11:29:49.846205,Milwaukee Brewers,New York Yankees,0.261,4.35,5.4,last10,-0.035,0,0,-0.04,0,0,
-2026-05-08T11:29:54.146791,Milwaukee Brewers,New York Yankees,0.527,4.93,4.82,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.035,0.838,0.25,-0.04,-0.004,0.05,
-2026-05-08T11:29:57.090248,Texas Rangers,Chicago Cubs,0.575,5.03,4.72,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,0.01,0.838,0,-0.12,0.052,0.05,
-2026-05-08T11:30:01.763446,Texas Rangers,Chicago Cubs,0.303,4.46,5.29,last10,0.01,0,0,-0.12,0,0,
-2026-05-08T11:30:04.395340,Texas Rangers,Chicago Cubs,0.313,4.48,5.27,rest_days,0.01,0,0,0,0,0,
-2026-05-08T11:30:06.920879,Texas Rangers,Chicago Cubs,0.46,4.79,4.96,home_away_split,0.01,0,0,0,0.052,0,
-2026-05-08T11:30:09.222605,Texas Rangers,Chicago Cubs,0.315,4.49,5.26,timezone,0.01,0,0,0,0,0.05,
-2026-05-08T11:30:11.317828,Texas Rangers,Chicago Cubs,0.429,4.73,5.02,pitcher_stats,0.01,0.838,0,0,0,0,
-2026-05-08T11:30:13.588987,Texas Rangers,Chicago Cubs,0.313,4.48,5.27,bullpen_breakdown_score,0.01,0,0,0,0,0,
-2026-05-08T11:30:19.266183,Arizona Diamondbacks,New York Mets,0.283,4.41,5.34,bullpen_breakdown_score,-0.103,0,0,0,0,0,
-2026-05-08T11:30:21.551674,Arizona Diamondbacks,New York Mets,0.395,4.66,5.09,pitcher_stats,-0.103,0.838,0,0,0,0,
-2026-05-08T11:30:23.465445,Arizona Diamondbacks,New York Mets,0.285,4.41,5.34,timezone,-0.103,0,0,0,0,0.05,
-2026-05-08T11:30:25.776780,Arizona Diamondbacks,New York Mets,0.423,4.72,5.03,home_away_split,-0.103,0,0,0,0.033,0,
-2026-05-08T11:30:28.059764,Arizona Diamondbacks,New York Mets,0.283,4.41,5.34,rest_days,-0.103,0,0,0,0,0,
-2026-05-08T11:30:30.716951,Arizona Diamondbacks,New York Mets,0.28,4.4,5.35,last10,-0.103,0,0,-0.04,0,0,
-2026-05-08T11:30:34.299211,Arizona Diamondbacks,New York Mets,0.546,4.97,4.78,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.103,0.838,0,-0.04,0.033,0.05,
-2026-05-08T11:30:37.209950,San Diego Padres,St. Louis Cardinals,0.586,5.05,4.7,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.029,0.838,0,-0.06,-0.019,0.05,
-2026-05-08T11:30:40.929098,San Diego Padres,St. Louis Cardinals,0.32,4.5,5.25,last10,-0.029,0,0,-0.06,0,0,
-2026-05-08T11:30:43.335923,San Diego Padres,St. Louis Cardinals,0.325,4.51,5.24,rest_days,-0.029,0,0,0,0,0,
-2026-05-08T11:30:45.844221,San Diego Padres,St. Louis Cardinals,0.465,4.8,4.95,home_away_split,-0.029,0,0,0,-0.019,0,
-2026-05-08T11:30:48.521862,San Diego Padres,St. Louis Cardinals,0.327,4.51,5.24,timezone,-0.029,0,0,0,0,0.05,
-2026-05-08T11:30:50.773939,San Diego Padres,St. Louis Cardinals,0.443,4.76,4.99,pitcher_stats,-0.029,0.838,0,0,0,0,
-2026-05-08T11:30:52.938235,San Diego Padres,St. Louis Cardinals,0.325,4.51,5.24,bullpen_breakdown_score,-0.029,0,0,0,0,0,
-2026-05-08T11:30:55.966736,Los Angeles Dodgers,Atlanta Braves,0.271,4.38,5.37,bullpen_breakdown_score,-0.071,0,0,0,0,0,
-2026-05-08T11:30:57.950556,Los Angeles Dodgers,Atlanta Braves,0.38,4.63,5.12,pitcher_stats,-0.071,0.838,0,0,0,0,
-2026-05-08T11:30:59.976581,Los Angeles Dodgers,Atlanta Braves,0.272,4.38,5.37,timezone,-0.071,0,0,0,0,0.05,
-2026-05-08T11:31:02.091487,Los Angeles Dodgers,Atlanta Braves,0.404,4.68,5.07,home_away_split,-0.071,0,0,0,0.008,0,
-2026-05-08T11:31:04.501506,Los Angeles Dodgers,Atlanta Braves,0.271,4.38,5.37,rest_days,-0.071,0,0,0,0,0,
-2026-05-08T11:31:06.963225,Los Angeles Dodgers,Atlanta Braves,0.267,4.37,5.38,last10,-0.071,0,0,-0.04,0,0,
-2026-05-08T11:31:12.041238,Los Angeles Dodgers,Atlanta Braves,0.527,4.93,4.82,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.071,0.838,0,-0.04,0.008,0.05,
-2026-05-08T11:31:17.277093,San Francisco Giants,Pittsburgh Pirates,0.542,4.96,4.79,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.07,0.838,0.25,-0.08,0.004,0.05,
-2026-05-08T11:31:22.009010,San Francisco Giants,Pittsburgh Pirates,0.272,4.38,5.37,last10,-0.07,0,0,-0.08,0,0,
-2026-05-08T11:31:24.612503,San Francisco Giants,Pittsburgh Pirates,0.286,4.42,5.33,rest_days,-0.07,0,0.25,0,0,0,
-2026-05-08T11:31:27.395083,San Francisco Giants,Pittsburgh Pirates,0.413,4.7,5.05,home_away_split,-0.07,0,0,0,0.004,0,
-2026-05-08T11:31:29.592487,San Francisco Giants,Pittsburgh Pirates,0.28,4.4,5.35,timezone,-0.07,0,0,0,0,0.05,
-2026-05-08T11:31:31.728762,San Francisco Giants,Pittsburgh Pirates,0.389,4.65,5.1,pitcher_stats,-0.07,0.838,0,0,0,0,
-2026-05-08T11:31:33.912888,San Francisco Giants,Pittsburgh Pirates,0.278,4.4,5.35,bullpen_breakdown_score,-0.07,0,0,0,0,0,
-2026-05-08T11:50:54.920539,Cincinnati Reds,Houston Astros,0.508,4.9,4.85,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.061,0.447,-0.25,-0.04,0.066,0.02,
-2026-05-08T11:50:56.764915,Cincinnati Reds,Houston Astros,0.508,4.9,4.85,last10|rest_days|home_away_split|timezone|pitcher_stats,-0.061,0.447,-0.25,-0.04,0.066,0.02,
-2026-05-08T11:51:02.383018,Cincinnati Reds,Houston Astros,0.374,4.47,5.28,last10,-0.061,0,0,-0.04,0,0,
-2026-05-08T11:51:04.787948,Cincinnati Reds,Houston Astros,0.371,4.45,5.3,rest_days,-0.061,0,-0.25,0,0,0,
-2026-05-08T11:51:07.156841,Cincinnati Reds,Houston Astros,0.473,4.79,4.96,home_away_split,-0.061,0,0,0,0.066,0,
-2026-05-08T11:51:10.658648,Cincinnati Reds,Houston Astros,0.377,4.48,5.27,timezone,-0.061,0,0,0,0,0.02,
-2026-05-08T11:51:13.130404,Cincinnati Reds,Houston Astros,0.415,4.61,5.14,pitcher_stats,-0.061,0.447,0,0,0,0,
-2026-05-08T11:51:15.573253,Cincinnati Reds,Houston Astros,0.376,4.47,5.28,bullpen_breakdown_score,-0.061,0,0,0,0,0,
-2026-05-08T11:51:22.775993,Philadelphia Phillies,Colorado Rockies,0.533,4.98,4.77,bullpen_breakdown_score|pitcher_stats|timezone|home_away_split|rest_days|last10,-0.012,0.447,0,0.1,0.006,0.02,
-2026-05-08T11:51:27.274020,Philadelphia Phillies,Colorado Rockies,0.395,4.54,5.21,last10,-0.012,0,0,0.1,0,0,
-2026-05-08T11:51:29.957309,Philadelphia Phillies,Colorado Rockies,0.39,4.52,5.23,rest_days,-0.012,0,0,0,0,0,
-2026-05-08T11:51:31.959115,Philadelphia Phillies,Colorado Rockies,0.483,4.82,4.93,home_away_split,-0.012,0,0,0,0.006,0,
-2026-05-08T11:51:34.861503,Philadelphia Phillies,Colorado Rockies,0.39,4.52,5.23,timezone,-0.012,0,0,0,0,0.02,
-2026-05-08T11:51:37.280869,Philadelphia Phillies,Colorado Rockies,0.43,4.66,5.09,pitcher_stats,-0.012,0.447,0,0,0,0,
-2026-05-08T11:51:39.701925,Philadelphia Phillies,Colorado Rockies,0.39,4.52,5.23,bullpen_breakdown_score,-0.012,0,0,0,0,0,
-2026-05-08T11:51:49.523880,Baltimore Orioles,Athletics,0.486,4.83,4.92,bullpen_breakdown_score|pitcher_stats|timezone|home_away_split|rest_days|last10,-0.226,0.447,0,-0.04,-0.008,0.02,
-2026-05-08T11:51:52.561914,Baltimore Orioles,Athletics,0.356,4.4,5.35,last10,-0.226,0,0,-0.04,0,0,
-2026-05-08T11:51:55.153549,Baltimore Orioles,Athletics,0.358,4.41,5.34,rest_days,-0.226,0,0,0,0,0,
-2026-05-08T11:51:57.001206,Baltimore Orioles,Athletics,0.445,4.7,5.05,home_away_split,-0.226,0,0,0,-0.008,0,
-2026-05-08T11:51:58.727587,Baltimore Orioles,Athletics,0.358,4.41,5.34,timezone,-0.226,0,0,0,0,0.02,
-2026-05-08T11:52:00.331814,Baltimore Orioles,Athletics,0.395,4.54,5.21,pitcher_stats,-0.226,0.447,0,0,0,0,
-2026-05-08T11:52:02.808753,Baltimore Orioles,Athletics,0.358,4.41,5.34,bullpen_breakdown_score,-0.226,0,0,0,0,0,
-2026-05-08T11:52:22.389181,Baltimore Orioles,Athletics,0.358,4.41,5.34,bullpen_breakdown_score,-0.226,0,0,0,0,0,
-2026-05-08T11:52:28.649970,Toronto Blue Jays,Los Angeles Angels,0.541,5,4.75,bullpen_breakdown_score|pitcher_stats|timezone|home_away_split|last10|rest_days,0.046,0.447,0,0.02,0.041,0.02,
-2026-05-08T11:52:32.342628,Toronto Blue Jays,Los Angeles Angels,0.4,4.56,5.19,last10,0.046,0,0,0.02,0,0,
-2026-05-08T11:52:34.888586,Toronto Blue Jays,Los Angeles Angels,0.399,4.55,5.2,rest_days,0.046,0,0,0,0,0,
-2026-05-08T11:52:37.226863,Toronto Blue Jays,Los Angeles Angels,0.399,4.55,5.2,rest_days,0.046,0,0,0,0,0,
-2026-05-08T11:52:39.757565,Toronto Blue Jays,Los Angeles Angels,0.496,4.86,4.89,home_away_split,0.046,0,0,0,0.041,0,
-2026-05-08T11:52:41.956980,Toronto Blue Jays,Los Angeles Angels,0.399,4.55,5.2,timezone,0.046,0,0,0,0,0.02,
-2026-05-08T11:52:43.994955,Toronto Blue Jays,Los Angeles Angels,0.44,4.69,5.06,pitcher_stats,0.046,0.447,0,0,0,0,
-2026-05-08T11:52:45.992079,Toronto Blue Jays,Los Angeles Angels,0.399,4.55,5.2,bullpen_breakdown_score,0.046,0,0,0,0,0,
-2026-05-08T11:52:48.348886,Boston Red Sox,Tampa Bay Rays,0.367,4.44,5.31,bullpen_breakdown_score,-0.144,0,0,0,0,0,
-2026-05-08T11:52:50.034284,Boston Red Sox,Tampa Bay Rays,0.405,4.57,5.18,pitcher_stats,-0.144,0.447,0,0,0,0,
-2026-05-08T11:52:51.873338,Boston Red Sox,Tampa Bay Rays,0.367,4.44,5.31,timezone,-0.144,0,0,0,0,0.02,
-2026-05-08T11:52:53.601756,Boston Red Sox,Tampa Bay Rays,0.456,4.74,5.01,home_away_split,-0.144,0,0,0,-0.003,0,
-2026-05-08T11:52:55.401844,Boston Red Sox,Tampa Bay Rays,0.367,4.44,5.31,rest_days,-0.144,0,0,0,0,0,
-2026-05-08T11:52:57.645195,Boston Red Sox,Tampa Bay Rays,0.362,4.42,5.33,last10,-0.144,0,0,-0.08,0,0,
-2026-05-08T11:53:00.537103,Boston Red Sox,Tampa Bay Rays,0.495,4.86,4.89,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.144,0.447,0,-0.08,-0.003,0.02,
-2026-05-08T11:53:02.767950,Miami Marlins,Washington Nationals,0.515,4.92,4.83,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,0.005,0.447,0,-0.04,-0.016,0.02,
-2026-05-08T11:53:06.271470,Miami Marlins,Washington Nationals,0.381,4.49,5.26,last10,0.005,0,0,-0.04,0,0,
-2026-05-08T11:53:08.943758,Miami Marlins,Washington Nationals,0.383,4.5,5.25,rest_days,0.005,0,0,0,0,0,
-2026-05-08T11:53:10.850672,Miami Marlins,Washington Nationals,0.474,4.79,4.96,home_away_split,0.005,0,0,0,-0.016,0,
-2026-05-08T11:53:12.515271,Miami Marlins,Washington Nationals,0.383,4.5,5.25,timezone,0.005,0,0,0,0,0.02,
-2026-05-08T11:53:14.283681,Miami Marlins,Washington Nationals,0.423,4.63,5.12,pitcher_stats,0.005,0.447,0,0,0,0,
-2026-05-08T11:53:16.143840,Miami Marlins,Washington Nationals,0.383,4.5,5.25,bullpen_breakdown_score,0.005,0,0,0,0,0,
-2026-05-08T11:53:21.976240,Cleveland Guardians,Minnesota Twins,0.39,4.52,5.23,bullpen_breakdown_score,0.048,0,0,0,0,0,
-2026-05-08T11:53:23.536297,Cleveland Guardians,Minnesota Twins,0.43,4.66,5.09,pitcher_stats,0.048,0.447,0,0,0,0,
-2026-05-08T11:53:24.921227,Cleveland Guardians,Minnesota Twins,0.391,4.53,5.22,timezone,0.048,0,0,0,0,0.02,
-2026-05-08T11:53:26.572282,Cleveland Guardians,Minnesota Twins,0.488,4.84,4.91,home_away_split,0.048,0,0,0,0.062,0,
-2026-05-08T11:53:28.558850,Cleveland Guardians,Minnesota Twins,0.39,4.52,5.23,rest_days,0.048,0,0,0,0,0,
-2026-05-08T11:53:30.872110,Cleveland Guardians,Minnesota Twins,0.391,4.53,5.22,last10,0.048,0,0,0.02,0,0,
-2026-05-08T11:53:35.205644,Cleveland Guardians,Minnesota Twins,0.534,4.98,4.77,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,0.048,0.447,0,0.02,0.062,0.02,
-2026-05-08T11:53:38.908256,Kansas City Royals,Detroit Tigers,0.486,4.83,4.92,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.201,0.447,-0.25,0.04,0.044,0.02,
-2026-05-08T11:53:43.885317,Kansas City Royals,Detroit Tigers,0.358,4.4,5.35,last10,-0.201,0,0,0.04,0,0,
-2026-05-08T11:53:45.976244,Kansas City Royals,Detroit Tigers,0.35,4.38,5.37,rest_days,-0.201,0,-0.25,0,0,0,
-2026-05-08T11:53:48.387699,Kansas City Royals,Detroit Tigers,0.446,4.71,5.04,home_away_split,-0.201,0,0,0,0.044,0,
-2026-05-08T11:53:50.019595,Kansas City Royals,Detroit Tigers,0.356,4.4,5.35,timezone,-0.201,0,0,0,0,0.02,
-2026-05-08T11:53:52.164895,Kansas City Royals,Detroit Tigers,0.392,4.53,5.22,pitcher_stats,-0.201,0.447,0,0,0,0,
-2026-05-08T11:53:54.053847,Kansas City Royals,Detroit Tigers,0.355,4.4,5.35,bullpen_breakdown_score,-0.201,0,0,0,0,0,
-2026-05-08T11:54:00.726474,Chicago White Sox,Seattle Mariners,0.393,4.53,5.22,bullpen_breakdown_score,0.03,0,0,0,0,0,
-2026-05-08T11:54:02.692902,Chicago White Sox,Seattle Mariners,0.433,4.67,5.08,pitcher_stats,0.03,0.447,0,0,0,0,
-2026-05-08T11:54:04.679524,Chicago White Sox,Seattle Mariners,0.393,4.53,5.22,timezone,0.03,0,0,0,0,0.02,
-2026-05-08T11:54:06.386951,Chicago White Sox,Seattle Mariners,0.487,4.84,4.91,home_away_split,0.03,0,0,0,0.014,0,
-2026-05-08T11:54:08.762539,Chicago White Sox,Seattle Mariners,0.393,4.53,5.22,rest_days,0.03,0,0,0,0,0,
-2026-05-08T11:54:10.814032,Chicago White Sox,Seattle Mariners,0.394,4.54,5.21,last10,0.03,0,0,0.02,0,0,
-2026-05-08T11:54:14.972843,Chicago White Sox,Seattle Mariners,0.533,4.98,4.77,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,0.03,0.447,0,0.02,0.014,0.02,
-2026-05-08T11:54:18.561911,Milwaukee Brewers,New York Yankees,0.499,4.87,4.88,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.035,0.447,0.25,-0.04,-0.004,0.02,
-2026-05-08T11:54:22.262448,Milwaukee Brewers,New York Yankees,0.361,4.42,5.33,last10,-0.035,0,0,-0.04,0,0,
-2026-05-08T11:54:24.516753,Milwaukee Brewers,New York Yankees,0.369,4.45,5.3,rest_days,-0.035,0,0.25,0,0,0,
-2026-05-08T11:54:27.878287,Milwaukee Brewers,New York Yankees,0.452,4.73,5.02,home_away_split,-0.035,0,0,0,-0.004,0,
-2026-05-08T11:54:30.280299,Milwaukee Brewers,New York Yankees,0.364,4.43,5.32,timezone,-0.035,0,0,0,0,0.02,
-2026-05-08T11:54:32.389221,Milwaukee Brewers,New York Yankees,0.401,4.56,5.19,pitcher_stats,-0.035,0.447,0,0,0,0,
-2026-05-08T11:54:34.577166,Milwaukee Brewers,New York Yankees,0.363,4.43,5.32,bullpen_breakdown_score,-0.035,0,0,0,0,0,
-2026-05-08T11:54:41.123279,Texas Rangers,Chicago Cubs,0.382,4.49,5.26,bullpen_breakdown_score,0.01,0,0,0,0,0,
-2026-05-08T11:54:42.290224,Texas Rangers,Chicago Cubs,0.382,4.49,5.26,,0.01,0,0,0,0,0,
-2026-05-08T11:54:43.568019,Texas Rangers,Chicago Cubs,0.421,4.63,5.12,pitcher_stats,0.01,0.447,0,0,0,0,
-2026-05-08T11:54:45.164962,Texas Rangers,Chicago Cubs,0.382,4.5,5.25,timezone,0.01,0,0,0,0,0.02,
-2026-05-08T11:54:47.326033,Texas Rangers,Chicago Cubs,0.478,4.81,4.94,home_away_split,0.01,0,0,0,0.052,0,
-2026-05-08T11:54:49.433270,Texas Rangers,Chicago Cubs,0.382,4.49,5.26,rest_days,0.01,0,0,0,0,0,
-2026-05-08T11:54:51.725848,Texas Rangers,Chicago Cubs,0.375,4.47,5.28,last10,0.01,0,0,-0.12,0,0,
-2026-05-08T11:54:54.556826,Texas Rangers,Chicago Cubs,0.514,4.92,4.83,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,0.01,0.447,0,-0.12,0.052,0.02,
-2026-05-08T11:54:57.025412,Arizona Diamondbacks,New York Mets,0.497,4.87,4.88,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.103,0.447,0,-0.04,0.033,0.02,
-2026-05-08T11:55:01.056029,Arizona Diamondbacks,New York Mets,0.362,4.42,5.33,last10,-0.103,0,0,-0.04,0,0,
-2026-05-08T11:55:03.182741,Arizona Diamondbacks,New York Mets,0.364,4.43,5.32,rest_days,-0.103,0,0,0,0,0,
-2026-05-08T11:55:05.295759,Arizona Diamondbacks,New York Mets,0.456,4.74,5.01,home_away_split,-0.103,0,0,0,0.033,0,
-2026-05-08T11:55:07.011976,Arizona Diamondbacks,New York Mets,0.365,4.43,5.32,timezone,-0.103,0,0,0,0,0.02,
-2026-05-08T11:55:08.418145,Arizona Diamondbacks,New York Mets,0.402,4.56,5.19,pitcher_stats,-0.103,0.447,0,0,0,0,
-2026-05-08T11:55:10.138296,Arizona Diamondbacks,New York Mets,0.364,4.43,5.32,bullpen_breakdown_score,-0.103,0,0,0,0,0,
-2026-05-08T11:55:17.681061,San Diego Padres,St. Louis Cardinals,0.383,4.5,5.25,bullpen_breakdown_score,-0.029,0,0,0,0,0,
-2026-05-08T11:55:18.949441,San Diego Padres,St. Louis Cardinals,0.422,4.63,5.12,pitcher_stats,-0.029,0.447,0,0,0,0,
-2026-05-08T11:55:21.497459,San Diego Padres,St. Louis Cardinals,0.383,4.5,5.25,timezone,-0.029,0,0,0,0,0.02,
-2026-05-08T11:55:23.612009,San Diego Padres,St. Louis Cardinals,0.473,4.79,4.96,home_away_split,-0.029,0,0,0,-0.019,0,
-2026-05-08T11:55:26.016599,San Diego Padres,St. Louis Cardinals,0.383,4.5,5.25,rest_days,-0.029,0,0,0,0,0,
-2026-05-08T11:55:27.813802,San Diego Padres,St. Louis Cardinals,0.379,4.48,5.27,last10,-0.029,0,0,-0.06,0,0,
-2026-05-08T11:55:33.060889,San Diego Padres,St. Louis Cardinals,0.513,4.92,4.83,last10|rest_days|home_away_split|pitcher_stats|timezone|bullpen_breakdown_score,-0.029,0.447,0,-0.06,-0.019,0.02,
-2026-05-08T11:55:35.302982,Los Angeles Dodgers,Atlanta Braves,0.493,4.85,4.9,last10|rest_days|home_away_split|pitcher_stats|timezone|bullpen_breakdown_score,-0.071,0.447,0,-0.04,0.008,0.02,
-2026-05-08T11:55:38.965073,Los Angeles Dodgers,Atlanta Braves,0.361,4.42,5.33,last10,-0.071,0,0,-0.04,0,0,
-2026-05-08T11:55:41.199899,Los Angeles Dodgers,Atlanta Braves,0.363,4.42,5.33,rest_days,-0.071,0,0,0,0,0,
-2026-05-08T11:55:43.390894,Los Angeles Dodgers,Atlanta Braves,0.452,4.73,5.02,home_away_split,-0.071,0,0,0,0.008,0,
-2026-05-08T11:55:44.896836,Los Angeles Dodgers,Atlanta Braves,0.363,4.43,5.32,timezone,-0.071,0,0,0,0,0.02,
-2026-05-08T11:55:47.137767,Los Angeles Dodgers,Atlanta Braves,0.363,4.43,5.32,timezone,-0.071,0,0,0,0,0.02,
-2026-05-08T11:55:49.226812,Los Angeles Dodgers,Atlanta Braves,0.401,4.56,5.19,pitcher_stats,-0.071,0.447,0,0,0,0,
-2026-05-08T11:55:51.189229,Los Angeles Dodgers,Atlanta Braves,0.363,4.42,5.33,bullpen_breakdown_score,-0.071,0,0,0,0,0,
-2026-05-08T11:55:54.727693,San Francisco Giants,Pittsburgh Pirates,0.365,4.43,5.32,bullpen_breakdown_score,-0.07,0,0,0,0,0,
-2026-05-08T11:55:57.225214,San Francisco Giants,Pittsburgh Pirates,0.403,4.57,5.18,pitcher_stats,-0.07,0.447,0,0,0,0,
-2026-05-08T11:55:59.053440,San Francisco Giants,Pittsburgh Pirates,0.366,4.44,5.31,timezone,-0.07,0,0,0,0,0.02,
-2026-05-08T11:56:01.041700,San Francisco Giants,Pittsburgh Pirates,0.455,4.73,5.02,home_away_split,-0.07,0,0,0,0.004,0,
-2026-05-08T11:56:03.382573,San Francisco Giants,Pittsburgh Pirates,0.371,4.45,5.3,rest_days,-0.07,0,0.25,0,0,0,
-2026-05-08T11:56:05.689938,San Francisco Giants,Pittsburgh Pirates,0.361,4.42,5.33,last10,-0.07,0,0,-0.08,0,0,
-2026-05-08T11:56:10.006018,San Francisco Giants,Pittsburgh Pirates,0.5,4.87,4.88,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.07,0.447,0.25,-0.08,0.004,0.02,
-2026-05-08T11:59:45.158746,Texas Rangers,Chicago Cubs,0.514,4.92,4.83,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,0.01,0.447,0,-0.12,0.052,0.02,
-2026-05-14T07:58:54.601111,Pittsburgh Pirates,Colorado Rockies,0.461,4.75,5,pitcher_stats|timezone|last10,0.173,0.447,0,0.06,0,0.02,
-2026-05-14T07:59:20.120250,Pittsburgh Pirates,Colorado Rockies,0.559,5.06,4.69,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,0.173,0.447,0,0.06,0.017,0.02,
-2026-05-19T11:47:26.953879,Miami Marlins,Atlanta Braves,0.472,4.79,4.96,last10|home_away_split|pitcher_stats,-0.338,0.447,0,-0.02,-0.012,0,
-2026-05-19T15:01:59.572741,Miami Marlins,Atlanta Braves,0.474,4.8,4.95,pitcher_stats|home_away_split|timezone,-0.338,0.447,0,0,-0.012,0.02,
-2026-05-19T15:02:06.146899,Detroit Tigers,Cleveland Guardians,0.489,4.84,4.91,pitcher_stats|home_away_split|timezone,-0.12,0.447,0,0,0.003,0.02,
-2026-05-19T15:02:09.392527,Detroit Tigers,Cleveland Guardians,0.395,4.54,5.21,pitcher_stats,-0.12,0.447,0,0,0,0,
-2026-05-19T15:02:14.690459,Tampa Bay Rays,Baltimore Orioles,0.454,4.73,5.02,pitcher_stats,0.172,0.447,0,0,0,0,
-2026-05-19T15:02:21.289850,Philadelphia Phillies,Cincinnati Reds,0.424,4.64,5.11,pitcher_stats,0.026,0.447,0,0,0,0,
-2026-05-19T19:26:49.865193,Seattle Mariners,Chicago White Sox,0.371,4.46,5.29,,-0.025,0,0,0,0,0,
-2026-05-19T19:27:02.264775,Arizona Diamondbacks,San Francisco Giants,0.381,4.49,5.26,,-0.041,0,0,0,0,0,
-2026-05-19T19:27:10.000023,San Diego Padres,Los Angeles Dodgers,0.35,4.35,5.4,,-0.238,0,0,0,0,0,
-2026-05-19T19:27:19.999909,Los Angeles Angels,Athletics,0.35,4.37,5.38,,-0.228,0,0,0,0,0,
-2026-05-19T19:27:31.441187,Colorado Rockies,Texas Rangers,0.35,4.36,5.39,,-0.281,0,0,0,0,0,
-2026-05-19T19:27:38.079641,St. Louis Cardinals,Pittsburgh Pirates,0.391,4.52,5.23,,0.043,0,0,0,0,0,
-2026-05-19T19:27:43.677735,St. Louis Cardinals,Pittsburgh Pirates,0.431,4.66,5.09,pitcher_stats,0.043,0.447,0,0,0,0,
-2026-05-19T19:27:50.676220,Colorado Rockies,Texas Rangers,0.382,4.49,5.26,pitcher_stats,-0.281,0.447,0,0,0,0,
-2026-05-19T19:27:55.641240,Los Angeles Angels,Athletics,0.385,4.51,5.24,pitcher_stats,-0.228,0.447,0,0,0,0,
-2026-05-19T19:27:59.921216,Chicago Cubs,Milwaukee Brewers,0.404,4.57,5.18,pitcher_stats,-0.126,0.447,0,0,0,0,0
-2026-05-19T19:28:04.540143,Chicago Cubs,Milwaukee Brewers,0.404,4.57,5.18,pitcher_stats|rest_days,-0.126,0.447,0,0,0,0,0
-2026-05-19T19:28:54.056900,St. Louis Cardinals,Pittsburgh Pirates,0.531,4.97,4.78,pitcher_stats|rest_days|last10|home_away_split|timezone|bullpen_breakdown_score,0.043,0.447,0,0.04,0.01,0.02,
-2026-05-21T18:30:09.712729,Arizona Diamondbacks,Colorado Rockies,0.411,4.59,5.16,timezone,0.11,0,0,0,0,0.02,
-2026-05-26T21:43:42.096867,Los Angeles Dodgers,Colorado Rockies,0.503,4.89,4.86,pitcher_stats|bullpen_breakdown_score,0.469,0.447,0,0,0,0,
-2026-05-26T21:43:51.064590,Los Angeles Dodgers,Colorado Rockies,0.46,4.75,5,timezone,0.469,0,0,0,0,0.02,
-2026-05-27T13:51:21.892578,Texas Rangers,Houston Astros,0.531,4.97,4.78,home_away_split|timezone|pitcher_stats|last10,0.136,0.447,0,-0.021,0,0.005,
-2026-05-27T14:32:11.424656,Texas Rangers,Houston Astros,0.533,4.98,4.77,pitcher_stats|home_away_split|rest_days,0.136,0.447,0,0,0.007,0,
-2026-05-28T09:42:13.285174,Detroit Tigers,Los Angeles Angels,0.388,4.52,5.23,last10,0.098,0,0,-0.06,0,,
-2026-05-28T09:42:16.785175,Detroit Tigers,Los Angeles Angels,0.392,4.53,5.22,rest_days,0.098,0,0,0,0,0,
-2026-05-28T09:46:21.483915,Detroit Tigers,Los Angeles Angels,0.388,4.52,5.23,last10,0.098,0,0,-0.06,0,0,
-2026-05-28T09:46:32.994061,Detroit Tigers,Los Angeles Angels,0.392,4.53,5.22,rest_days,0.098,0,0,0,0,0,
-2026-05-28T09:46:36.788691,Detroit Tigers,Los Angeles Angels,0.392,4.53,5.22,rest_days,0.098,0,0,0,0,0,
-2026-05-28T09:46:43.165122,Detroit Tigers,Los Angeles Angels,0.486,4.83,4.92,home_away_split,0.098,0,0,0,0.008,0,
-2026-05-28T09:46:46.600241,Detroit Tigers,Los Angeles Angels,0.392,4.53,5.22,timezone,0.098,0,0,0,0,0.02,
-2026-05-28T09:46:50.513170,Detroit Tigers,Los Angeles Angels,0.392,4.53,5.22,timezone,0.098,0,0,0,0,0.02,
-2026-05-28T09:46:55.178242,Detroit Tigers,Los Angeles Angels,0.432,4.66,5.09,pitcher_stats,0.098,0.447,0,0,0,0,
-2026-05-28T09:46:58.465113,Detroit Tigers,Los Angeles Angels,0.392,4.53,5.22,bullpen_breakdown_score,0.098,0,0,0,0,0,
-2026-05-28T09:47:08.852068,Detroit Tigers,Los Angeles Angels,0.528,4.96,4.79,bullpen_breakdown_score|pitcher_stats|timezone|home_away_split|rest_days|last10,0.098,0.447,0,-0.01,0.001,0.003,
-2026-05-28T09:47:17.997336,Chicago White Sox,Minnesota Twins,0.513,4.92,4.83,bullpen_breakdown_score|pitcher_stats|timezone|home_away_split|rest_days|last10,-0.036,0.447,0,-0.007,0.003,0.003,
-2026-05-28T09:47:23.956568,Chicago White Sox,Minnesota Twins,0.376,4.47,5.28,last10,-0.036,0,0,-0.04,0,0,
-2026-05-28T09:47:27.836650,Chicago White Sox,Minnesota Twins,0.378,4.48,5.27,rest_days,-0.036,0,0,0,0,0,
-2026-05-28T09:47:31.933835,Chicago White Sox,Minnesota Twins,0.471,4.79,4.96,home_away_split,-0.036,0,0,0,0.019,0,
-2026-05-28T09:47:35.214828,Chicago White Sox,Minnesota Twins,0.379,4.48,5.27,timezone,-0.036,0,0,0,0,0.02,
-2026-05-28T09:47:38.398529,Chicago White Sox,Minnesota Twins,0.417,4.62,5.13,pitcher_stats,-0.036,0.447,0,0,0,0,
-2026-05-28T09:47:41.231029,Chicago White Sox,Minnesota Twins,0.378,4.48,5.27,bullpen_breakdown_score,-0.036,0,0,0,0,0,
-2026-05-28T09:47:56.040681,Boston Red Sox,Atlanta Braves,0.457,4.74,5.01,bullpen_breakdown_score|pitcher_stats|timezone|home_away_split|rest_days|last10,-0.415,0.447,0,-0.003,-0.005,0.003,
-2026-05-28T09:48:03.327699,Boston Red Sox,Atlanta Braves,0.35,4.31,5.44,last10,-0.415,0,0,-0.02,0,0,
-2026-05-28T09:48:07.946152,Boston Red Sox,Atlanta Braves,0.35,4.31,5.44,rest_days,-0.415,0,0,0,0,0,
-2026-05-28T09:48:10.721165,Boston Red Sox,Atlanta Braves,0.414,4.6,5.15,home_away_split,-0.415,0,0,0,-0.03,0,
-2026-05-28T09:48:13.587987,Boston Red Sox,Atlanta Braves,0.35,4.31,5.44,timezone,-0.415,0,0,0,0,0.02,
-2026-05-28T09:48:17.686143,Boston Red Sox,Atlanta Braves,0.368,4.45,5.3,pitcher_stats,-0.415,0.447,0,0,0,0,
-2026-05-28T09:48:20.287954,Boston Red Sox,Atlanta Braves,0.35,4.31,5.44,bullpen_breakdown_score,-0.415,0,0,0,0,0,
-2026-05-28T09:48:39.798460,Baltimore Orioles,Toronto Blue Jays,0.497,4.87,4.88,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.133,0.447,0,-0.003,0.003,0.003,
-2026-05-28T09:48:49.104818,Baltimore Orioles,Toronto Blue Jays,0.364,4.43,5.32,last10,-0.133,0,0,-0.02,0,0,
-2026-05-28T09:48:52.700303,Baltimore Orioles,Toronto Blue Jays,0.365,4.43,5.32,rest_days,-0.133,0,0,0,0,0,
-2026-05-28T09:48:55.832628,Baltimore Orioles,Toronto Blue Jays,0.455,4.74,5.01,home_away_split,-0.133,0,0,0,0.016,0,
-2026-05-28T09:48:58.858813,Baltimore Orioles,Toronto Blue Jays,0.365,4.43,5.32,timezone,-0.133,0,0,0,0,0.02,
-2026-05-28T09:49:01.461426,Baltimore Orioles,Toronto Blue Jays,0.403,4.57,5.18,pitcher_stats,-0.133,0.447,0,0,0,0,
-2026-05-28T09:49:04.393200,Baltimore Orioles,Toronto Blue Jays,0.365,4.43,5.32,bullpen_breakdown_score,-0.133,0,0,0,0,0,
-2026-05-28T09:49:16.847486,Baltimore Orioles,Toronto Blue Jays,0.497,4.87,4.88,bullpen_breakdown_score|pitcher_stats|timezone|home_away_split|rest_days|last10,-0.133,0.447,0,-0.003,0.003,0.003,
-2026-05-28T09:49:23.166534,Pittsburgh Pirates,Chicago Cubs,0.533,4.98,4.77,bullpen_breakdown_score|pitcher_stats|timezone|home_away_split|rest_days|last10,0.018,0.447,0,0.013,0.003,0.003,
-2026-05-28T09:49:28.612730,Pittsburgh Pirates,Chicago Cubs,0.399,4.55,5.2,last10,0.018,0,0,0.08,0,0,
-2026-05-28T09:49:31.978506,Pittsburgh Pirates,Chicago Cubs,0.394,4.54,5.21,rest_days,0.018,0,0,0,0,0,
-2026-05-28T09:49:34.842669,Pittsburgh Pirates,Chicago Cubs,0.489,4.84,4.91,home_away_split,0.018,0,0,0,0.017,0,
-2026-05-28T09:49:37.334507,Pittsburgh Pirates,Chicago Cubs,0.395,4.54,5.21,timezone,0.018,0,0,0,0,0.02,
-2026-05-28T09:49:40.114093,Pittsburgh Pirates,Chicago Cubs,0.435,4.67,5.08,pitcher_stats,0.018,0.447,0,0,0,0,
-2026-05-28T09:49:42.914408,Pittsburgh Pirates,Chicago Cubs,0.394,4.54,5.21,bullpen_breakdown_score,0.018,0,0,0,0,0,
-2026-05-28T09:49:53.735835,Texas Rangers,Houston Astros,0.531,4.97,4.78,bullpen_breakdown_score|pitcher_stats|timezone|home_away_split|last10|rest_days,0.128,0.447,0,-0.007,0.004,0.003,
-2026-05-28T09:49:59.582662,Texas Rangers,Houston Astros,0.391,4.53,5.22,last10,0.128,0,0,-0.04,0,0,
-2026-05-28T09:50:02.953846,Texas Rangers,Houston Astros,0.394,4.54,5.21,rest_days,0.128,0,0,0,0,0,
-2026-05-28T09:50:05.925646,Texas Rangers,Houston Astros,0.489,4.84,4.91,home_away_split,0.128,0,0,0,0.024,0,
-2026-05-28T09:50:08.592366,Texas Rangers,Houston Astros,0.394,4.54,5.21,timezone,0.128,0,0,0,0,0.02,
-2026-05-28T09:50:11.377288,Texas Rangers,Houston Astros,0.434,4.67,5.08,pitcher_stats,0.128,0.447,0,0,0,0,
-2026-05-28T09:50:18.084517,Texas Rangers,Houston Astros,0.394,4.54,5.21,bullpen_breakdown_score,0.128,0,0,0,0,0,
+2026-03-29,Baltimore Orioles,Minnesota Twins,0.735,5.01,3.99,last10|rest_days|home_away_split|timezone|pitcher_stats,-0.14,0.838,0.0,0.06,0.048,0.05,1.0
+2026-03-29,Philadelphia Phillies,Texas Rangers,0.638,4.78,4.22,last10|rest_days|home_away_split|timezone|pitcher_stats,-0.498,0.838,0.0,-0.08,-0.025,0.05,0.0
+2026-03-29,Atlanta Braves,Kansas City Royals,0.868,5.44,3.56,last10|rest_days|home_away_split|timezone|pitcher_stats,0.639,0.838,0.0,0.1,0.183,0.05,0.0
+2026-03-29,Toronto Blue Jays,Athletics,0.758,5.07,3.93,last10|rest_days|home_away_split|timezone|pitcher_stats,-0.054,0.838,0.0,0.08,0.103,0.05,1.0
+2026-03-29,Cincinnati Reds,Boston Red Sox,0.801,5.2,3.8,last10|rest_days|home_away_split|timezone|pitcher_stats,0.217,0.838,0.0,0.02,0.119,0.05,1.0
+2026-03-29,New York Mets,Pittsburgh Pirates,0.805,5.21,3.79,last10|rest_days|home_away_split|timezone|pitcher_stats,0.274,0.838,0.0,0.0,0.065,0.05,0.0
+2026-03-29,Miami Marlins,Colorado Rockies,0.784,5.14,3.86,last10|rest_days|home_away_split|timezone|pitcher_stats,0.154,0.838,0.0,0.04,0.018,0.05,1.0
+2026-03-29,Houston Astros,Los Angeles Angels,0.781,5.13,3.87,last10|rest_days|home_away_split|timezone|pitcher_stats,0.159,0.838,0.0,-0.02,0.014,0.05,1.0
+2026-03-29,Milwaukee Brewers,Chicago White Sox,0.827,5.28,3.72,last10|rest_days|home_away_split|timezone|pitcher_stats,0.356,0.838,0.0,0.1,0.113,0.05,1.0
+2026-03-29,St. Louis Cardinals,Tampa Bay Rays,0.811,5.23,3.77,last10|rest_days|home_away_split|timezone|pitcher_stats,0.255,0.838,0.0,0.08,0.12,0.05,0.0
+2026-03-29,Chicago Cubs,Washington Nationals,0.748,5.04,3.96,last10|rest_days|home_away_split|timezone|pitcher_stats,-0.035,0.838,0.0,0.0,0.021,0.05,0.0
+2026-03-29,Seattle Mariners,Cleveland Guardians,0.662,4.84,4.16,last10|rest_days|home_away_split|timezone|pitcher_stats,-0.394,0.838,0.0,-0.04,-0.054,0.05,1.0
+2026-03-30,Miami Marlins,Chicago White Sox,0.66,4.83,4.17,pitcher_stats|timezone|rest_days,0.151,0.838,0.0,0.0,0.0,0.05,0.0
+2026-03-30,Miami Marlins,Chicago White Sox,0.785,5.15,3.85,pitcher_stats|timezone|rest_days|home_away_split,0.151,0.838,0.0,0.0,0.072,0.05,0.0
+2026-03-30,Miami Marlins,Chicago White Sox,0.785,5.15,3.85,pitcher_stats|timezone|rest_days|home_away_split,0.151,0.838,0.0,0.0,0.072,0.05,0.0
+2026-03-30,Toronto Blue Jays,Colorado Rockies,0.594,4.69,4.31,,0.379,0.0,0.0,0.0,0.0,0.0,0.0
+2026-03-30,Kansas City Royals,Minnesota Twins,0.401,4.3,4.7,,-0.402,0.0,0.0,0.0,0.0,0.0,1.0
+2026-03-30,Baltimore Orioles,Texas Rangers,0.396,4.29,4.71,,-0.421,0.0,0.0,0.0,0.0,0.0,0.0
+2026-03-30,San Diego Padres,San Francisco Giants,0.711,4.95,4.05,pitcher_stats|timezone|home_away_split|rest_days|last10,-0.152,0.838,-0.25,-0.02,-0.02,0.05,0.0
+2026-03-30,San Diego Padres,San Francisco Giants,0.587,4.68,4.32,pitcher_stats,-0.152,0.838,0.0,0.0,0.0,0.0,0.0
+2026-03-30,San Diego Padres,San Francisco Giants,0.587,4.68,4.32,pitcher_stats,-0.152,0.838,0.0,0.0,0.0,0.0,0.0
+2026-03-31,Baltimore Orioles,Texas Rangers,0.656,4.82,4.18,pitcher_stats|timezone|home_away_split|rest_days|last10,-0.447,0.838,0.0,-0.02,-0.018,0.05,0.0
+2026-03-31,Baltimore Orioles,Texas Rangers,0.658,4.83,4.17,pitcher_stats|timezone|home_away_split|rest_days,-0.447,0.838,0.0,0.0,-0.018,0.05,0.0
+2026-03-31,Baltimore Orioles,Texas Rangers,0.516,4.53,4.47,pitcher_stats|timezone|rest_days,-0.447,0.838,0.0,0.0,0.0,0.05,0.0
+2026-03-31,Baltimore Orioles,Texas Rangers,0.516,4.53,4.47,pitcher_stats|timezone,-0.447,0.838,0.0,0.0,0.0,0.05,0.0
+2026-03-31,Baltimore Orioles,Texas Rangers,0.514,4.53,4.47,pitcher_stats,-0.447,0.838,0.0,0.0,0.0,0.0,0.0
+2026-03-31,Baltimore Orioles,Texas Rangers,0.514,4.53,4.47,pitcher_stats,-0.447,0.838,0.0,0.0,0.0,0.0,0.0
+2026-04-01,Kansas City Royals,Minnesota Twins,0.488,4.48,4.52,pitcher_stats,-0.357,0.838,0.0,0.0,0.0,0.0,1.0
+2026-04-01,Chicago Cubs,Los Angeles Angels,0.638,4.78,4.22,last10|rest_days|home_away_split,0.003,0.0,0.0,0.04,0.001,0.0,1.0
+2026-04-01,Chicago Cubs,Los Angeles Angels,0.613,4.73,4.27,pitcher_stats|timezone,0.003,0.838,0.0,0.0,0.0,0.05,1.0
+2026-04-01,Chicago Cubs,Los Angeles Angels,0.613,4.73,4.27,pitcher_stats|timezone,0.003,0.838,0.0,0.0,0.0,0.05,1.0
+2026-05-05,New York Yankees,Texas Rangers,0.696,4.91,4.09,home_away_split|timezone,0.025,0.0,0.0,0.0,0.054,0.05,1.0
+2026-05-05,Detroit Tigers,Boston Red Sox,0.731,5.0,4.0,home_away_split|timezone,0.254,0.0,0.0,0.0,0.065,0.05,0.0
+2026-05-05,Washington Nationals,Minnesota Twins,0.492,4.48,4.52,last10|rest_days,-0.096,0.0,0.0,0.04,0.0,0.0,0.0
+2026-05-05,Washington Nationals,Minnesota Twins,0.494,4.49,4.51,last10|rest_days|timezone,-0.096,0.0,0.0,0.04,0.0,0.05,0.0
+2026-05-05,San Francisco Giants,San Diego Padres,0.497,4.49,4.51,last10,-0.013,0.0,0.0,-0.02,0.0,0.0,0.0
+2026-05-05,San Francisco Giants,San Diego Padres,0.499,4.5,4.5,bullpen_breakdown_score,-0.013,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-05,San Francisco Giants,San Diego Padres,0.32,4.5,5.25,bullpen_breakdown_score,-0.013,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-05,San Francisco Giants,San Diego Padres,0.32,4.5,5.25,bullpen_breakdown_score,-0.013,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-05,San Francisco Giants,San Diego Padres,0.318,4.49,5.26,bullpen_breakdown_score|last10,-0.013,0.0,0.0,-0.02,0.0,0.0,0.0
+2026-05-05,San Francisco Giants,San Diego Padres,0.46,4.79,4.96,bullpen_breakdown_score|last10|home_away_split,-0.013,0.0,0.0,-0.02,0.003,0.0,0.0
+2026-05-05,San Francisco Giants,San Diego Padres,0.32,4.5,5.25,bullpen_breakdown_score,-0.013,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-05,Philadelphia Phillies,Athletics,0.389,4.65,5.1,pitcher_stats,-0.275,0.838,0.0,0.0,0.0,0.0,1.0
+2026-05-05,Philadelphia Phillies,Athletics,0.53,4.93,4.82,timezone|home_away_split|pitcher_stats|rest_days|last10,-0.275,0.838,-0.25,0.04,-0.025,0.05,1.0
+2026-05-05,Philadelphia Phillies,Athletics,0.53,4.93,4.82,timezone|home_away_split|pitcher_stats|rest_days|last10|bullpen_breakdown_score,-0.275,0.838,-0.25,0.04,-0.025,0.05,1.0
+2026-05-05,Philadelphia Phillies,Athletics,0.526,4.93,4.82,timezone|home_away_split|pitcher_stats|rest_days|bullpen_breakdown_score,-0.275,0.838,-0.25,0.0,-0.025,0.05,1.0
+2026-05-05,Philadelphia Phillies,Athletics,0.536,4.95,4.8,timezone|home_away_split|pitcher_stats|bullpen_breakdown_score,-0.275,0.838,0.0,0.0,-0.025,0.05,1.0
+2026-05-05,Philadelphia Phillies,Athletics,0.391,4.65,5.1,timezone|pitcher_stats|bullpen_breakdown_score,-0.275,0.838,0.0,0.0,0.0,0.05,1.0
+2026-05-05,Philadelphia Phillies,Athletics,0.389,4.65,5.1,pitcher_stats|bullpen_breakdown_score,-0.275,0.838,0.0,0.0,0.0,0.0,1.0
+2026-05-05,Philadelphia Phillies,Athletics,0.278,4.4,5.35,bullpen_breakdown_score,-0.275,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-05,Miami Marlins,Baltimore Orioles,0.609,5.1,4.65,bullpen_breakdown_score|pitcher_stats|timezone|home_away_split|rest_days|last10,0.1,0.838,0.0,0.04,0.035,0.05,0.0
+2026-05-05,Miami Marlins,Baltimore Orioles,0.331,4.52,5.23,bullpen_breakdown_score,0.1,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-05,Miami Marlins,Baltimore Orioles,0.45,4.78,4.97,pitcher_stats,0.1,0.838,0.0,0.0,0.0,0.0,0.0
+2026-05-05,Miami Marlins,Baltimore Orioles,0.333,4.53,5.22,timezone,0.1,0.0,0.0,0.0,0.0,0.05,0.0
+2026-05-05,Miami Marlins,Baltimore Orioles,0.479,4.83,4.92,home_away_split,0.1,0.0,0.0,0.0,0.035,0.0,0.0
+2026-05-05,Miami Marlins,Baltimore Orioles,0.331,4.52,5.23,rest_days,0.1,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-05,Miami Marlins,Baltimore Orioles,0.335,4.53,5.22,last10,0.1,0.0,0.0,0.04,0.0,0.0,0.0
+2026-05-05,Miami Marlins,Baltimore Orioles,0.609,5.1,4.65,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,0.1,0.838,0.0,0.04,0.035,0.05,0.0
+2026-05-05,Miami Marlins,Baltimore Orioles,0.331,4.52,5.23,bullpen_breakdown_score,0.1,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-05,Miami Marlins,Baltimore Orioles,0.45,4.78,4.97,pitcher_stats,0.1,0.838,0.0,0.0,0.0,0.0,0.0
+2026-05-05,Miami Marlins,Baltimore Orioles,0.333,4.53,5.22,timezone,0.1,0.0,0.0,0.0,0.0,0.05,0.0
+2026-05-05,Miami Marlins,Baltimore Orioles,0.337,4.54,5.21,timezone|last10|rest_days,0.1,0.0,0.0,0.04,0.0,0.05,0.0
+2026-05-05,Miami Marlins,Baltimore Orioles,0.337,4.54,5.21,timezone|last10|rest_days,0.1,0.0,0.0,0.04,0.0,0.05,0.0
+2026-05-05,Philadelphia Phillies,Athletics,0.275,4.39,5.36,timezone|last10|rest_days,-0.275,0.0,-0.25,0.04,0.0,0.05,1.0
+2026-05-06,Arizona Diamondbacks,Pittsburgh Pirates,0.251,4.33,5.42,last10|rest_days,-0.161,0.0,0.0,-0.02,0.0,0.0,0.0
+2026-05-06,Arizona Diamondbacks,Pittsburgh Pirates,0.251,4.33,5.42,last10|rest_days|bullpen_breakdown_score,-0.161,0.0,0.0,-0.02,0.0,0.0,0.0
+2026-05-06,Arizona Diamondbacks,Pittsburgh Pirates,0.356,4.58,5.17,last10|rest_days|bullpen_breakdown_score|pitcher_stats,-0.161,0.838,0.0,-0.02,0.0,0.0,0.0
+2026-05-06,Arizona Diamondbacks,Pittsburgh Pirates,0.358,4.58,5.17,bullpen_breakdown_score|pitcher_stats,-0.161,0.838,0.0,0.0,0.0,0.0,0.0
+2026-05-06,Tampa Bay Rays,Toronto Blue Jays,0.596,5.07,4.68,bullpen_breakdown_score|pitcher_stats|last10|rest_days|home_away_split|timezone,-0.01,0.838,0.0,0.1,0.093,0.05,1.0
+2026-05-06,St. Louis Cardinals,Milwaukee Brewers,0.584,5.05,4.7,bullpen_breakdown_score|pitcher_stats|last10|rest_days|home_away_split|timezone,-0.098,0.838,0.0,0.02,0.037,0.05,0.0
+2026-05-06,Houston Astros,Los Angeles Dodgers,0.519,4.91,4.84,bullpen_breakdown_score|pitcher_stats|last10|rest_days|home_away_split|timezone,-0.296,0.838,0.0,-0.02,-0.019,0.05,0.0
+2026-05-06,San Francisco Giants,San Diego Padres,0.581,5.04,4.71,bullpen_breakdown_score|pitcher_stats|last10|rest_days|home_away_split|timezone,-0.041,0.838,0.0,-0.04,-0.006,0.05,0.0
+2026-05-06,New York Yankees,Texas Rangers,0.388,4.65,5.1,,0.044,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-06,New York Yankees,Texas Rangers,0.397,4.67,5.08,last10,0.044,0.0,0.0,0.1,0.0,0.0,0.0
+2026-05-06,New York Yankees,Texas Rangers,0.397,4.67,5.08,last10|rest_days,0.044,0.0,0.0,0.1,0.0,0.0,0.0
+2026-05-06,New York Yankees,Texas Rangers,0.399,4.67,5.08,last10|rest_days|timezone,0.044,0.0,0.0,0.1,0.0,0.05,0.0
+2026-05-06,Chicago Cubs,Cincinnati Reds,0.381,4.63,5.12,last10|rest_days|timezone,0.171,0.0,0.0,0.08,0.0,0.05,1.0
+2026-05-06,Chicago Cubs,Cincinnati Reds,0.505,4.88,4.87,last10|rest_days|timezone|pitcher_stats,0.171,0.838,0.0,0.08,0.0,0.05,1.0
+2026-05-08,Cincinnati Reds,Houston Astros,0.574,5.02,4.73,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.061,0.838,-0.25,-0.04,0.066,0.05,0.0
+2026-05-08,Cincinnati Reds,Houston Astros,0.578,5.03,4.72,rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.061,0.838,-0.25,0.0,0.066,0.05,0.0
+2026-05-08,Cincinnati Reds,Houston Astros,0.587,5.05,4.7,home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.061,0.838,0.0,0.0,0.066,0.05,0.0
+2026-05-08,Cincinnati Reds,Houston Astros,0.431,4.74,5.01,timezone|pitcher_stats|bullpen_breakdown_score,-0.061,0.838,0.0,0.0,0.0,0.05,0.0
+2026-05-08,Cincinnati Reds,Houston Astros,0.429,4.73,5.02,pitcher_stats|bullpen_breakdown_score,-0.061,0.838,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Cincinnati Reds,Houston Astros,0.312,4.48,5.27,bullpen_breakdown_score,-0.061,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Cincinnati Reds,Houston Astros,0.429,4.73,5.02,pitcher_stats,-0.061,0.838,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Cincinnati Reds,Houston Astros,0.314,4.48,5.27,timezone,-0.061,0.0,0.0,0.0,0.0,0.05,0.0
+2026-05-08,Cincinnati Reds,Houston Astros,0.461,4.8,4.95,home_away_split,-0.061,0.0,0.0,0.0,0.066,0.0,0.0
+2026-05-08,Cincinnati Reds,Houston Astros,0.303,4.46,5.29,rest_days,-0.061,0.0,-0.25,0.0,0.0,0.0,0.0
+2026-05-08,Cincinnati Reds,Houston Astros,0.309,4.47,5.28,last10,-0.061,0.0,0.0,-0.04,0.0,0.0,0.0
+2026-05-08,Philadelphia Phillies,Colorado Rockies,0.353,4.57,5.18,last10,-0.012,0.0,0.0,0.1,0.0,0.0,0.0
+2026-05-08,Philadelphia Phillies,Colorado Rockies,0.344,4.55,5.2,rest_days,-0.012,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Philadelphia Phillies,Colorado Rockies,0.489,4.85,4.9,home_away_split,-0.012,0.0,0.0,0.0,0.006,0.0,0.0
+2026-05-08,Philadelphia Phillies,Colorado Rockies,0.346,4.56,5.19,timezone,-0.012,0.0,0.0,0.0,0.0,0.05,0.0
+2026-05-08,Philadelphia Phillies,Colorado Rockies,0.464,4.8,4.95,pitcher_stats,-0.012,0.838,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Philadelphia Phillies,Colorado Rockies,0.344,4.55,5.2,bullpen_breakdown_score,-0.012,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Philadelphia Phillies,Colorado Rockies,0.624,5.13,4.62,bullpen_breakdown_score|pitcher_stats|timezone|home_away_split|rest_days|last10,-0.012,0.838,0.0,0.1,0.006,0.05,0.0
+2026-05-08,Baltimore Orioles,Athletics,0.549,4.97,4.78,bullpen_breakdown_score|pitcher_stats|timezone|home_away_split|rest_days|last10,-0.226,0.838,0.0,-0.04,-0.008,0.05,0.0
+2026-05-08,Baltimore Orioles,Athletics,0.287,4.42,5.33,last10,-0.226,0.0,0.0,-0.04,0.0,0.0,0.0
+2026-05-08,Baltimore Orioles,Athletics,0.29,4.43,5.32,rest_days,-0.226,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Baltimore Orioles,Athletics,0.426,4.73,5.02,home_away_split,-0.226,0.0,0.0,0.0,-0.008,0.0,0.0
+2026-05-08,Baltimore Orioles,Athletics,0.292,4.43,5.32,timezone,-0.226,0.0,0.0,0.0,0.0,0.05,0.0
+2026-05-08,Baltimore Orioles,Athletics,0.403,4.68,5.07,pitcher_stats,-0.226,0.838,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Baltimore Orioles,Athletics,0.29,4.43,5.32,bullpen_breakdown_score,-0.226,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Toronto Blue Jays,Los Angeles Angels,0.36,4.59,5.16,bullpen_breakdown_score,0.046,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Toronto Blue Jays,Los Angeles Angels,0.482,4.84,4.91,pitcher_stats,0.046,0.838,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Toronto Blue Jays,Los Angeles Angels,0.361,4.59,5.16,timezone,0.046,0.0,0.0,0.0,0.0,0.05,1.0
+2026-05-08,Toronto Blue Jays,Los Angeles Angels,0.511,4.9,4.85,home_away_split,0.046,0.0,0.0,0.0,0.041,0.0,1.0
+2026-05-08,Toronto Blue Jays,Los Angeles Angels,0.36,4.59,5.16,rest_days,0.046,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Toronto Blue Jays,Los Angeles Angels,0.361,4.59,5.16,last10,0.046,0.0,0.0,0.02,0.0,0.0,1.0
+2026-05-08,Toronto Blue Jays,Los Angeles Angels,0.515,4.9,4.85,last10|rest_days|home_away_split|timezone|bullpen_breakdown_score,0.046,0.0,0.0,0.02,0.041,0.05,1.0
+2026-05-08,Boston Red Sox,Tampa Bay Rays,0.432,4.74,5.01,last10|rest_days|home_away_split|timezone|bullpen_breakdown_score,-0.144,0.0,0.0,-0.08,-0.003,0.05,1.0
+2026-05-08,Boston Red Sox,Tampa Bay Rays,0.293,4.44,5.31,last10,-0.144,0.0,0.0,-0.08,0.0,0.0,1.0
+2026-05-08,Boston Red Sox,Tampa Bay Rays,0.3,4.45,5.3,rest_days,-0.144,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Boston Red Sox,Tampa Bay Rays,0.438,4.75,5.0,home_away_split,-0.144,0.0,0.0,0.0,-0.003,0.0,1.0
+2026-05-08,Boston Red Sox,Tampa Bay Rays,0.302,4.46,5.29,timezone,-0.144,0.0,0.0,0.0,0.0,0.05,1.0
+2026-05-08,Boston Red Sox,Tampa Bay Rays,0.415,4.7,5.05,pitcher_stats,-0.144,0.838,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Boston Red Sox,Tampa Bay Rays,0.3,4.45,5.3,bullpen_breakdown_score,-0.144,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Miami Marlins,Washington Nationals,0.317,4.49,5.26,bullpen_breakdown_score,0.005,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Miami Marlins,Washington Nationals,0.435,4.74,5.01,pitcher_stats,0.005,0.838,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Miami Marlins,Washington Nationals,0.319,4.5,5.25,timezone,0.005,0.0,0.0,0.0,0.0,0.05,0.0
+2026-05-08,Miami Marlins,Washington Nationals,0.457,4.79,4.96,home_away_split,0.005,0.0,0.0,0.0,-0.016,0.0,0.0
+2026-05-08,Miami Marlins,Washington Nationals,0.317,4.49,5.26,rest_days,0.005,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Miami Marlins,Washington Nationals,0.314,4.48,5.27,last10,0.005,0.0,0.0,-0.04,0.0,0.0,0.0
+2026-05-08,Miami Marlins,Washington Nationals,0.58,5.04,4.71,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,0.005,0.838,0.0,-0.04,-0.016,0.05,0.0
+2026-05-08,Cleveland Guardians,Minnesota Twins,0.61,5.1,4.65,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,0.048,0.838,0.0,0.02,0.062,0.05,1.0
+2026-05-08,Cleveland Guardians,Minnesota Twins,0.333,4.53,5.22,last10,0.048,0.0,0.0,0.02,0.0,0.0,1.0
+2026-05-08,Cleveland Guardians,Minnesota Twins,0.331,4.52,5.23,rest_days,0.048,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Cleveland Guardians,Minnesota Twins,0.482,4.84,4.91,home_away_split,0.048,0.0,0.0,0.0,0.062,0.0,1.0
+2026-05-08,Cleveland Guardians,Minnesota Twins,0.333,4.53,5.22,timezone,0.048,0.0,0.0,0.0,0.0,0.05,1.0
+2026-05-08,Cleveland Guardians,Minnesota Twins,0.45,4.77,4.98,pitcher_stats,0.048,0.838,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Cleveland Guardians,Minnesota Twins,0.331,4.52,5.23,bullpen_breakdown_score,0.048,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Kansas City Royals,Detroit Tigers,0.276,4.39,5.36,bullpen_breakdown_score,-0.201,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Kansas City Royals,Detroit Tigers,0.387,4.64,5.11,pitcher_stats,-0.201,0.838,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Kansas City Royals,Detroit Tigers,0.278,4.4,5.35,timezone,-0.201,0.0,0.0,0.0,0.0,0.05,1.0
+2026-05-08,Kansas City Royals,Detroit Tigers,0.415,4.7,5.05,home_away_split,-0.201,0.0,0.0,0.0,0.044,0.0,1.0
+2026-05-08,Kansas City Royals,Detroit Tigers,0.268,4.37,5.38,rest_days,-0.201,0.0,-0.25,0.0,0.0,0.0,1.0
+2026-05-08,Kansas City Royals,Detroit Tigers,0.279,4.4,5.35,last10,-0.201,0.0,0.0,0.04,0.0,0.0,1.0
+2026-05-08,Kansas City Royals,Detroit Tigers,0.536,4.95,4.8,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.201,0.838,-0.25,0.04,0.044,0.05,1.0
+2026-05-08,Chicago White Sox,Seattle Mariners,0.618,5.11,4.64,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,0.03,0.838,0.0,0.02,0.014,0.05,0.0
+2026-05-08,Chicago White Sox,Seattle Mariners,0.346,4.56,5.19,last10,0.03,0.0,0.0,0.02,0.0,0.0,0.0
+2026-05-08,Chicago White Sox,Seattle Mariners,0.344,4.55,5.2,rest_days,0.03,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Chicago White Sox,Seattle Mariners,0.49,4.86,4.89,home_away_split,0.03,0.0,0.0,0.0,0.014,0.0,0.0
+2026-05-08,Chicago White Sox,Seattle Mariners,0.346,4.56,5.19,timezone,0.03,0.0,0.0,0.0,0.0,0.05,0.0
+2026-05-08,Chicago White Sox,Seattle Mariners,0.464,4.8,4.95,pitcher_stats,0.03,0.838,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Chicago White Sox,Seattle Mariners,0.344,4.55,5.2,bullpen_breakdown_score,0.03,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Milwaukee Brewers,New York Yankees,0.264,4.36,5.39,bullpen_breakdown_score,-0.035,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Milwaukee Brewers,New York Yankees,0.372,4.61,5.14,pitcher_stats,-0.035,0.838,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Milwaukee Brewers,New York Yankees,0.266,4.37,5.38,timezone,-0.035,0.0,0.0,0.0,0.0,0.05,1.0
+2026-05-08,Milwaukee Brewers,New York Yankees,0.395,4.66,5.09,home_away_split,-0.035,0.0,0.0,0.0,-0.004,0.0,1.0
+2026-05-08,Milwaukee Brewers,New York Yankees,0.272,4.38,5.37,rest_days,-0.035,0.0,0.25,0.0,0.0,0.0,1.0
+2026-05-08,Milwaukee Brewers,New York Yankees,0.261,4.35,5.4,last10,-0.035,0.0,0.0,-0.04,0.0,0.0,1.0
+2026-05-08,Milwaukee Brewers,New York Yankees,0.527,4.93,4.82,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.035,0.838,0.25,-0.04,-0.004,0.05,1.0
+2026-05-08,Texas Rangers,Chicago Cubs,0.575,5.03,4.72,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,0.01,0.838,0.0,-0.12,0.052,0.05,0.0
+2026-05-08,Texas Rangers,Chicago Cubs,0.303,4.46,5.29,last10,0.01,0.0,0.0,-0.12,0.0,0.0,0.0
+2026-05-08,Texas Rangers,Chicago Cubs,0.313,4.48,5.27,rest_days,0.01,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Texas Rangers,Chicago Cubs,0.46,4.79,4.96,home_away_split,0.01,0.0,0.0,0.0,0.052,0.0,0.0
+2026-05-08,Texas Rangers,Chicago Cubs,0.315,4.49,5.26,timezone,0.01,0.0,0.0,0.0,0.0,0.05,0.0
+2026-05-08,Texas Rangers,Chicago Cubs,0.429,4.73,5.02,pitcher_stats,0.01,0.838,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Texas Rangers,Chicago Cubs,0.313,4.48,5.27,bullpen_breakdown_score,0.01,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Arizona Diamondbacks,New York Mets,0.283,4.41,5.34,bullpen_breakdown_score,-0.103,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Arizona Diamondbacks,New York Mets,0.395,4.66,5.09,pitcher_stats,-0.103,0.838,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Arizona Diamondbacks,New York Mets,0.285,4.41,5.34,timezone,-0.103,0.0,0.0,0.0,0.0,0.05,0.0
+2026-05-08,Arizona Diamondbacks,New York Mets,0.423,4.72,5.03,home_away_split,-0.103,0.0,0.0,0.0,0.033,0.0,0.0
+2026-05-08,Arizona Diamondbacks,New York Mets,0.283,4.41,5.34,rest_days,-0.103,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Arizona Diamondbacks,New York Mets,0.28,4.4,5.35,last10,-0.103,0.0,0.0,-0.04,0.0,0.0,0.0
+2026-05-08,Arizona Diamondbacks,New York Mets,0.546,4.97,4.78,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.103,0.838,0.0,-0.04,0.033,0.05,0.0
+2026-05-08,San Diego Padres,St. Louis Cardinals,0.586,5.05,4.7,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.029,0.838,0.0,-0.06,-0.019,0.05,0.0
+2026-05-08,San Diego Padres,St. Louis Cardinals,0.32,4.5,5.25,last10,-0.029,0.0,0.0,-0.06,0.0,0.0,0.0
+2026-05-08,San Diego Padres,St. Louis Cardinals,0.325,4.51,5.24,rest_days,-0.029,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,San Diego Padres,St. Louis Cardinals,0.465,4.8,4.95,home_away_split,-0.029,0.0,0.0,0.0,-0.019,0.0,0.0
+2026-05-08,San Diego Padres,St. Louis Cardinals,0.327,4.51,5.24,timezone,-0.029,0.0,0.0,0.0,0.0,0.05,0.0
+2026-05-08,San Diego Padres,St. Louis Cardinals,0.443,4.76,4.99,pitcher_stats,-0.029,0.838,0.0,0.0,0.0,0.0,0.0
+2026-05-08,San Diego Padres,St. Louis Cardinals,0.325,4.51,5.24,bullpen_breakdown_score,-0.029,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Los Angeles Dodgers,Atlanta Braves,0.271,4.38,5.37,bullpen_breakdown_score,-0.071,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Los Angeles Dodgers,Atlanta Braves,0.38,4.63,5.12,pitcher_stats,-0.071,0.838,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Los Angeles Dodgers,Atlanta Braves,0.272,4.38,5.37,timezone,-0.071,0.0,0.0,0.0,0.0,0.05,1.0
+2026-05-08,Los Angeles Dodgers,Atlanta Braves,0.404,4.68,5.07,home_away_split,-0.071,0.0,0.0,0.0,0.008,0.0,1.0
+2026-05-08,Los Angeles Dodgers,Atlanta Braves,0.271,4.38,5.37,rest_days,-0.071,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Los Angeles Dodgers,Atlanta Braves,0.267,4.37,5.38,last10,-0.071,0.0,0.0,-0.04,0.0,0.0,1.0
+2026-05-08,Los Angeles Dodgers,Atlanta Braves,0.527,4.93,4.82,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.071,0.838,0.0,-0.04,0.008,0.05,1.0
+2026-05-08,San Francisco Giants,Pittsburgh Pirates,0.542,4.96,4.79,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.07,0.838,0.25,-0.08,0.004,0.05,1.0
+2026-05-08,San Francisco Giants,Pittsburgh Pirates,0.272,4.38,5.37,last10,-0.07,0.0,0.0,-0.08,0.0,0.0,1.0
+2026-05-08,San Francisco Giants,Pittsburgh Pirates,0.286,4.42,5.33,rest_days,-0.07,0.0,0.25,0.0,0.0,0.0,1.0
+2026-05-08,San Francisco Giants,Pittsburgh Pirates,0.413,4.7,5.05,home_away_split,-0.07,0.0,0.0,0.0,0.004,0.0,1.0
+2026-05-08,San Francisco Giants,Pittsburgh Pirates,0.28,4.4,5.35,timezone,-0.07,0.0,0.0,0.0,0.0,0.05,1.0
+2026-05-08,San Francisco Giants,Pittsburgh Pirates,0.389,4.65,5.1,pitcher_stats,-0.07,0.838,0.0,0.0,0.0,0.0,1.0
+2026-05-08,San Francisco Giants,Pittsburgh Pirates,0.278,4.4,5.35,bullpen_breakdown_score,-0.07,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Cincinnati Reds,Houston Astros,0.508,4.9,4.85,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.061,0.447,-0.25,-0.04,0.066,0.02,0.0
+2026-05-08,Cincinnati Reds,Houston Astros,0.508,4.9,4.85,last10|rest_days|home_away_split|timezone|pitcher_stats,-0.061,0.447,-0.25,-0.04,0.066,0.02,0.0
+2026-05-08,Cincinnati Reds,Houston Astros,0.374,4.47,5.28,last10,-0.061,0.0,0.0,-0.04,0.0,0.0,0.0
+2026-05-08,Cincinnati Reds,Houston Astros,0.371,4.45,5.3,rest_days,-0.061,0.0,-0.25,0.0,0.0,0.0,0.0
+2026-05-08,Cincinnati Reds,Houston Astros,0.473,4.79,4.96,home_away_split,-0.061,0.0,0.0,0.0,0.066,0.0,0.0
+2026-05-08,Cincinnati Reds,Houston Astros,0.377,4.48,5.27,timezone,-0.061,0.0,0.0,0.0,0.0,0.02,0.0
+2026-05-08,Cincinnati Reds,Houston Astros,0.415,4.61,5.14,pitcher_stats,-0.061,0.447,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Cincinnati Reds,Houston Astros,0.376,4.47,5.28,bullpen_breakdown_score,-0.061,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Philadelphia Phillies,Colorado Rockies,0.533,4.98,4.77,bullpen_breakdown_score|pitcher_stats|timezone|home_away_split|rest_days|last10,-0.012,0.447,0.0,0.1,0.006,0.02,0.0
+2026-05-08,Philadelphia Phillies,Colorado Rockies,0.395,4.54,5.21,last10,-0.012,0.0,0.0,0.1,0.0,0.0,0.0
+2026-05-08,Philadelphia Phillies,Colorado Rockies,0.39,4.52,5.23,rest_days,-0.012,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Philadelphia Phillies,Colorado Rockies,0.483,4.82,4.93,home_away_split,-0.012,0.0,0.0,0.0,0.006,0.0,0.0
+2026-05-08,Philadelphia Phillies,Colorado Rockies,0.39,4.52,5.23,timezone,-0.012,0.0,0.0,0.0,0.0,0.02,0.0
+2026-05-08,Philadelphia Phillies,Colorado Rockies,0.43,4.66,5.09,pitcher_stats,-0.012,0.447,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Philadelphia Phillies,Colorado Rockies,0.39,4.52,5.23,bullpen_breakdown_score,-0.012,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Baltimore Orioles,Athletics,0.486,4.83,4.92,bullpen_breakdown_score|pitcher_stats|timezone|home_away_split|rest_days|last10,-0.226,0.447,0.0,-0.04,-0.008,0.02,0.0
+2026-05-08,Baltimore Orioles,Athletics,0.356,4.4,5.35,last10,-0.226,0.0,0.0,-0.04,0.0,0.0,0.0
+2026-05-08,Baltimore Orioles,Athletics,0.358,4.41,5.34,rest_days,-0.226,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Baltimore Orioles,Athletics,0.445,4.7,5.05,home_away_split,-0.226,0.0,0.0,0.0,-0.008,0.0,0.0
+2026-05-08,Baltimore Orioles,Athletics,0.358,4.41,5.34,timezone,-0.226,0.0,0.0,0.0,0.0,0.02,0.0
+2026-05-08,Baltimore Orioles,Athletics,0.395,4.54,5.21,pitcher_stats,-0.226,0.447,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Baltimore Orioles,Athletics,0.358,4.41,5.34,bullpen_breakdown_score,-0.226,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Baltimore Orioles,Athletics,0.358,4.41,5.34,bullpen_breakdown_score,-0.226,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Toronto Blue Jays,Los Angeles Angels,0.541,5.0,4.75,bullpen_breakdown_score|pitcher_stats|timezone|home_away_split|last10|rest_days,0.046,0.447,0.0,0.02,0.041,0.02,1.0
+2026-05-08,Toronto Blue Jays,Los Angeles Angels,0.4,4.56,5.19,last10,0.046,0.0,0.0,0.02,0.0,0.0,1.0
+2026-05-08,Toronto Blue Jays,Los Angeles Angels,0.399,4.55,5.2,rest_days,0.046,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Toronto Blue Jays,Los Angeles Angels,0.399,4.55,5.2,rest_days,0.046,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Toronto Blue Jays,Los Angeles Angels,0.496,4.86,4.89,home_away_split,0.046,0.0,0.0,0.0,0.041,0.0,1.0
+2026-05-08,Toronto Blue Jays,Los Angeles Angels,0.399,4.55,5.2,timezone,0.046,0.0,0.0,0.0,0.0,0.02,1.0
+2026-05-08,Toronto Blue Jays,Los Angeles Angels,0.44,4.69,5.06,pitcher_stats,0.046,0.447,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Toronto Blue Jays,Los Angeles Angels,0.399,4.55,5.2,bullpen_breakdown_score,0.046,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Boston Red Sox,Tampa Bay Rays,0.367,4.44,5.31,bullpen_breakdown_score,-0.144,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Boston Red Sox,Tampa Bay Rays,0.405,4.57,5.18,pitcher_stats,-0.144,0.447,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Boston Red Sox,Tampa Bay Rays,0.367,4.44,5.31,timezone,-0.144,0.0,0.0,0.0,0.0,0.02,1.0
+2026-05-08,Boston Red Sox,Tampa Bay Rays,0.456,4.74,5.01,home_away_split,-0.144,0.0,0.0,0.0,-0.003,0.0,1.0
+2026-05-08,Boston Red Sox,Tampa Bay Rays,0.367,4.44,5.31,rest_days,-0.144,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Boston Red Sox,Tampa Bay Rays,0.362,4.42,5.33,last10,-0.144,0.0,0.0,-0.08,0.0,0.0,1.0
+2026-05-08,Boston Red Sox,Tampa Bay Rays,0.495,4.86,4.89,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.144,0.447,0.0,-0.08,-0.003,0.02,1.0
+2026-05-08,Miami Marlins,Washington Nationals,0.515,4.92,4.83,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,0.005,0.447,0.0,-0.04,-0.016,0.02,0.0
+2026-05-08,Miami Marlins,Washington Nationals,0.381,4.49,5.26,last10,0.005,0.0,0.0,-0.04,0.0,0.0,0.0
+2026-05-08,Miami Marlins,Washington Nationals,0.383,4.5,5.25,rest_days,0.005,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Miami Marlins,Washington Nationals,0.474,4.79,4.96,home_away_split,0.005,0.0,0.0,0.0,-0.016,0.0,0.0
+2026-05-08,Miami Marlins,Washington Nationals,0.383,4.5,5.25,timezone,0.005,0.0,0.0,0.0,0.0,0.02,0.0
+2026-05-08,Miami Marlins,Washington Nationals,0.423,4.63,5.12,pitcher_stats,0.005,0.447,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Miami Marlins,Washington Nationals,0.383,4.5,5.25,bullpen_breakdown_score,0.005,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Cleveland Guardians,Minnesota Twins,0.39,4.52,5.23,bullpen_breakdown_score,0.048,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Cleveland Guardians,Minnesota Twins,0.43,4.66,5.09,pitcher_stats,0.048,0.447,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Cleveland Guardians,Minnesota Twins,0.391,4.53,5.22,timezone,0.048,0.0,0.0,0.0,0.0,0.02,1.0
+2026-05-08,Cleveland Guardians,Minnesota Twins,0.488,4.84,4.91,home_away_split,0.048,0.0,0.0,0.0,0.062,0.0,1.0
+2026-05-08,Cleveland Guardians,Minnesota Twins,0.39,4.52,5.23,rest_days,0.048,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Cleveland Guardians,Minnesota Twins,0.391,4.53,5.22,last10,0.048,0.0,0.0,0.02,0.0,0.0,1.0
+2026-05-08,Cleveland Guardians,Minnesota Twins,0.534,4.98,4.77,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,0.048,0.447,0.0,0.02,0.062,0.02,1.0
+2026-05-08,Kansas City Royals,Detroit Tigers,0.486,4.83,4.92,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.201,0.447,-0.25,0.04,0.044,0.02,1.0
+2026-05-08,Kansas City Royals,Detroit Tigers,0.358,4.4,5.35,last10,-0.201,0.0,0.0,0.04,0.0,0.0,1.0
+2026-05-08,Kansas City Royals,Detroit Tigers,0.35,4.38,5.37,rest_days,-0.201,0.0,-0.25,0.0,0.0,0.0,1.0
+2026-05-08,Kansas City Royals,Detroit Tigers,0.446,4.71,5.04,home_away_split,-0.201,0.0,0.0,0.0,0.044,0.0,1.0
+2026-05-08,Kansas City Royals,Detroit Tigers,0.356,4.4,5.35,timezone,-0.201,0.0,0.0,0.0,0.0,0.02,1.0
+2026-05-08,Kansas City Royals,Detroit Tigers,0.392,4.53,5.22,pitcher_stats,-0.201,0.447,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Kansas City Royals,Detroit Tigers,0.355,4.4,5.35,bullpen_breakdown_score,-0.201,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Chicago White Sox,Seattle Mariners,0.393,4.53,5.22,bullpen_breakdown_score,0.03,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Chicago White Sox,Seattle Mariners,0.433,4.67,5.08,pitcher_stats,0.03,0.447,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Chicago White Sox,Seattle Mariners,0.393,4.53,5.22,timezone,0.03,0.0,0.0,0.0,0.0,0.02,0.0
+2026-05-08,Chicago White Sox,Seattle Mariners,0.487,4.84,4.91,home_away_split,0.03,0.0,0.0,0.0,0.014,0.0,0.0
+2026-05-08,Chicago White Sox,Seattle Mariners,0.393,4.53,5.22,rest_days,0.03,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Chicago White Sox,Seattle Mariners,0.394,4.54,5.21,last10,0.03,0.0,0.0,0.02,0.0,0.0,0.0
+2026-05-08,Chicago White Sox,Seattle Mariners,0.533,4.98,4.77,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,0.03,0.447,0.0,0.02,0.014,0.02,0.0
+2026-05-08,Milwaukee Brewers,New York Yankees,0.499,4.87,4.88,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.035,0.447,0.25,-0.04,-0.004,0.02,1.0
+2026-05-08,Milwaukee Brewers,New York Yankees,0.361,4.42,5.33,last10,-0.035,0.0,0.0,-0.04,0.0,0.0,1.0
+2026-05-08,Milwaukee Brewers,New York Yankees,0.369,4.45,5.3,rest_days,-0.035,0.0,0.25,0.0,0.0,0.0,1.0
+2026-05-08,Milwaukee Brewers,New York Yankees,0.452,4.73,5.02,home_away_split,-0.035,0.0,0.0,0.0,-0.004,0.0,1.0
+2026-05-08,Milwaukee Brewers,New York Yankees,0.364,4.43,5.32,timezone,-0.035,0.0,0.0,0.0,0.0,0.02,1.0
+2026-05-08,Milwaukee Brewers,New York Yankees,0.401,4.56,5.19,pitcher_stats,-0.035,0.447,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Milwaukee Brewers,New York Yankees,0.363,4.43,5.32,bullpen_breakdown_score,-0.035,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Texas Rangers,Chicago Cubs,0.382,4.49,5.26,bullpen_breakdown_score,0.01,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Texas Rangers,Chicago Cubs,0.382,4.49,5.26,,0.01,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Texas Rangers,Chicago Cubs,0.421,4.63,5.12,pitcher_stats,0.01,0.447,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Texas Rangers,Chicago Cubs,0.382,4.5,5.25,timezone,0.01,0.0,0.0,0.0,0.0,0.02,0.0
+2026-05-08,Texas Rangers,Chicago Cubs,0.478,4.81,4.94,home_away_split,0.01,0.0,0.0,0.0,0.052,0.0,0.0
+2026-05-08,Texas Rangers,Chicago Cubs,0.382,4.49,5.26,rest_days,0.01,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Texas Rangers,Chicago Cubs,0.375,4.47,5.28,last10,0.01,0.0,0.0,-0.12,0.0,0.0,0.0
+2026-05-08,Texas Rangers,Chicago Cubs,0.514,4.92,4.83,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,0.01,0.447,0.0,-0.12,0.052,0.02,0.0
+2026-05-08,Arizona Diamondbacks,New York Mets,0.497,4.87,4.88,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.103,0.447,0.0,-0.04,0.033,0.02,0.0
+2026-05-08,Arizona Diamondbacks,New York Mets,0.362,4.42,5.33,last10,-0.103,0.0,0.0,-0.04,0.0,0.0,0.0
+2026-05-08,Arizona Diamondbacks,New York Mets,0.364,4.43,5.32,rest_days,-0.103,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Arizona Diamondbacks,New York Mets,0.456,4.74,5.01,home_away_split,-0.103,0.0,0.0,0.0,0.033,0.0,0.0
+2026-05-08,Arizona Diamondbacks,New York Mets,0.365,4.43,5.32,timezone,-0.103,0.0,0.0,0.0,0.0,0.02,0.0
+2026-05-08,Arizona Diamondbacks,New York Mets,0.402,4.56,5.19,pitcher_stats,-0.103,0.447,0.0,0.0,0.0,0.0,0.0
+2026-05-08,Arizona Diamondbacks,New York Mets,0.364,4.43,5.32,bullpen_breakdown_score,-0.103,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,San Diego Padres,St. Louis Cardinals,0.383,4.5,5.25,bullpen_breakdown_score,-0.029,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,San Diego Padres,St. Louis Cardinals,0.422,4.63,5.12,pitcher_stats,-0.029,0.447,0.0,0.0,0.0,0.0,0.0
+2026-05-08,San Diego Padres,St. Louis Cardinals,0.383,4.5,5.25,timezone,-0.029,0.0,0.0,0.0,0.0,0.02,0.0
+2026-05-08,San Diego Padres,St. Louis Cardinals,0.473,4.79,4.96,home_away_split,-0.029,0.0,0.0,0.0,-0.019,0.0,0.0
+2026-05-08,San Diego Padres,St. Louis Cardinals,0.383,4.5,5.25,rest_days,-0.029,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-08,San Diego Padres,St. Louis Cardinals,0.379,4.48,5.27,last10,-0.029,0.0,0.0,-0.06,0.0,0.0,0.0
+2026-05-08,San Diego Padres,St. Louis Cardinals,0.513,4.92,4.83,last10|rest_days|home_away_split|pitcher_stats|timezone|bullpen_breakdown_score,-0.029,0.447,0.0,-0.06,-0.019,0.02,0.0
+2026-05-08,Los Angeles Dodgers,Atlanta Braves,0.493,4.85,4.9,last10|rest_days|home_away_split|pitcher_stats|timezone|bullpen_breakdown_score,-0.071,0.447,0.0,-0.04,0.008,0.02,1.0
+2026-05-08,Los Angeles Dodgers,Atlanta Braves,0.361,4.42,5.33,last10,-0.071,0.0,0.0,-0.04,0.0,0.0,1.0
+2026-05-08,Los Angeles Dodgers,Atlanta Braves,0.363,4.42,5.33,rest_days,-0.071,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Los Angeles Dodgers,Atlanta Braves,0.452,4.73,5.02,home_away_split,-0.071,0.0,0.0,0.0,0.008,0.0,1.0
+2026-05-08,Los Angeles Dodgers,Atlanta Braves,0.363,4.43,5.32,timezone,-0.071,0.0,0.0,0.0,0.0,0.02,1.0
+2026-05-08,Los Angeles Dodgers,Atlanta Braves,0.363,4.43,5.32,timezone,-0.071,0.0,0.0,0.0,0.0,0.02,1.0
+2026-05-08,Los Angeles Dodgers,Atlanta Braves,0.401,4.56,5.19,pitcher_stats,-0.071,0.447,0.0,0.0,0.0,0.0,1.0
+2026-05-08,Los Angeles Dodgers,Atlanta Braves,0.363,4.42,5.33,bullpen_breakdown_score,-0.071,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-08,San Francisco Giants,Pittsburgh Pirates,0.365,4.43,5.32,bullpen_breakdown_score,-0.07,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-08,San Francisco Giants,Pittsburgh Pirates,0.403,4.57,5.18,pitcher_stats,-0.07,0.447,0.0,0.0,0.0,0.0,1.0
+2026-05-08,San Francisco Giants,Pittsburgh Pirates,0.366,4.44,5.31,timezone,-0.07,0.0,0.0,0.0,0.0,0.02,1.0
+2026-05-08,San Francisco Giants,Pittsburgh Pirates,0.455,4.73,5.02,home_away_split,-0.07,0.0,0.0,0.0,0.004,0.0,1.0
+2026-05-08,San Francisco Giants,Pittsburgh Pirates,0.371,4.45,5.3,rest_days,-0.07,0.0,0.25,0.0,0.0,0.0,1.0
+2026-05-08,San Francisco Giants,Pittsburgh Pirates,0.361,4.42,5.33,last10,-0.07,0.0,0.0,-0.08,0.0,0.0,1.0
+2026-05-08,San Francisco Giants,Pittsburgh Pirates,0.5,4.87,4.88,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.07,0.447,0.25,-0.08,0.004,0.02,1.0
+2026-05-08,Texas Rangers,Chicago Cubs,0.514,4.92,4.83,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,0.01,0.447,0.0,-0.12,0.052,0.02,0.0
+2026-05-14,Pittsburgh Pirates,Colorado Rockies,0.461,4.75,5.0,pitcher_stats|timezone|last10,0.173,0.447,0.0,0.06,0.0,0.02,1.0
+2026-05-14,Pittsburgh Pirates,Colorado Rockies,0.559,5.06,4.69,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,0.173,0.447,0.0,0.06,0.017,0.02,1.0
+2026-05-19,Miami Marlins,Atlanta Braves,0.472,4.79,4.96,last10|home_away_split|pitcher_stats,-0.338,0.447,0.0,-0.02,-0.012,0.0,0.0
+2026-05-19,Miami Marlins,Atlanta Braves,0.474,4.8,4.95,pitcher_stats|home_away_split|timezone,-0.338,0.447,0.0,0.0,-0.012,0.02,0.0
+2026-05-19,Detroit Tigers,Cleveland Guardians,0.489,4.84,4.91,pitcher_stats|home_away_split|timezone,-0.12,0.447,0.0,0.0,0.003,0.02,0.0
+2026-05-19,Detroit Tigers,Cleveland Guardians,0.395,4.54,5.21,pitcher_stats,-0.12,0.447,0.0,0.0,0.0,0.0,0.0
+2026-05-19,Tampa Bay Rays,Baltimore Orioles,0.454,4.73,5.02,pitcher_stats,0.172,0.447,0.0,0.0,0.0,0.0,1.0
+2026-05-19,Philadelphia Phillies,Cincinnati Reds,0.424,4.64,5.11,pitcher_stats,0.026,0.447,0.0,0.0,0.0,0.0,0.0
+2026-05-19,Seattle Mariners,Chicago White Sox,0.371,4.46,5.29,,-0.025,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-19,Arizona Diamondbacks,San Francisco Giants,0.381,4.49,5.26,,-0.041,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-19,San Diego Padres,Los Angeles Dodgers,0.35,4.35,5.4,,-0.238,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-19,Los Angeles Angels,Athletics,0.35,4.37,5.38,,-0.228,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-19,Colorado Rockies,Texas Rangers,0.35,4.36,5.39,,-0.281,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-19,St. Louis Cardinals,Pittsburgh Pirates,0.391,4.52,5.23,,0.043,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-19,St. Louis Cardinals,Pittsburgh Pirates,0.431,4.66,5.09,pitcher_stats,0.043,0.447,0.0,0.0,0.0,0.0,1.0
+2026-05-19,Colorado Rockies,Texas Rangers,0.382,4.49,5.26,pitcher_stats,-0.281,0.447,0.0,0.0,0.0,0.0,0.0
+2026-05-19,Los Angeles Angels,Athletics,0.385,4.51,5.24,pitcher_stats,-0.228,0.447,0.0,0.0,0.0,0.0,0.0
+2026-05-19,Chicago Cubs,Milwaukee Brewers,0.404,4.57,5.18,pitcher_stats,-0.126,0.447,0.0,0.0,0.0,0.0,0.0
+2026-05-19,Chicago Cubs,Milwaukee Brewers,0.404,4.57,5.18,pitcher_stats|rest_days,-0.126,0.447,0.0,0.0,0.0,0.0,0.0
+2026-05-19,St. Louis Cardinals,Pittsburgh Pirates,0.531,4.97,4.78,pitcher_stats|rest_days|last10|home_away_split|timezone|bullpen_breakdown_score,0.043,0.447,0.0,0.04,0.01,0.02,1.0
+2026-05-21,Arizona Diamondbacks,Colorado Rockies,0.411,4.59,5.16,timezone,0.11,0.0,0.0,0.0,0.0,0.02,1.0
+2026-05-26,Los Angeles Dodgers,Colorado Rockies,0.503,4.89,4.86,pitcher_stats|bullpen_breakdown_score,0.469,0.447,0.0,0.0,0.0,0.0,1.0
+2026-05-26,Los Angeles Dodgers,Colorado Rockies,0.46,4.75,5.0,timezone,0.469,0.0,0.0,0.0,0.0,0.02,1.0
+2026-05-27,Texas Rangers,Houston Astros,0.531,4.97,4.78,home_away_split|timezone|pitcher_stats|last10,0.136,0.447,0.0,-0.021,0.0,0.005,0.0
+2026-05-27,Texas Rangers,Houston Astros,0.533,4.98,4.77,pitcher_stats|home_away_split|rest_days,0.136,0.447,0.0,0.0,0.007,0.0,0.0
+2026-05-28,Detroit Tigers,Los Angeles Angels,0.388,4.52,5.23,last10,0.098,0.0,0.0,-0.06,0.0,,0.0
+2026-05-28,Detroit Tigers,Los Angeles Angels,0.392,4.53,5.22,rest_days,0.098,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-28,Detroit Tigers,Los Angeles Angels,0.388,4.52,5.23,last10,0.098,0.0,0.0,-0.06,0.0,0.0,0.0
+2026-05-28,Detroit Tigers,Los Angeles Angels,0.392,4.53,5.22,rest_days,0.098,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-28,Detroit Tigers,Los Angeles Angels,0.392,4.53,5.22,rest_days,0.098,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-28,Detroit Tigers,Los Angeles Angels,0.486,4.83,4.92,home_away_split,0.098,0.0,0.0,0.0,0.008,0.0,0.0
+2026-05-28,Detroit Tigers,Los Angeles Angels,0.392,4.53,5.22,timezone,0.098,0.0,0.0,0.0,0.0,0.02,0.0
+2026-05-28,Detroit Tigers,Los Angeles Angels,0.392,4.53,5.22,timezone,0.098,0.0,0.0,0.0,0.0,0.02,0.0
+2026-05-28,Detroit Tigers,Los Angeles Angels,0.432,4.66,5.09,pitcher_stats,0.098,0.447,0.0,0.0,0.0,0.0,0.0
+2026-05-28,Detroit Tigers,Los Angeles Angels,0.392,4.53,5.22,bullpen_breakdown_score,0.098,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-28,Detroit Tigers,Los Angeles Angels,0.528,4.96,4.79,bullpen_breakdown_score|pitcher_stats|timezone|home_away_split|rest_days|last10,0.098,0.447,0.0,-0.01,0.001,0.003,0.0
+2026-05-28,Chicago White Sox,Minnesota Twins,0.513,4.92,4.83,bullpen_breakdown_score|pitcher_stats|timezone|home_away_split|rest_days|last10,-0.036,0.447,0.0,-0.007,0.003,0.003,1.0
+2026-05-28,Chicago White Sox,Minnesota Twins,0.376,4.47,5.28,last10,-0.036,0.0,0.0,-0.04,0.0,0.0,1.0
+2026-05-28,Chicago White Sox,Minnesota Twins,0.378,4.48,5.27,rest_days,-0.036,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-28,Chicago White Sox,Minnesota Twins,0.471,4.79,4.96,home_away_split,-0.036,0.0,0.0,0.0,0.019,0.0,1.0
+2026-05-28,Chicago White Sox,Minnesota Twins,0.379,4.48,5.27,timezone,-0.036,0.0,0.0,0.0,0.0,0.02,1.0
+2026-05-28,Chicago White Sox,Minnesota Twins,0.417,4.62,5.13,pitcher_stats,-0.036,0.447,0.0,0.0,0.0,0.0,1.0
+2026-05-28,Chicago White Sox,Minnesota Twins,0.378,4.48,5.27,bullpen_breakdown_score,-0.036,0.0,0.0,0.0,0.0,0.0,1.0
+2026-05-28,Boston Red Sox,Atlanta Braves,0.457,4.74,5.01,bullpen_breakdown_score|pitcher_stats|timezone|home_away_split|rest_days|last10,-0.415,0.447,0.0,-0.003,-0.005,0.003,0.0
+2026-05-28,Boston Red Sox,Atlanta Braves,0.35,4.31,5.44,last10,-0.415,0.0,0.0,-0.02,0.0,0.0,0.0
+2026-05-28,Boston Red Sox,Atlanta Braves,0.35,4.31,5.44,rest_days,-0.415,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-28,Boston Red Sox,Atlanta Braves,0.414,4.6,5.15,home_away_split,-0.415,0.0,0.0,0.0,-0.03,0.0,0.0
+2026-05-28,Boston Red Sox,Atlanta Braves,0.35,4.31,5.44,timezone,-0.415,0.0,0.0,0.0,0.0,0.02,0.0
+2026-05-28,Boston Red Sox,Atlanta Braves,0.368,4.45,5.3,pitcher_stats,-0.415,0.447,0.0,0.0,0.0,0.0,0.0
+2026-05-28,Boston Red Sox,Atlanta Braves,0.35,4.31,5.44,bullpen_breakdown_score,-0.415,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-28,Baltimore Orioles,Toronto Blue Jays,0.497,4.87,4.88,last10|rest_days|home_away_split|timezone|pitcher_stats|bullpen_breakdown_score,-0.133,0.447,0.0,-0.003,0.003,0.003,0.0
+2026-05-28,Baltimore Orioles,Toronto Blue Jays,0.364,4.43,5.32,last10,-0.133,0.0,0.0,-0.02,0.0,0.0,0.0
+2026-05-28,Baltimore Orioles,Toronto Blue Jays,0.365,4.43,5.32,rest_days,-0.133,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-28,Baltimore Orioles,Toronto Blue Jays,0.455,4.74,5.01,home_away_split,-0.133,0.0,0.0,0.0,0.016,0.0,0.0
+2026-05-28,Baltimore Orioles,Toronto Blue Jays,0.365,4.43,5.32,timezone,-0.133,0.0,0.0,0.0,0.0,0.02,0.0
+2026-05-28,Baltimore Orioles,Toronto Blue Jays,0.403,4.57,5.18,pitcher_stats,-0.133,0.447,0.0,0.0,0.0,0.0,0.0
+2026-05-28,Baltimore Orioles,Toronto Blue Jays,0.365,4.43,5.32,bullpen_breakdown_score,-0.133,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-28,Baltimore Orioles,Toronto Blue Jays,0.497,4.87,4.88,bullpen_breakdown_score|pitcher_stats|timezone|home_away_split|rest_days|last10,-0.133,0.447,0.0,-0.003,0.003,0.003,0.0
+2026-05-28,Pittsburgh Pirates,Chicago Cubs,0.533,4.98,4.77,bullpen_breakdown_score|pitcher_stats|timezone|home_away_split|rest_days|last10,0.018,0.447,0.0,0.013,0.003,0.003,0.0
+2026-05-28,Pittsburgh Pirates,Chicago Cubs,0.399,4.55,5.2,last10,0.018,0.0,0.0,0.08,0.0,0.0,0.0
+2026-05-28,Pittsburgh Pirates,Chicago Cubs,0.394,4.54,5.21,rest_days,0.018,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-28,Pittsburgh Pirates,Chicago Cubs,0.489,4.84,4.91,home_away_split,0.018,0.0,0.0,0.0,0.017,0.0,0.0
+2026-05-28,Pittsburgh Pirates,Chicago Cubs,0.395,4.54,5.21,timezone,0.018,0.0,0.0,0.0,0.0,0.02,0.0
+2026-05-28,Pittsburgh Pirates,Chicago Cubs,0.435,4.67,5.08,pitcher_stats,0.018,0.447,0.0,0.0,0.0,0.0,0.0
+2026-05-28,Pittsburgh Pirates,Chicago Cubs,0.394,4.54,5.21,bullpen_breakdown_score,0.018,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-28,Texas Rangers,Houston Astros,0.531,4.97,4.78,bullpen_breakdown_score|pitcher_stats|timezone|home_away_split|last10|rest_days,0.128,0.447,0.0,-0.007,0.004,0.003,0.0
+2026-05-28,Texas Rangers,Houston Astros,0.391,4.53,5.22,last10,0.128,0.0,0.0,-0.04,0.0,0.0,0.0
+2026-05-28,Texas Rangers,Houston Astros,0.394,4.54,5.21,rest_days,0.128,0.0,0.0,0.0,0.0,0.0,0.0
+2026-05-28,Texas Rangers,Houston Astros,0.489,4.84,4.91,home_away_split,0.128,0.0,0.0,0.0,0.024,0.0,0.0
+2026-05-28,Texas Rangers,Houston Astros,0.394,4.54,5.21,timezone,0.128,0.0,0.0,0.0,0.0,0.02,0.0
+2026-05-28,Texas Rangers,Houston Astros,0.434,4.67,5.08,pitcher_stats,0.128,0.447,0.0,0.0,0.0,0.0,0.0
+2026-05-28,Texas Rangers,Houston Astros,0.394,4.54,5.21,bullpen_breakdown_score,0.128,0.0,0.0,0.0,0.0,0.0,0.0
+2026-06-09T13:04:33.379253,Baltimore Orioles,Seattle Mariners,0.445,4.62,5.13,pitcher_stats|bullpen_breakdown_score|rest_days,-0.063,0.447,0.0,0.0,0.0,0.0,
+2026-06-09T13:04:40.538337,Pittsburgh Pirates,Los Angeles Dodgers,0.424,4.52,5.23,pitcher_stats|bullpen_breakdown_score|rest_days,-0.26,0.447,0.0,0.0,0.0,0.0,
+2026-06-09T13:04:49.234084,Tampa Bay Rays,Boston Red Sox,0.453,4.66,5.09,pitcher_stats|bullpen_breakdown_score|rest_days,0.086,0.447,0.0,0.0,0.0,0.0,
+2026-06-09T13:04:57.931220,Detroit Tigers,Minnesota Twins,0.453,4.66,5.09,pitcher_stats|bullpen_breakdown_score|rest_days,-0.01,0.447,0.0,0.0,0.0,0.0,
+2026-06-09T13:05:07.632900,Miami Marlins,Arizona Diamondbacks,0.455,4.67,5.08,pitcher_stats|bullpen_breakdown_score|rest_days,0.013,0.447,0.0,0.0,0.0,0.0,
+2026-06-09T13:05:15.362522,Cleveland Guardians,New York Yankees,0.436,4.58,5.17,pitcher_stats|bullpen_breakdown_score|rest_days,-0.1,0.447,0.0,0.0,0.0,0.0,
+2026-06-09T13:05:22.112693,Toronto Blue Jays,Philadelphia Phillies,0.45,4.65,5.1,pitcher_stats|bullpen_breakdown_score|rest_days,0.054,0.447,0.0,0.0,0.0,0.0,
+2026-06-09T13:05:28.298834,New York Mets,St. Louis Cardinals,0.442,4.61,5.14,pitcher_stats|bullpen_breakdown_score|rest_days,-0.015,0.447,0.0,0.0,0.0,0.0,
+2026-06-09T13:05:35.436178,Kansas City Royals,Texas Rangers,0.422,4.51,5.24,pitcher_stats|bullpen_breakdown_score|rest_days,-0.29,0.447,0.0,0.0,0.0,0.0,
+2026-06-09T13:05:41.572157,Chicago White Sox,Atlanta Braves,0.419,4.5,5.25,pitcher_stats|bullpen_breakdown_score|rest_days,-0.305,0.447,0.0,0.0,0.0,0.0,
+2026-06-09T13:05:48.426859,Colorado Rockies,Chicago Cubs,0.43,4.55,5.2,pitcher_stats|bullpen_breakdown_score|rest_days,-0.215,0.447,0.02,0.0,0.0,0.0,
+2026-06-09T13:05:55.601352,Los Angeles Angels,Houston Astros,0.435,4.58,5.17,pitcher_stats|bullpen_breakdown_score|rest_days,-0.106,0.447,0.0,0.0,0.0,0.0,
+2026-06-09T13:06:02.160093,San Diego Padres,Cincinnati Reds,0.454,4.67,5.08,pitcher_stats|bullpen_breakdown_score|rest_days,0.081,0.447,0.0,0.0,0.0,0.0,
+2026-06-09T13:06:08.998172,San Francisco Giants,Washington Nationals,0.448,4.64,5.11,pitcher_stats|bullpen_breakdown_score|rest_days,-0.038,0.447,0.0,0.0,0.0,0.0,
+2026-06-09T13:06:12.490734,Athletics,Milwaukee Brewers,0.418,4.5,5.25,pitcher_stats|bullpen_breakdown_score|rest_days,-0.202,0.447,0.0,0.0,0.0,0.0,
+2026-06-09T13:06:21.527500,Athletics,Milwaukee Brewers,0.418,4.5,5.25,pitcher_stats|bullpen_breakdown_score,-0.202,0.447,0.0,0.0,0.0,0.0,
+2026-06-09T13:06:50.059577,Athletics,Milwaukee Brewers,0.418,4.5,5.25,pitcher_stats|bullpen_breakdown_score|rest_days,-0.202,0.447,0.0,0.0,0.0,0.0,
+2026-06-09T13:07:00.906641,Athletics,Milwaukee Brewers,0.418,4.5,5.25,pitcher_stats|bullpen_breakdown_score,-0.202,0.447,0.0,0.0,0.0,0.0,
+2026-06-09T13:07:07.253710,Athletics,Milwaukee Brewers,0.418,4.5,5.25,pitcher_stats,-0.202,0.447,0.0,0.0,0.0,0.0,
+2026-06-09T13:07:14.024097,Athletics,Milwaukee Brewers,0.4,4.36,5.39,bullpen_breakdown_score,-0.202,0.0,0.0,0.0,0.0,0.0,
+2026-06-09T13:07:24.947759,Athletics,Milwaukee Brewers,0.4,4.35,5.4,last10,-0.202,0.0,0.0,-0.06,0.0,0.0,
+2026-06-09T13:07:31.817188,Athletics,Milwaukee Brewers,0.417,4.49,5.26,last10|pitcher_stats,-0.202,0.447,0.0,-0.03,0.0,0.0,
+2026-06-09T13:07:38.932826,Athletics,Milwaukee Brewers,0.418,4.49,5.26,last10|pitcher_stats|rest_days,-0.202,0.447,0.0,-0.02,0.0,0.0,
