@@ -2,6 +2,7 @@ import requests
 import csv
 import os
 import pandas as pd
+import sqlite3
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -22,6 +23,38 @@ from models.baseball_stats import (
 from models.expected_runs import expected_home_runs, expected_away_runs
 
 app = FastAPI(title="Statified API")
+
+DB_FILE = "statified.db"
+
+def init_db():
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS predictions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            date TEXT,
+            home_team TEXT,
+            away_team TEXT,
+            p_home_win REAL,
+            expected_home_runs REAL,
+            expected_away_runs REAL,
+            selected_stats TEXT,
+            rating_diff REAL,
+            pitcher_edge REAL,
+            rest_edge REAL,
+            form_edge REAL,
+            split_edge REAL,
+            timezone_edge REAL,
+            actual_result INTEGER
+        )
+    """)
+
+    conn.commit()
+    conn.close()
+
+
+init_db()
 
 app.add_middleware(
     CORSMiddleware,
@@ -55,6 +88,7 @@ def get_today_mlb_games():
     res = requests.get(url, timeout=10)
     res.raise_for_status()
     data = res.json()
+
 
     dates = data.get("dates", [])
     if not dates:
@@ -292,27 +326,24 @@ def mlb_games():
     return {"games": games}
 
 def prediction_exists_today(home_team: str, away_team: str) -> bool:
-    file_path = "predictions.csv"
-
-    if not os.path.exists(file_path):
-        return False
-
     try:
-        df = pd.read_csv(file_path, on_bad_lines="skip")
+        conn = sqlite3.connect(DB_FILE)
+        cursor = conn.cursor()
 
-        if df.empty:
-            return False
+        today = date.today().isoformat()
 
-        df["date_only"] = pd.to_datetime(df["date"]).dt.date
-        today = date.today()
+        cursor.execute("""
+            SELECT COUNT(*)
+            FROM predictions
+            WHERE DATE(date) = ?
+              AND home_team = ?
+              AND away_team = ?
+        """, (today, home_team, away_team))
 
-        match = df[
-            (df["date_only"] == today)
-            & (df["home_team"] == home_team)
-            & (df["away_team"] == away_team)
-        ]
+        count = cursor.fetchone()[0]
+        conn.close()
 
-        return not match.empty
+        return count > 0
 
     except Exception:
         return False
@@ -462,35 +493,46 @@ def mlb_games_with_probabilities():
     
 
 def log_prediction(result):
-    file_path = "predictions.csv"
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
 
-    row = {
-        "date": datetime.now().isoformat(),
-        "home_team": result["home_team"],
-        "away_team": result["away_team"],
-        "p_home_win": result["p_home_win"],
-        "expected_home_runs": result["expected_home_runs"],
-        "expected_away_runs": result["expected_away_runs"],
-        "selected_stats": "|".join(result["inputs_used"]["selected_stats"]),
-        "rating_diff": result["inputs_used"].get("rating_diff", 0),
-        "pitcher_edge": result["inputs_used"].get("pitcher_edge", 0),
-        "rest_edge": result["inputs_used"].get("rest_edge", 0),
-        "form_edge": result["inputs_used"].get("form_edge", 0),
-        "split_edge": result["inputs_used"].get("split_edge", 0),
-        "timezone_edge": result["inputs_used"].get("timezone_edge", 0),
+    cursor.execute("""
+        INSERT INTO predictions (
+            date,
+            home_team,
+            away_team,
+            p_home_win,
+            expected_home_runs,
+            expected_away_runs,
+            selected_stats,
+            rating_diff,
+            pitcher_edge,
+            rest_edge,
+            form_edge,
+            split_edge,
+            timezone_edge,
+            actual_result
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, (
+        datetime.now().isoformat(),
+        result["home_team"],
+        result["away_team"],
+        result["p_home_win"],
+        result["expected_home_runs"],
+        result["expected_away_runs"],
+        "|".join(result["inputs_used"]["selected_stats"]),
+        result["inputs_used"].get("rating_diff", 0),
+        result["inputs_used"].get("pitcher_edge", 0),
+        result["inputs_used"].get("rest_edge", 0),
+        result["inputs_used"].get("form_edge", 0),
+        result["inputs_used"].get("split_edge", 0),
+        result["inputs_used"].get("timezone_edge", 0),
+        result.get("actual_result")
+    ))
 
-        # 🔥 add later manually
-        "actual_result": result.get("actual_result", ""),
-        
-    }
-
-    file_exists = os.path.isfile(file_path)
-
-    with open(file_path, "a", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=row.keys())
-        if not file_exists:
-            writer.writeheader()
-        writer.writerow(row)
+    conn.commit()
+    conn.close()
 
 #PROBABILITY***********************************************************
 @app.post("/probability")
@@ -727,27 +769,32 @@ def test_pitcher():
 @app.get("/predictions")
 def get_predictions():
     try:
-        csv_path = os.path.join(os.path.dirname(__file__), "predictions.csv")
-        df = pd.read_csv(csv_path)
-        df = df.fillna("")
+        conn = sqlite3.connect(DB_FILE)
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            SELECT *
+            FROM predictions
+            ORDER BY date DESC
+        """)
+
+        rows = cursor.fetchall()
+        conn.close()
+
+        predictions = [dict(row) for row in rows]
+
         return {
             "ok": True,
-            "count": len(df),
-            "predictions": df.to_dict(orient="records")
+            "count": len(predictions),
+            "predictions": predictions
         }
+
     except Exception as e:
         return {
             "ok": False,
             "error": str(e)
         }
-
-class BullpenBreakdownRequest(BaseModel):
-    team: str
-    bullpen_innings_yesterday: float = 0
-    back_to_back_relievers: int = 0
-    closer_used_yesterday: bool = False
-    setup_used_yesterday: bool = False
-    bullpen_era_penalty: float = 0
 
 
 @app.post("/bullpen-breakdown-score")
