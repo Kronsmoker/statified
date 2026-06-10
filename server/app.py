@@ -76,6 +76,24 @@ class ProbabilityRequest(BaseModel):
     home_team: str
     away_team: str
     selected_stats: List[StatSelection]
+    model_name: str = "manual"
+
+
+MODEL_PRESETS = {
+    "model_1_pitcher_bullpen_last10": [
+        StatSelection(stat_key="pitcher_stats", weight=0.40),
+        StatSelection(stat_key="bullpen_breakdown_score", weight=0.35),
+        StatSelection(stat_key="last10", weight=0.25),
+    ],
+    "model_2_pitcher_rest": [
+        StatSelection(stat_key="pitcher_stats", weight=0.70),
+        StatSelection(stat_key="rest_days", weight=0.30),
+    ],
+    "model_3_pitcher_bullpen": [
+        StatSelection(stat_key="pitcher_stats", weight=0.55),
+        StatSelection(stat_key="bullpen_breakdown_score", weight=0.45),
+    ],
+}
 
 
 @app.get("/health")
@@ -497,39 +515,41 @@ def log_prediction(result):
     cursor = conn.cursor()
 
     cursor.execute("""
-        INSERT INTO predictions (
-            date,
-            home_team,
-            away_team,
-            p_home_win,
-            expected_home_runs,
-            expected_away_runs,
-            selected_stats,
-            rating_diff,
-            pitcher_edge,
-            rest_edge,
-            form_edge,
-            split_edge,
-            timezone_edge,
-            actual_result
-        )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    """, (
-        datetime.now().isoformat(),
-        result["home_team"],
-        result["away_team"],
-        result["p_home_win"],
-        result["expected_home_runs"],
-        result["expected_away_runs"],
-        "|".join(result["inputs_used"]["selected_stats"]),
-        result["inputs_used"].get("rating_diff", 0),
-        result["inputs_used"].get("pitcher_edge", 0),
-        result["inputs_used"].get("rest_edge", 0),
-        result["inputs_used"].get("form_edge", 0),
-        result["inputs_used"].get("split_edge", 0),
-        result["inputs_used"].get("timezone_edge", 0),
-        result.get("actual_result")
-    ))
+    INSERT INTO predictions (
+        date,
+        home_team,
+        away_team,
+        p_home_win,
+        expected_home_runs,
+        expected_away_runs,
+        selected_stats,
+        rating_diff,
+        pitcher_edge,
+        rest_edge,
+        form_edge,
+        split_edge,
+        timezone_edge,
+        actual_result,
+        model_name
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+""", (
+    datetime.now().isoformat(),
+    result["home_team"],
+    result["away_team"],
+    result["p_home_win"],
+    result["expected_home_runs"],
+    result["expected_away_runs"],
+    "|".join(result["inputs_used"]["selected_stats"]),
+    result["inputs_used"].get("rating_diff", 0),
+    result["inputs_used"].get("pitcher_edge", 0),
+    result["inputs_used"].get("rest_edge", 0),
+    result["inputs_used"].get("form_edge", 0),
+    result["inputs_used"].get("split_edge", 0),
+    result["inputs_used"].get("timezone_edge", 0),
+    result.get("actual_result"),
+    result.get("model_name", "manual")
+))
 
     conn.commit()
     conn.close()
@@ -711,6 +731,7 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
         "p_away_win": round(1 - p_home_win, 3),
         "expected_home_runs": round(home_runs, 2),
         "expected_away_runs": round(away_runs, 2),
+        "model_name": payload.model_name,
         "message": "You've been Statified",
         "selected_stats_count": len(payload.selected_stats),
         "actual_result": actual_result,
@@ -796,6 +817,13 @@ def get_predictions():
             "error": str(e)
         }
 
+class BullpenBreakdownRequest(BaseModel):
+    team: str
+    bullpen_innings_yesterday: float = 0
+    back_to_back_relievers: int = 0
+    closer_used_yesterday: bool = False
+    setup_used_yesterday: bool = False
+    bullpen_era_penalty: float = 0
 
 @app.post("/bullpen-breakdown-score")
 def bullpen_breakdown_score(data: BullpenBreakdownRequest):
@@ -814,4 +842,27 @@ def bullpen_breakdown_score(data: BullpenBreakdownRequest):
         "stat_key": "bullpen_breakdown_score",
         **result,
         "message": f"{data.team} bullpen risk: {result['risk_level']}",
+    }
+
+@app.get("/clear-today-predictions")
+def clear_today_predictions():
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+
+    today = date.today().isoformat()
+
+    cursor.execute("""
+        DELETE FROM predictions
+        WHERE DATE(date) = ?
+    """, (today,))
+
+    deleted = cursor.rowcount
+
+    conn.commit()
+    conn.close()
+
+    return {
+        "ok": True,
+        "deleted": deleted,
+        "date": today
     }
