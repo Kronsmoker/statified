@@ -51,12 +51,6 @@ def init_db():
         )
     """)
 
-    cursor.execute("PRAGMA table_info(predictions)")
-    columns = [row[1] for row in cursor.fetchall()]
-
-    if "model_name" not in columns:
-        cursor.execute("ALTER TABLE predictions ADD COLUMN model_name TEXT")
-
     conn.commit()
     conn.close()
 
