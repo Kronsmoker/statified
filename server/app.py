@@ -787,9 +787,9 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
             "away_bullpen": away_bullpen,
         }
         }
-    #print("CALLING LOG_PREDICTION")
-    #log_prediction(result)
-    #print("DONE LOGGING")
+    print("CALLING LOG_PREDICTION")
+    log_prediction(result)
+    print("DONE LOGGING")
 
     return result
 
