@@ -549,42 +549,64 @@ def log_prediction(result: dict):
 
     inputs = result.get("inputs_used", {})
 
-    cursor.execute("""
-        INSERT INTO predictions (
-            date,
-            home_team,
-            away_team,
-            p_home_win,
-            expected_home_runs,
-            expected_away_runs,
+    cursor.execute("PRAGMA table_info(predictions)")
+    columns = [row[1] for row in cursor.fetchall()]
+
+    selected_stats = ",".join(inputs.get("selected_stats", []))
+
+    if "model_name" in columns:
+        cursor.execute("""
+            INSERT INTO predictions (
+                date, home_team, away_team, p_home_win,
+                expected_home_runs, expected_away_runs,
+                selected_stats, rating_diff, pitcher_edge,
+                rest_edge, form_edge, split_edge,
+                timezone_edge, actual_result, model_name
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            date.today().isoformat(),
+            result.get("home_team"),
+            result.get("away_team"),
+            result.get("p_home_win"),
+            result.get("expected_home_runs"),
+            result.get("expected_away_runs"),
             selected_stats,
-            rating_diff,
-            pitcher_edge,
-            rest_edge,
-            form_edge,
-            split_edge,
-            timezone_edge,
-            actual_result,
-            model_name
-        )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    """, (
-        date.today().isoformat(),
-        result.get("home_team"),
-        result.get("away_team"),
-        result.get("p_home_win"),
-        result.get("expected_home_runs"),
-        result.get("expected_away_runs"),
-        ",".join(inputs.get("selected_stats", [])),
-        inputs.get("rating_diff"),
-        inputs.get("pitcher_edge"),
-        inputs.get("rest_edge"),
-        inputs.get("form_edge"),
-        inputs.get("split_edge"),
-        inputs.get("timezone_edge"),
-        result.get("actual_result"),
-        result.get("model_name", "manual"),
-    ))
+            inputs.get("rating_diff"),
+            inputs.get("pitcher_edge"),
+            inputs.get("rest_edge"),
+            inputs.get("form_edge"),
+            inputs.get("split_edge"),
+            inputs.get("timezone_edge"),
+            result.get("actual_result"),
+            result.get("model_name", "manual"),
+        ))
+    else:
+        cursor.execute("""
+            INSERT INTO predictions (
+                date, home_team, away_team, p_home_win,
+                expected_home_runs, expected_away_runs,
+                selected_stats, rating_diff, pitcher_edge,
+                rest_edge, form_edge, split_edge,
+                timezone_edge, actual_result
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            date.today().isoformat(),
+            result.get("home_team"),
+            result.get("away_team"),
+            result.get("p_home_win"),
+            result.get("expected_home_runs"),
+            result.get("expected_away_runs"),
+            selected_stats,
+            inputs.get("rating_diff"),
+            inputs.get("pitcher_edge"),
+            inputs.get("rest_edge"),
+            inputs.get("form_edge"),
+            inputs.get("split_edge"),
+            inputs.get("timezone_edge"),
+            result.get("actual_result"),
+        ))
 
     conn.commit()
     conn.close()
