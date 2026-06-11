@@ -50,7 +50,11 @@ def init_db():
             model_name TEXT
         )
     """)
-
+    
+    try:
+        cursor.execute("ALTER TABLE predictions ADD COLUMN model_name TEXT")
+    except sqlite3.OperationalError:
+        pass
     conn.commit()
     conn.close()
 
