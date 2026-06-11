@@ -46,7 +46,8 @@ def init_db():
             form_edge REAL,
             split_edge REAL,
             timezone_edge REAL,
-            actual_result INTEGER
+            actual_result INTEGER,
+            model_name TEXT
         )
     """)
 
@@ -426,16 +427,19 @@ def mlb_games_with_probabilities():
         return {"error": "No MLB games found today"}
 
     results = []
+    saved = 0
+    skipped = 0
 
     for game in games:
         home = game["home_team"]
         away = game["away_team"]
 
-        # get real stats
+        if prediction_exists_today(home, away):
+            skipped += 1
+
         home_stats = get_real_team_stats(home)
         away_stats = get_real_team_stats(away)
 
-        # ratings
         home_rating = team_power_rating(
             home_stats["win_pct"],
             home_stats["run_diff_per_game"]
@@ -447,10 +451,8 @@ def mlb_games_with_probabilities():
 
         rating_diff = team_rating_diff(home_rating, away_rating)
 
-        # edges
         pitcher_edge = 0.0
         timezone_edge = 0.0
-
         home_field = home_field_advantage()
 
         rest_edge = rest_days_edge(
@@ -462,6 +464,7 @@ def mlb_games_with_probabilities():
             home_stats["last10_win_pct"],
             away_stats["last10_win_pct"]
         )
+
         rri_edge = (away_stats["rri_5"] - home_stats["rri_5"]) * 0.15
 
         split_edge = home_away_split_edge(
@@ -469,7 +472,6 @@ def mlb_games_with_probabilities():
             away_stats["away_win_pct"]
         )
 
-        # expected runs
         home_runs = expected_home_runs(
             base_runs=4.5,
             rating_diff=rating_diff,
@@ -492,10 +494,9 @@ def mlb_games_with_probabilities():
             rri_edge=rri_edge,
         )
 
-        # probability
         p_home_win = win_probability_from_expected_runs(home_runs, away_runs)
 
-        results.append({
+        result = {
             "home_team": home,
             "away_team": away,
             "away_score": game["away_score"],
@@ -505,51 +506,81 @@ def mlb_games_with_probabilities():
             "expected_away_runs": round(away_runs, 2),
             "p_home_win": round(p_home_win, 3),
             "p_away_win": round(1 - p_home_win, 3),
-        })
+            "model_name": "daily_mlb_auto",
+            "actual_result": get_actual_result_from_game(game),
+            "inputs_used": {
+                "selected_stats": [
+                    "last10",
+                    "rest_days",
+                    "home_away_split",
+                    "timezone",
+                    "rating_diff",
+                    "rri"
+                ],
+                "rating_diff": round(rating_diff, 3),
+                "pitcher_edge": round(pitcher_edge, 3),
+                "rest_edge": round(rest_edge, 3),
+                "form_edge": round(form_edge, 3),
+                "split_edge": round(split_edge, 3),
+                "timezone_edge": round(timezone_edge, 3),
+            }
+        }
 
-    return {"games": results}
-    
+        if not prediction_exists_today(home, away):
+            log_prediction(result)
+            saved += 1
 
-def log_prediction(result):
+        results.append(result)
+
+    return {
+        "ok": True,
+        "saved": saved,
+        "skipped": skipped,
+        "games": results
+    }
+
+def log_prediction(result: dict):
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
 
+    inputs = result.get("inputs_used", {})
+
     cursor.execute("""
-    INSERT INTO predictions (
-        date,
-        home_team,
-        away_team,
-        p_home_win,
-        expected_home_runs,
-        expected_away_runs,
-        selected_stats,
-        rating_diff,
-        pitcher_edge,
-        rest_edge,
-        form_edge,
-        split_edge,
-        timezone_edge,
-        actual_result,
-        model_name
-    )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-""", (
-    datetime.now().isoformat(),
-    result["home_team"],
-    result["away_team"],
-    result["p_home_win"],
-    result["expected_home_runs"],
-    result["expected_away_runs"],
-    "|".join(result["inputs_used"]["selected_stats"]),
-    result["inputs_used"].get("rating_diff", 0),
-    result["inputs_used"].get("pitcher_edge", 0),
-    result["inputs_used"].get("rest_edge", 0),
-    result["inputs_used"].get("form_edge", 0),
-    result["inputs_used"].get("split_edge", 0),
-    result["inputs_used"].get("timezone_edge", 0),
-    result.get("actual_result"),
-    result.get("model_name", "manual")
-))
+        INSERT INTO predictions (
+            date,
+            home_team,
+            away_team,
+            p_home_win,
+            expected_home_runs,
+            expected_away_runs,
+            selected_stats,
+            rating_diff,
+            pitcher_edge,
+            rest_edge,
+            form_edge,
+            split_edge,
+            timezone_edge,
+            actual_result,
+            model_name
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, (
+        date.today().isoformat(),
+        result.get("home_team"),
+        result.get("away_team"),
+        result.get("p_home_win"),
+        result.get("expected_home_runs"),
+        result.get("expected_away_runs"),
+        ",".join(inputs.get("selected_stats", [])),
+        inputs.get("rating_diff"),
+        inputs.get("pitcher_edge"),
+        inputs.get("rest_edge"),
+        inputs.get("form_edge"),
+        inputs.get("split_edge"),
+        inputs.get("timezone_edge"),
+        result.get("actual_result"),
+        result.get("model_name", "manual"),
+    ))
 
     conn.commit()
     conn.close()
