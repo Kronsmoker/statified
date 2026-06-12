@@ -24,7 +24,10 @@ from models.expected_runs import expected_home_runs, expected_away_runs
 
 app = FastAPI(title="Statified API")
 
-DB_FILE = "statified.db"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_FILE = os.path.join(BASE_DIR, "statified.db")
+
+print("DB_FILE =", DB_FILE)
 
 def init_db():
     conn = sqlite3.connect(DB_FILE)
