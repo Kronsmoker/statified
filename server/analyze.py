@@ -1,9 +1,17 @@
 import pandas as pd
+import sqlite3
 
 pd.set_option("display.max_columns", None)
 pd.set_option("display.width", None)
 
-df = pd.read_csv("predictions.csv", on_bad_lines="skip")
+conn = sqlite3.connect("statified.db")
+
+df = pd.read_sql_query(
+    "SELECT * FROM predictions",
+    conn
+)
+
+conn.close()
 
 df["date"] = pd.to_datetime(df["date"]).dt.date
 
