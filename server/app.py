@@ -547,9 +547,6 @@ def mlb_games_with_probabilities():
             }
         }
 
-        if not prediction_exists_today(home, away):
-            log_prediction(result)
-            saved += 1
         print(f"{away} @ {home} -> {win_probability}")
         results.append(result)
     print(f"Generated {len(results)} games")
