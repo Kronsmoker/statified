@@ -29,6 +29,14 @@ DB_FILE = os.path.join(BASE_DIR, "statified.db")
 
 print("DB_FILE =", DB_FILE)
 
+@app.get("/debug-db")
+def debug_db():
+    return {
+        "DB_FILE": DB_FILE,
+        "absolute": os.path.abspath(DB_FILE),
+        "exists": os.path.exists(DB_FILE)
+    }
+
 def init_db():
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
