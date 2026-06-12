@@ -429,9 +429,9 @@ def generate_daily_predictions():
 
             result = probability(payload)
 
-            results.append(result)
+            log_prediction(result)
             saved += 1
-
+            results.append(result)
     return {
         "ok": True,
         "message": "Daily model predictions generated",
