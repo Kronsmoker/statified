@@ -348,20 +348,30 @@ def mlb_games():
 
     return {"games": games}
 
-def prediction_exists_today(home_team: str, away_team: str) -> bool:
+def prediction_exists_today(home_team: str, away_team: str, model_name: str = None) -> bool:
     try:
         conn = sqlite3.connect(DB_FILE)
         cursor = conn.cursor()
 
         today = date.today().isoformat()
 
-        cursor.execute("""
-            SELECT COUNT(*)
-            FROM predictions
-            WHERE DATE(date) = ?
-              AND home_team = ?
-              AND away_team = ?
-        """, (today, home_team, away_team))
+        if model_name:
+            cursor.execute("""
+                SELECT COUNT(*)
+                FROM predictions
+                WHERE DATE(date) = ?
+                  AND home_team = ?
+                  AND away_team = ?
+                  AND model_name = ?
+            """, (today, home_team, away_team, model_name))
+        else:
+            cursor.execute("""
+                SELECT COUNT(*)
+                FROM predictions
+                WHERE DATE(date) = ?
+                  AND home_team = ?
+                  AND away_team = ?
+            """, (today, home_team, away_team))
 
         count = cursor.fetchone()[0]
         conn.close()
@@ -386,38 +396,34 @@ def generate_daily_predictions():
     skipped = 0
     results = []
 
-    default_stats = [
-        StatSelection(stat_key="last10", weight=0.25),
-        StatSelection(stat_key="rest_days", weight=0.15),
-        StatSelection(stat_key="home_away_split", weight=0.25),
-        StatSelection(stat_key="timezone", weight=0.10),
-        StatSelection(stat_key="pitcher_stats", weight=0.25),
-    ]
-
     for game in games:
         home = game["home_team"]
         away = game["away_team"]
 
-        if prediction_exists_today(home, away):
-            skipped += 1
-            continue
+        for model_name, selected_stats in MODEL_PRESETS.items():
 
-        payload = ProbabilityRequest(
-            sport="baseball",
-            league="mlb",
-            home_team=home,
-            away_team=away,
-            selected_stats=default_stats
-        )
+            # Skip if this exact game + model already exists today
+            if prediction_exists_today(home, away, model_name):
+                skipped += 1
+                continue
 
-        result = probability(payload)
+            payload = ProbabilityRequest(
+                sport="baseball",
+                league="mlb",
+                home_team=home,
+                away_team=away,
+                selected_stats=selected_stats,
+                model_name=model_name
+            )
 
-        results.append(result)
-        saved += 1
+            result = probability(payload)
+
+            results.append(result)
+            saved += 1
 
     return {
         "ok": True,
-        "message": "Daily predictions generated",
+        "message": "Daily model predictions generated",
         "saved": saved,
         "skipped": skipped,
         "results": results
@@ -533,9 +539,10 @@ def mlb_games_with_probabilities():
         if not prediction_exists_today(home, away):
             log_prediction(result)
             saved += 1
-
+        print(f"{away} @ {home} -> {win_probability}")
         results.append(result)
-
+    print(f"Generated {len(results)} games")
+    print(f"Saved {saved} predictions")
     return {
         "ok": True,
         "saved": saved,
