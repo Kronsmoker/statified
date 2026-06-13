@@ -349,22 +349,71 @@ def get_real_team_stats(team_name: str) -> dict:
         "rri_5": round(float(latest_rri), 3) if pd.notna(latest_rri) else 0.0,
     }
     
+def get_mlb_games_by_date(game_date: str):
+    url = f"https://statsapi.mlb.com/api/v1/schedule?sportId=1&date={game_date}"
+
+    response = requests.get(url)
+    data = response.json()
+
+    dates = data.get("dates", [])
+
+    if not dates:
+        return []
+
+    games = []
+
+    for game in dates[0].get("games", []):
+        home_team = game["teams"]["home"]["team"]["name"]
+        away_team = game["teams"]["away"]["team"]["name"]
+
+        home_score = game["teams"]["home"].get("score")
+        away_score = game["teams"]["away"].get("score")
+
+        status = game["status"]["detailedState"]
+
+        games.append({
+            "home_team": home_team,
+            "away_team": away_team,
+            "home_score": home_score,
+            "away_score": away_score,
+            "status": status,
+            "game_date": game_date
+        })
+
+    return games
 
 @app.get("/mlb-games")
-def mlb_games():
-    games = get_today_mlb_games()
+def mlb_games(game_date: str = None):
+    if game_date is None:
+        game_date = date.today().isoformat()
+
+    games = get_mlb_games_by_date(game_date)
 
     if not games:
-        return {"error": "No MLB games found today"}
+        return {
+            "date": game_date,
+            "games": []
+        }
 
-    return {"games": games}
-
+    return {
+        "date": game_date,
+        "games": games
+    }
+    
 def prediction_exists_today(home_team: str, away_team: str, model_name: str = None) -> bool:
+    today = date.today().isoformat()
+    return prediction_exists_for_date(home_team, away_team, today, model_name)
+
+
+def prediction_exists_for_date(
+    home_team: str,
+    away_team: str,
+    game_date: str,
+    model_name: str = None
+) -> bool:
     try:
         conn = sqlite3.connect(DB_FILE)
         cursor = conn.cursor()
-
-        today = date.today().isoformat()
 
         if model_name:
             cursor.execute("""
@@ -374,7 +423,7 @@ def prediction_exists_today(home_team: str, away_team: str, model_name: str = No
                   AND home_team = ?
                   AND away_team = ?
                   AND model_name = ?
-            """, (today, home_team, away_team, model_name))
+            """, (game_date, home_team, away_team, model_name))
         else:
             cursor.execute("""
                 SELECT COUNT(*)
@@ -382,7 +431,7 @@ def prediction_exists_today(home_team: str, away_team: str, model_name: str = No
                 WHERE DATE(date) = ?
                   AND home_team = ?
                   AND away_team = ?
-            """, (today, home_team, away_team))
+            """, (game_date, home_team, away_team))
 
         count = cursor.fetchone()[0]
         conn.close()
@@ -391,7 +440,7 @@ def prediction_exists_today(home_team: str, away_team: str, model_name: str = No
 
     except Exception:
         return False
-
+    
 @app.get("/generate-daily-predictions")
 def generate_daily_predictions():
     games = get_today_mlb_games()

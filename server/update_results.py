@@ -1,10 +1,17 @@
+import sqlite3
 import pandas as pd
 import requests
 from pathlib import Path
 
-CSV_PATH = Path("predictions.csv")
+DB_PATH = Path("statified.db")
 
-df = pd.read_csv(CSV_PATH)
+conn = sqlite3.connect(DB_PATH)
+
+df = pd.read_sql_query("""
+    SELECT *
+    FROM predictions
+""", conn)
+
 df["date"] = pd.to_datetime(df["date"]).dt.date
 df["actual_result"] = pd.to_numeric(df["actual_result"], errors="coerce")
 
@@ -14,9 +21,7 @@ print("\nGames missing results:\n")
 for i, row in missing.iterrows():
     print(f"{i}: {row['date']} | {row['away_team']} at {row['home_team']}")
 
-choice = input(
-    "\nEnter row numbers to update separated by commas, or type ALL: "
-).strip()
+choice = input("\nEnter row numbers to update separated by commas, or type ALL: ").strip()
 
 if choice.lower() == "all":
     selected_indexes = missing.index.tolist()
@@ -31,6 +36,7 @@ for index in selected_indexes:
     game_date = row["date"]
     home_team = row["home_team"]
     away_team = row["away_team"]
+    prediction_id = int(row["id"])
 
     url = f"https://statsapi.mlb.com/api/v1/schedule?sportId=1&date={game_date}"
     response = requests.get(url)
@@ -58,18 +64,26 @@ for index in selected_indexes:
             home_score = game["teams"]["home"]["score"]
             away_score = game["teams"]["away"]["score"]
 
-            df.loc[index, "actual_result"] = 1 if home_score > away_score else 0
+            actual_result = 1 if home_score > away_score else 0
+
+            conn.execute(
+                """
+                UPDATE predictions
+                SET actual_result = ?
+                WHERE id = ?
+                """,
+                (actual_result, prediction_id)
+            )
+
             updated_count += 1
 
-            print(
-                f"Updated: {away_team} at {home_team} "
-                f"{away_score}-{home_score}"
-            )
+            print(f"Updated: {away_team} at {home_team} {away_score}-{home_score}")
             break
 
     if not found:
         print(f"Could not match: {away_team} at {home_team}")
 
-df.to_csv(CSV_PATH, index=False)
+conn.commit()
+conn.close()
 
 print(f"\nDone. Updated {updated_count} rows.")
