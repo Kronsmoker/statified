@@ -16,6 +16,9 @@ function App() {
   );
   const [passwordInput, setPasswordInput] = useState("");
 
+  const [selectedDate, setSelectedDate] = useState(
+  new Date().toISOString().split("T")[0]);
+
   const APP_PASSWORD = "statified2026";
 
   const statOptions = [
@@ -32,14 +35,16 @@ function App() {
   ];
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}/mlb-games`)
+    setSelectedGame(null);
+    setResult(null);
+    fetch(`${API_BASE_URL}/mlb-games?game_date=${selectedDate}`)
       .then((res) => res.json())
       .then((data) => {
         console.log("MLB games data:", data);
         setGames(Array.isArray(data) ? data : data.games || []);
       })
       .catch((err) => console.error(err));
-  }, [API_BASE_URL]);
+  }, [selectedDate, API_BASE_URL]);
 
   function handleUnlock(e) {
     e.preventDefault();
@@ -217,7 +222,40 @@ function App() {
 
       <div className="app-layout">
         <div className="games-column">
-          <h2>Today's MLB Games</h2>
+          <h2>MLB Games</h2>
+
+<div style={{
+  display: "flex",
+  gap: "10px",
+  alignItems: "center",
+  marginBottom: "15px"
+}}>
+  <button
+    onClick={() => {
+      const d = new Date(selectedDate);
+      d.setDate(d.getDate() - 1);
+      setSelectedDate(d.toISOString().split("T")[0]);
+    }}
+  >
+    ◀
+  </button>
+
+  <input
+    type="date"
+    value={selectedDate}
+    onChange={(e) => setSelectedDate(e.target.value)}
+  />
+
+  <button
+    onClick={() => {
+      const d = new Date(selectedDate);
+      d.setDate(d.getDate() + 1);
+      setSelectedDate(d.toISOString().split("T")[0]);
+    }}
+  >
+    ▶
+  </button>
+</div>
           <p>Games loaded: {games.length}</p>
 
           <div className="games-list">
