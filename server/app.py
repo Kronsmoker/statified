@@ -1017,3 +1017,23 @@ def export_predictions_csv():
         media_type="text/csv",
         filename="predictions_export.csv"
     )
+
+@app.get("/prediction-counts")
+def prediction_counts():
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT date, COUNT(*)
+        FROM predictions
+        GROUP BY date
+        ORDER BY date DESC
+    """)
+
+    rows = cursor.fetchall()
+    conn.close()
+
+    return {
+        "ok": True,
+        "counts": rows
+    }
