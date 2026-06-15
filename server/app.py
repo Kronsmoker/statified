@@ -21,6 +21,7 @@ from models.baseball_stats import (
     home_away_split_edge,
 )
 from models.expected_runs import expected_home_runs, expected_away_runs
+from fastapi.responses import FileResponse
 
 app = FastAPI(title="Statified API")
 
@@ -478,7 +479,7 @@ def generate_daily_predictions():
 
             result = probability(payload)
 
-            log_prediction(result)
+            #log_prediction(result)
             saved += 1
             results.append(result)
     return {
@@ -843,8 +844,8 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
     if edge_map:
         biggest_edge_name = max(edge_map, key=lambda k: abs(edge_map[k]))
         biggest_edge_value = edge_map[biggest_edge_name]
-    game = get_game_by_teams(payload.home_team, payload.away_team)
-    actual_result = get_actual_result_from_game(game)
+    
+    actual_result = None
     result = {
         "home_team": payload.home_team,
         "away_team": payload.away_team,
@@ -990,3 +991,29 @@ def clear_today_predictions():
         "deleted": deleted,
         "date": today
     }
+    
+
+@app.get("/export-predictions-csv")
+def export_predictions_csv():
+    csv_file = os.path.join(BASE_DIR, "predictions_export.csv")
+
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM predictions")
+    rows = cursor.fetchall()
+
+    column_names = [description[0] for description in cursor.description]
+
+    conn.close()
+
+    with open(csv_file, "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(column_names)
+        writer.writerows(rows)
+
+    return FileResponse(
+        csv_file,
+        media_type="text/csv",
+        filename="predictions_export.csv"
+    )
