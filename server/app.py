@@ -878,14 +878,9 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
             "away_bullpen": away_bullpen,
         }
         }
-    try:
-        print("CALLING LOG_PREDICTION")
-        log_prediction(result)
-        print("DONE LOGGING")
-    except Exception as e:
-        print("LOGGING FAILED:", e)
-
-    return result
+    print("CALLING LOG_PREDICTION")
+    log_prediction(result)
+    print("DONE LOGGING")
 
 @app.get("/test-pitcher")
 def test_pitcher():
