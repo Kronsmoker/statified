@@ -1045,5 +1045,6 @@ def prediction_counts():
 
     return {
         "ok": True,
-        "counts": rows
+        "DB_FILE": DB_FILE,
+        "count_dates": rows
     }
