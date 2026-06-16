@@ -484,11 +484,17 @@ def generate_daily_predictions():
                 model_name=model_name
             )
 
-            result = probability(payload)
-
-            #log_prediction(result)
-            saved += 1
-            results.append(result)
+            try:
+                result = probability(payload)
+                saved += 1
+                results.append(result)
+            except Exception as e:
+                results.append({
+                    "home_team": home,
+                    "away_team": away,
+                    "model_name": model_name,
+                    "error": str(e)
+                })
     return {
         "ok": True,
         "message": "Daily model predictions generated",
@@ -889,7 +895,7 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
     log_prediction(result)
     print("DONE LOGGING")
 
-    return result
+    #return result
 
 @app.get("/test-pitcher")
 def test_pitcher():
