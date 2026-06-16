@@ -895,7 +895,7 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
     log_prediction(result)
     print("DONE LOGGING")
 
-    #return result
+    return result
 
 @app.get("/test-pitcher")
 def test_pitcher():
