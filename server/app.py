@@ -22,8 +22,6 @@ from models.baseball_stats import (
 )
 from models.expected_runs import expected_home_runs, expected_away_runs
 from fastapi.responses import FileResponse
-from datetime import datetime
-from zoneinfo import ZoneInfo
 
 app = FastAPI(title="Statified API")
 
@@ -119,14 +117,9 @@ MODEL_PRESETS = {
 def health():
     return {"status": "ok"}
 
-def today_pacific():
-    return datetime.now(ZoneInfo("America/Los_Angeles")).date().isoformat()
-
 
 def get_today_mlb_games():
-    today = today_pacific()
-
-    url = f"https://statsapi.mlb.com/api/v1/schedule?sportId=1&date={today}"
+    url = "https://statsapi.mlb.com/api/v1/schedule?sportId=1"
     res = requests.get(url, timeout=10)
     res.raise_for_status()
     data = res.json()
@@ -393,7 +386,7 @@ def get_mlb_games_by_date(game_date: str):
 @app.get("/mlb-games")
 def mlb_games(game_date: str = None):
     if game_date is None:
-        game_date = today_pacific()
+        game_date = date.today().isoformat()
 
     games = get_mlb_games_by_date(game_date)
 
@@ -409,7 +402,7 @@ def mlb_games(game_date: str = None):
     }
     
 def prediction_exists_today(home_team: str, away_team: str, model_name: str = None) -> bool:
-    today = today_pacific()
+    today = date.today().isoformat()
     return prediction_exists_for_date(home_team, away_team, today, model_name)
 
 
@@ -484,17 +477,11 @@ def generate_daily_predictions():
                 model_name=model_name
             )
 
-            try:
-                result = probability(payload)
-                saved += 1
-                results.append(result)
-            except Exception as e:
-                results.append({
-                    "home_team": home,
-                    "away_team": away,
-                    "model_name": model_name,
-                    "error": str(e)
-                })
+            result = probability(payload)
+
+            #log_prediction(result)
+            saved += 1
+            results.append(result)
     return {
         "ok": True,
         "message": "Daily model predictions generated",
@@ -643,7 +630,7 @@ def log_prediction(result: dict):
             )
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
-            today_pacific(),
+            date.today().isoformat(),
             result.get("home_team"),
             result.get("away_team"),
             result.get("p_home_win"),
@@ -670,7 +657,7 @@ def log_prediction(result: dict):
             )
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
-            today_pacific(),
+            date.today().isoformat(),
             result.get("home_team"),
             result.get("away_team"),
             result.get("p_home_win"),
@@ -834,10 +821,10 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
     p_home_win = win_probability_from_expected_runs(home_runs, away_runs)
 
     # Compress probabilities harder until model is calibrated
-    p_home_win = 0.5 + ((p_home_win - 0.5) * 0.45)
+    p_home_win = 0.5 + ((p_home_win - 0.5) * 0.70)
 
     # Clamp probabilities to realistic MLB range
-    p_home_win = max(0.40, min(0.60, p_home_win))
+    p_home_win = max(0.35, min(0.65, p_home_win))
 
     biggest_edge_name = "None"
     biggest_edge_value = 0.0
@@ -984,7 +971,7 @@ def clear_today_predictions():
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
 
-    today = today_pacific()
+    today = date.today().isoformat()
 
     cursor.execute("""
         DELETE FROM predictions
@@ -1045,6 +1032,5 @@ def prediction_counts():
 
     return {
         "ok": True,
-        "DB_FILE": DB_FILE,
-        "count_dates": rows
+        "counts": rows
     }
