@@ -119,9 +119,14 @@ MODEL_PRESETS = {
 def health():
     return {"status": "ok"}
 
+def today_pacific():
+    return datetime.now(ZoneInfo("America/Los_Angeles")).date().isoformat()
+
 
 def get_today_mlb_games():
-    url = "https://statsapi.mlb.com/api/v1/schedule?sportId=1"
+    today = today_pacific()
+
+    url = f"https://statsapi.mlb.com/api/v1/schedule?sportId=1&date={today}"
     res = requests.get(url, timeout=10)
     res.raise_for_status()
     data = res.json()
@@ -388,7 +393,7 @@ def get_mlb_games_by_date(game_date: str):
 @app.get("/mlb-games")
 def mlb_games(game_date: str = None):
     if game_date is None:
-        game_date = date.today().isoformat()
+        game_date = today_pacific()
 
     games = get_mlb_games_by_date(game_date)
 
@@ -632,7 +637,7 @@ def log_prediction(result: dict):
             )
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
-            date.today().isoformat(),
+            today_pacific(),
             result.get("home_team"),
             result.get("away_team"),
             result.get("p_home_win"),
@@ -659,7 +664,7 @@ def log_prediction(result: dict):
             )
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
-            date.today().isoformat(),
+            today_pacific(),
             result.get("home_team"),
             result.get("away_team"),
             result.get("p_home_win"),
@@ -884,6 +889,8 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
     log_prediction(result)
     print("DONE LOGGING")
 
+    return result
+
 @app.get("/test-pitcher")
 def test_pitcher():
     pitcher = PitcherStats(
@@ -971,7 +978,7 @@ def clear_today_predictions():
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
 
-    today = date.today().isoformat()
+    today = today_pacific()
 
     cursor.execute("""
         DELETE FROM predictions
