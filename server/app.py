@@ -22,6 +22,8 @@ from models.baseball_stats import (
 )
 from models.expected_runs import expected_home_runs, expected_away_runs
 from fastapi.responses import FileResponse
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 app = FastAPI(title="Statified API")
 
@@ -402,7 +404,7 @@ def mlb_games(game_date: str = None):
     }
     
 def prediction_exists_today(home_team: str, away_team: str, model_name: str = None) -> bool:
-    today = date.today().isoformat()
+    today = today_pacific()
     return prediction_exists_for_date(home_team, away_team, today, model_name)
 
 
