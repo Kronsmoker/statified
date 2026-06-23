@@ -9,7 +9,6 @@ from pydantic import BaseModel
 from typing import List, Dict, Any
 from datetime import date, datetime, timedelta
 from models.bullpen import calculate_bullpen_breakdown_score
-from models.pitcher import build_pitcher_report, PitcherStats, TeamStats, GameContext
 from models.run_regression_index import build_run_regression_index
 from models.probability import win_probability, win_probability_from_expected_runs
 from models.ratings import team_power_rating, team_rating_diff
@@ -141,6 +140,7 @@ def get_today_mlb_games():
 
         all_games.append(
             {
+                "game_pk": game["gamePk"],
                 "away_team": away,
                 "home_team": home,
                 "away_score": away_score,
@@ -349,7 +349,17 @@ def get_real_team_stats(team_name: str) -> dict:
         "rest_days": rest_days,
         "rri_5": round(float(latest_rri), 3) if pd.notna(latest_rri) else 0.0,
     }
-    
+
+def get_game_pitchers(home_team: str, away_team: str):
+    games = get_today_mlb_games()
+
+    for game in games:
+        if game["home_team"] == home_team and game["away_team"] == away_team:
+            # Need to upgrade get_today_mlb_games to include probable pitchers
+            return game
+
+    return None
+         
 def get_mlb_games_by_date(game_date: str):
     url = f"https://statsapi.mlb.com/api/v1/schedule?sportId=1&date={game_date}"
 
@@ -373,6 +383,7 @@ def get_mlb_games_by_date(game_date: str):
         status = game["status"]["detailedState"]
 
         games.append({
+            "game_pk": game["gamePk"],
             "home_team": home_team,
             "away_team": away_team,
             "home_score": home_score,
@@ -536,7 +547,7 @@ def mlb_games_with_probabilities():
             away_stats["last10_win_pct"]
         )
 
-        rri_edge = (away_stats["rri_5"] - home_stats["rri_5"]) * 0.15
+        rri_edge = (home_stats["rri_5"] - away_stats["rri_5"]) * 0.15
 
         split_edge = home_away_split_edge(
             home_stats["home_win_pct"],
@@ -676,6 +687,66 @@ def log_prediction(result: dict):
     conn.commit()
     conn.close()
 
+def get_bullpen_inputs(team_name: str) -> dict:
+    team_ids = get_team_id_map()
+    team_id = team_ids.get(team_name)
+
+    if team_id is None:
+        return {
+            "bullpen_innings_yesterday": 0.0,
+            "back_to_back_relievers": 0,
+            "closer_used_yesterday": False,
+            "setup_used_yesterday": False,
+            "bullpen_era_penalty": 0.0,
+        }
+
+    today = date.today()
+    yesterday = (today - timedelta(days=1)).isoformat()
+
+    games = get_team_games(team_id, yesterday, yesterday)
+
+    bullpen_innings = 0.0
+
+    for game in games:
+        if game.get("status", {}).get("abstractGameState") != "Final":
+            continue
+
+        game_pk = game["gamePk"]
+        box_url = f"https://statsapi.mlb.com/api/v1/game/{game_pk}/boxscore"
+        res = requests.get(box_url, timeout=10)
+        res.raise_for_status()
+        box = res.json()
+
+        home_id = game["teams"]["home"]["team"]["id"]
+        side = "home" if team_id == home_id else "away"
+
+        players = box["teams"][side]["players"]
+
+        pitcher_lines = []
+        for player in players.values():
+            stats = player.get("stats", {}).get("pitching")
+            if stats:
+                pitcher_lines.append(stats)
+
+        # Assume first pitcher is starter; rest are bullpen
+        for stats in pitcher_lines[1:]:
+            ip = stats.get("inningsPitched", "0.0")
+
+            try:
+                whole, frac = str(ip).split(".")
+                outs = int(whole) * 3 + int(frac)
+                bullpen_innings += outs / 3
+            except Exception:
+                pass
+
+    return {
+        "bullpen_innings_yesterday": round(bullpen_innings, 2),
+        "back_to_back_relievers": 0,
+        "closer_used_yesterday": bullpen_innings >= 1.0,
+        "setup_used_yesterday": bullpen_innings >= 2.0,
+        "bullpen_era_penalty": 0.0,
+    }
+
 #PROBABILITY***********************************************************
 @app.post("/probability")
 def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
@@ -727,72 +798,27 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
         timezone_edge = 0.02 * selected["timezone"]
 
     if pitcher_stats_selected:
-        home_pitcher = PitcherStats(
-            name="Home Pitcher",
-            handedness="R",
-            k_percent=25.0,
-            bb_percent=7.0,
-            hr_per_9=1.0,
-            hard_hit_percent=38.0,
-            innings_per_start=5.5,
-        )
-
-        away_pitcher = PitcherStats(
-            name="Away Pitcher",
-            handedness="R",
-            k_percent=22.0,
-            bb_percent=9.0,
-            hr_per_9=1.3,
-            hard_hit_percent=42.0,
-            innings_per_start=5.0,
-        )
-
-        home_team_ctx = TeamStats(
-            team_name=payload.away_team,
-            handedness_split="vs_RHP",
-            k_percent=23.0,
-            bb_percent=8.0,
-            iso=0.150,
-            hard_hit_percent=38.0,
-        )
-
-        away_team_ctx = TeamStats(
-            team_name=payload.home_team,
-            handedness_split="vs_RHP",
-            k_percent=23.0,
-            bb_percent=8.0,
-            iso=0.150,
-            hard_hit_percent=38.0,
-        )
-
-        home_context = GameContext(home_pitcher=True)
-        away_context = GameContext(home_pitcher=False)
-
-        home_report = build_pitcher_report(home_pitcher, home_team_ctx, home_context)
-        away_report = build_pitcher_report(away_pitcher, away_team_ctx, away_context)
-
-        pitcher_edge = (home_report["f5"]["f5_edge"] - away_report["f5"]["f5_edge"]) * 0.08
+        # MVP TEMP: neutral until real probable pitcher data is connected
+        pitcher_edge = 0.0
     
-    rri_edge = (away_stats["rri_5"] - home_stats["rri_5"]) * 0.07
+    rri_edge = (home_stats["rri_5"] - away_stats["rri_5"]) * 0.07
 
-    home_bullpen = calculate_bullpen_breakdown_score(
-        bullpen_innings_yesterday=3.5,
-        back_to_back_relievers=2,
-        closer_used_yesterday=True,
-        setup_used_yesterday=True,
-        bullpen_era_penalty=1.0,
-    )
+    home_bullpen_inputs = get_bullpen_inputs(payload.home_team)
+    away_bullpen_inputs = get_bullpen_inputs(payload.away_team)
 
-    away_bullpen = calculate_bullpen_breakdown_score(
-        bullpen_innings_yesterday=1.0,
-        back_to_back_relievers=0,
-        closer_used_yesterday=False,
-        setup_used_yesterday=False,
-        bullpen_era_penalty=0.2,
-    )
+    home_bullpen = calculate_bullpen_breakdown_score(**home_bullpen_inputs)
+    away_bullpen = calculate_bullpen_breakdown_score(**away_bullpen_inputs)
 
-    home_bullpen_edge = away_bullpen["opponent_expected_run_boost"]
-    away_bullpen_edge = home_bullpen["opponent_expected_run_boost"]
+    home_bullpen_edge = 0.0
+    away_bullpen_edge = 0.0
+
+    print("SELECTED =", selected)
+    print("HAS BULLPEN =", "bullpen_breakdown_score" in selected)
+
+    if "bullpen_breakdown_score" in selected:
+        home_bullpen_edge = away_bullpen["opponent_expected_run_boost"]
+        away_bullpen_edge = home_bullpen["opponent_expected_run_boost"]
+
     
     home_runs = expected_home_runs(
         base_runs=4.5,
@@ -884,30 +910,86 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
 
     return result
 
-@app.get("/test-pitcher")
-def test_pitcher():
-    pitcher = PitcherStats(
-        name="Cam Schlittler",
-        handedness="R",
-        k_percent=27.0,
-        bb_percent=8.8,
-        hr_per_9=0.95,
-        hard_hit_percent=40.2,
-        innings_per_start=5.4,
-    )
+@app.get("/probable-pitchers")
+def probable_pitchers(game_pk: int) -> Dict[str, Any]:
+    url = "https://statsapi.mlb.com/api/v1/schedule"
+    params = {
+        "sportId": 1,
+        "gamePk": game_pk,
+        "hydrate": "probablePitcher"
+    }
 
-    team = TeamStats(
-        team_name="Giants",
-        handedness_split="vs_RHP",
-        k_percent=23.5,
-        bb_percent=8.5,
-        iso=0.155,
-        hard_hit_percent=38.0,
-    )
+    response = requests.get(url, params=params, timeout=10)
+    response.raise_for_status()
+    data = response.json()
 
-    context = GameContext(park_factor=95.0, home_pitcher=False)
+    dates = data.get("dates", [])
+    if not dates or not dates[0].get("games"):
+        raise HTTPException(status_code=404, detail="Game not found")
 
-    return build_pitcher_report(pitcher, team, context)
+    game = dates[0]["games"][0]
+
+    home_team = game["teams"]["home"]["team"]["name"]
+    away_team = game["teams"]["away"]["team"]["name"]
+
+    home_pitcher = game["teams"]["home"].get("probablePitcher")
+    away_pitcher = game["teams"]["away"].get("probablePitcher")
+
+    return {
+        "game_pk": game_pk,
+        "home_team": home_team,
+        "away_team": away_team,
+        "home_pitcher": {
+            "id": home_pitcher.get("id") if home_pitcher else None,
+            "name": home_pitcher.get("fullName") if home_pitcher else None,
+        },
+        "away_pitcher": {
+            "id": away_pitcher.get("id") if away_pitcher else None,
+            "name": away_pitcher.get("fullName") if away_pitcher else None,
+        }
+    }
+
+@app.get("/pitcher-stats")
+def pitcher_stats(pitcher_id: int):
+
+    url = f"https://statsapi.mlb.com/api/v1/people/{pitcher_id}/stats"
+
+    params = {
+        "stats": "season",
+        "group": "pitching",
+        "sportIds": 1
+    }
+
+    response = requests.get(url, params=params, timeout=10)
+    response.raise_for_status()
+
+    data = response.json()
+
+    stats = data.get("stats", [])
+
+    if not stats or not stats[0].get("splits"):
+        raise HTTPException(
+            status_code=404,
+            detail="No pitcher stats found"
+        )
+
+    split = stats[0]["splits"][0]
+    stat = split["stat"]
+
+    return {
+        "pitcher_id": pitcher_id,
+        "name": split["player"]["fullName"] if "player" in split else None,
+        "era": stat.get("era"),
+        "whip": stat.get("whip"),
+        "innings_pitched": stat.get("inningsPitched"),
+        "strikeouts": stat.get("strikeOuts"),
+        "walks": stat.get("baseOnBalls"),
+        "hits": stat.get("hits"),
+        "home_runs": stat.get("homeRuns"),
+        "wins": stat.get("wins"),
+        "losses": stat.get("losses")
+    }
+
 
 @app.get("/predictions")
 def get_predictions():
