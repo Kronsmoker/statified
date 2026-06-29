@@ -767,9 +767,12 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
 
     base_rating_diff = team_rating_diff(home_rating, away_rating)
 
-    rating_diff = base_rating_diff * 0.10
+    rating_diff = 0.0
+
+    if "rating_diff" in selected:
+        rating_diff = base_rating_diff * 0.10 * selected["rating_diff"]
     pitcher_edge = 0.0
-    home_field = 0.0
+    home_field = home_field_advantage()
     rest_edge = 0.0
     form_edge = 0.0
     split_edge = 0.0
@@ -788,7 +791,6 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
         ) * 0.10 * selected["rest_days"]
 
     if "home_away_split" in selected:
-        home_field = home_field_advantage()
         split_edge = home_away_split_edge(
             home_stats["home_win_pct"],
             away_stats["away_win_pct"]
@@ -801,7 +803,12 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
         # MVP TEMP: neutral until real probable pitcher data is connected
         pitcher_edge = 0.0
     
-    rri_edge = (home_stats["rri_5"] - away_stats["rri_5"]) * 0.07
+    rri_edge = 0.0
+
+    if "rri" in selected:
+        rri_edge = (
+            home_stats["rri_5"] - away_stats["rri_5"]
+        ) * 0.07 * selected["rri"]
 
     home_bullpen_inputs = get_bullpen_inputs(payload.home_team)
     away_bullpen_inputs = get_bullpen_inputs(payload.away_team)
@@ -819,7 +826,14 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
         home_bullpen_edge = away_bullpen["opponent_expected_run_boost"]
         away_bullpen_edge = home_bullpen["opponent_expected_run_boost"]
 
-    
+    print("RATING =", rating_diff)
+    print("FORM =", form_edge)
+    print("REST =", rest_edge)
+    print("SPLIT =", split_edge)
+    print("RRI =", rri_edge)
+    print("HOME BULLPEN =", home_bullpen_edge)
+    print("AWAY BULLPEN =", away_bullpen_edge)
+
     home_runs = expected_home_runs(
         base_runs=4.5,
         rating_diff=rating_diff,
@@ -843,6 +857,11 @@ def probability(payload: ProbabilityRequest) -> Dict[str, Any]:
         rri_edge=rri_edge,
         bullpen_edge=away_bullpen_edge,
     )
+
+    print("HOME FIELD =", home_field)
+    print("HOME RUNS =", home_runs)
+    print("AWAY RUNS =", away_runs)
+    print("RUN DIFF =", home_runs - away_runs)
 
     p_home_win = win_probability_from_expected_runs(home_runs, away_runs)
 
