@@ -3,6 +3,7 @@ import csv
 import os
 import pandas as pd
 import sqlite3
+from database import get_db
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -38,7 +39,7 @@ def debug_db():
     }
 
 def init_db():
-    conn = sqlite3.connect(DB_FILE)
+    conn = get_db()
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -70,7 +71,7 @@ def init_db():
     conn.close()
 
 
-init_db()
+# init_db()
 
 app.add_middleware(
     CORSMiddleware,
@@ -424,25 +425,25 @@ def prediction_exists_for_date(
     model_name: str = None
 ) -> bool:
     try:
-        conn = sqlite3.connect(DB_FILE)
+        conn = get_db()
         cursor = conn.cursor()
 
         if model_name:
             cursor.execute("""
                 SELECT COUNT(*)
                 FROM predictions
-                WHERE DATE(date) = ?
-                  AND home_team = ?
-                  AND away_team = ?
-                  AND model_name = ?
+                WHERE DATE(date) = %s
+                  AND home_team = %s
+                  AND away_team = %s
+                  AND model_name = %s
             """, (game_date, home_team, away_team, model_name))
         else:
             cursor.execute("""
                 SELECT COUNT(*)
                 FROM predictions
-                WHERE DATE(date) = ?
-                  AND home_team = ?
-                  AND away_team = ?
+                WHERE DATE(date) = %s
+                  AND home_team = %s
+                  AND away_team = %s
             """, (game_date, home_team, away_team))
 
         count = cursor.fetchone()[0]
@@ -620,90 +621,89 @@ def mlb_games_with_probabilities():
     }
 
 def log_prediction(result: dict):
-    conn = sqlite3.connect(DB_FILE)
+    print("LOG_PREDICTION WAS CALLED")
+    print("RESULT:", result)
+
+    conn = get_db()
     cursor = conn.cursor()
 
     inputs = result.get("inputs_used", {})
 
-    cursor.execute("PRAGMA table_info(predictions)")
-    columns = [row[1] for row in cursor.fetchall()]
+    selected_stats = ",".join(
+        inputs.get("selected_stats", [])
+    )
 
-    selected_stats = ",".join(inputs.get("selected_stats", []))
-
-    if "model_name" in columns:
-        cursor.execute("""
-            INSERT INTO predictions (
-                date, home_team, away_team, p_home_win,
-                expected_home_runs, expected_away_runs,
-                selected_stats, rating_diff, pitcher_edge,
-                rest_edge, form_edge, split_edge,
-                timezone_edge, actual_result, model_name
-            )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """, (
-            date.today().isoformat(),
-            result.get("home_team"),
-            result.get("away_team"),
-            result.get("p_home_win"),
-            result.get("expected_home_runs"),
-            result.get("expected_away_runs"),
+    cursor.execute("""
+        INSERT INTO predictions (
+            date,
+            home_team,
+            away_team,
+            p_home_win,
+            expected_home_runs,
+            expected_away_runs,
             selected_stats,
-            inputs.get("rating_diff"),
-            inputs.get("pitcher_edge"),
-            inputs.get("rest_edge"),
-            inputs.get("form_edge"),
-            inputs.get("split_edge"),
-            inputs.get("timezone_edge"),
-            result.get("actual_result"),
-            result.get("model_name", "manual"),
-        ))
-    else:
-        cursor.execute("""
-            INSERT INTO predictions (
-                date, home_team, away_team, p_home_win,
-                expected_home_runs, expected_away_runs,
-                selected_stats, rating_diff, pitcher_edge,
-                rest_edge, form_edge, split_edge,
-                timezone_edge, actual_result
-            )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """, (
-            date.today().isoformat(),
-            result.get("home_team"),
-            result.get("away_team"),
-            result.get("p_home_win"),
-            result.get("expected_home_runs"),
-            result.get("expected_away_runs"),
-            selected_stats,
-            inputs.get("rating_diff"),
-            inputs.get("pitcher_edge"),
-            inputs.get("rest_edge"),
-            inputs.get("form_edge"),
-            inputs.get("split_edge"),
-            inputs.get("timezone_edge"),
-            result.get("actual_result"),
-        ))
+            rating_diff,
+            pitcher_edge,
+            rest_edge,
+            form_edge,
+            split_edge,
+            timezone_edge,
+            actual_result,
+            model_name
+        )
+        VALUES (
+            %s, %s, %s, %s, %s,
+            %s, %s, %s, %s, %s,
+            %s, %s, %s, %s, %s
+        )
+    """, (
+        date.today().isoformat(),
+        result.get("home_team"),
+        result.get("away_team"),
+        result.get("p_home_win"),
+        result.get("expected_home_runs"),
+        result.get("expected_away_runs"),
+        selected_stats,
+        inputs.get("rating_diff"),
+        inputs.get("pitcher_edge"),
+        inputs.get("rest_edge"),
+        inputs.get("form_edge"),
+        inputs.get("split_edge"),
+        inputs.get("timezone_edge"),
+        result.get("actual_result"),
+        result.get("model_name", "manual"),
+    ))
 
     conn.commit()
+
+    print("PREDICTION COMMITTED TO DATABASE")
+    
+    cursor.close()
     conn.close()
 
 def get_bullpen_inputs(team_name: str) -> dict:
+    neutral_bullpen = {
+        "bullpen_innings_yesterday": 0.0,
+        "back_to_back_relievers": 0,
+        "closer_used_yesterday": False,
+        "setup_used_yesterday": False,
+        "bullpen_era_penalty": 0.0,
+    }
+
     team_ids = get_team_id_map()
     team_id = team_ids.get(team_name)
 
     if team_id is None:
-        return {
-            "bullpen_innings_yesterday": 0.0,
-            "back_to_back_relievers": 0,
-            "closer_used_yesterday": False,
-            "setup_used_yesterday": False,
-            "bullpen_era_penalty": 0.0,
-        }
+        return neutral_bullpen
 
     today = date.today()
     yesterday = (today - timedelta(days=1)).isoformat()
 
-    games = get_team_games(team_id, yesterday, yesterday)
+    try:
+        games = get_team_games(team_id, yesterday, yesterday)
+    except requests.exceptions.RequestException as e:
+        print(f"Warning: couldn't fetch games for {team_name}: {e}")
+        return neutral_bullpen
 
     bullpen_innings = 0.0
 
@@ -713,9 +713,14 @@ def get_bullpen_inputs(team_name: str) -> dict:
 
         game_pk = game["gamePk"]
         box_url = f"https://statsapi.mlb.com/api/v1/game/{game_pk}/boxscore"
-        res = requests.get(box_url, timeout=10)
-        res.raise_for_status()
-        box = res.json()
+
+        try:
+            res = requests.get(box_url, timeout=20)
+            res.raise_for_status()
+            box = res.json()
+        except requests.exceptions.RequestException as e:
+            print(f"Warning: couldn't fetch bullpen data for {team_name}: {e}")
+            continue
 
         home_id = game["teams"]["home"]["team"]["id"]
         side = "home" if team_id == home_id else "away"
@@ -723,21 +728,23 @@ def get_bullpen_inputs(team_name: str) -> dict:
         players = box["teams"][side]["players"]
 
         pitcher_lines = []
+
         for player in players.values():
             stats = player.get("stats", {}).get("pitching")
+
             if stats:
                 pitcher_lines.append(stats)
 
-        # Assume first pitcher is starter; rest are bullpen
+        # Assume first pitcher is starter; remaining pitchers are bullpen.
         for stats in pitcher_lines[1:]:
             ip = stats.get("inningsPitched", "0.0")
 
             try:
-                whole, frac = str(ip).split(".")
-                outs = int(whole) * 3 + int(frac)
+                whole, fraction = str(ip).split(".")
+                outs = int(whole) * 3 + int(fraction)
                 bullpen_innings += outs / 3
-            except Exception:
-                pass
+            except (ValueError, TypeError):
+                continue
 
     return {
         "bullpen_innings_yesterday": round(bullpen_innings, 2),
@@ -1013,8 +1020,8 @@ def pitcher_stats(pitcher_id: int):
 @app.get("/predictions")
 def get_predictions():
     try:
-        conn = sqlite3.connect(DB_FILE)
-        conn.row_factory = sqlite3.Row
+        conn = get_db()
+       # conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
 
         cursor.execute("""
@@ -1069,14 +1076,14 @@ def bullpen_breakdown_score(data: BullpenBreakdownRequest):
 
 @app.get("/clear-today-predictions")
 def clear_today_predictions():
-    conn = sqlite3.connect(DB_FILE)
+    conn = get_db()
     cursor = conn.cursor()
 
     today = date.today().isoformat()
 
     cursor.execute("""
         DELETE FROM predictions
-        WHERE DATE(date) = ?
+        WHERE DATE(date) = %s
     """, (today,))
 
     deleted = cursor.rowcount
@@ -1095,7 +1102,7 @@ def clear_today_predictions():
 def export_predictions_csv():
     csv_file = os.path.join(BASE_DIR, "predictions_export.csv")
 
-    conn = sqlite3.connect(DB_FILE)
+    conn = get_db()
     cursor = conn.cursor()
 
     cursor.execute("SELECT * FROM predictions")
@@ -1118,7 +1125,7 @@ def export_predictions_csv():
 
 @app.get("/prediction-counts")
 def prediction_counts():
-    conn = sqlite3.connect(DB_FILE)
+    conn = get_db()
     cursor = conn.cursor()
 
     cursor.execute("""

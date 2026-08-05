@@ -1,12 +1,28 @@
-# Mac
+# macOS
 .DS_Store
 
 # Python
 __pycache__/
 *.pyc
+.venv/
+
+# Environment variables
+.env
+*.env
+
+# SQLite databases
+*.db
+*.db-journal
 
 # Node
 node_modules/
 
-# env
-.venv
+# VS Code
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Build folders
+dist/
+build/
